@@ -112,6 +112,57 @@ def compute_classification_metrics(
     }
 
 
+def compute_roc_curve_points(y_true: np.ndarray, y_score: np.ndarray, n_points: int = 100) -> Tuple[np.ndarray, np.ndarray, float]:
+    """Computes (fpr, tpr, roc_auc) for plotting ROC curves."""
+    y_true = np.asarray(y_true, dtype=int)
+    y_score = np.asarray(y_score, dtype=float)
+    thresholds = np.linspace(0.0, 1.0, n_points)
+    tpr_list = []
+    fpr_list = []
+    n_pos = max(int(np.sum(y_true == 1)), 1)
+    n_neg = max(int(np.sum(y_true == 0)), 1)
+
+    for th in thresholds:
+        pred = (y_score >= th).astype(int)
+        tp = np.sum((pred == 1) & (y_true == 1))
+        fp = np.sum((pred == 1) & (y_true == 0))
+        tpr_list.append(tp / n_pos)
+        fpr_list.append(fp / n_neg)
+
+    # Sort by FPR for proper curve plotting
+    order = np.argsort(fpr_list)
+    fpr_arr = np.array(fpr_list)[order]
+    tpr_arr = np.array(tpr_list)[order]
+    auc = compute_roc_auc(y_true, y_score)
+    return fpr_arr, tpr_arr, auc
+
+
+def compute_pr_curve_points(y_true: np.ndarray, y_score: np.ndarray, n_points: int = 100) -> Tuple[np.ndarray, np.ndarray, float]:
+    """Computes (recall, precision, pr_auc) for plotting PR curves."""
+    y_true = np.asarray(y_true, dtype=int)
+    y_score = np.asarray(y_score, dtype=float)
+    thresholds = np.linspace(0.0, 1.0, n_points)
+    prec_list = []
+    rec_list = []
+    n_pos = max(int(np.sum(y_true == 1)), 1)
+
+    for th in thresholds:
+        pred = (y_score >= th).astype(int)
+        tp = np.sum((pred == 1) & (y_true == 1))
+        fp = np.sum((pred == 1) & (y_true == 0))
+        prec = tp / (tp + fp) if (tp + fp) > 0 else 1.0
+        rec = tp / n_pos
+        prec_list.append(prec)
+        rec_list.append(rec)
+
+    # Sort by recall
+    order = np.argsort(rec_list)
+    rec_arr = np.array(rec_list)[order]
+    prec_arr = np.array(prec_list)[order]
+    auc = compute_pr_auc(y_true, y_score)
+    return rec_arr, prec_arr, auc
+
+
 def tune_classification_threshold(
     y_val: np.ndarray,
     val_probs: np.ndarray,

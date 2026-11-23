@@ -73,13 +73,16 @@ class MobilityValidator:
             start_t = float(times[0])
             end_t = float(times[-1])
 
-            lifecycles[int(vid)] = {
+            vid_key = int(vid) if str(vid).isdigit() else str(vid)
+            lifecycles[vid_key] = {
                 "start_t": start_t,
                 "end_t": end_t,
                 "lifespan_s": end_t - start_t,
                 "steps": len(times),
                 "has_gaps": has_gaps
             }
+            if isinstance(vid_key, int):
+                lifecycles[str(vid_key)] = lifecycles[vid_key]
         return lifecycles
 
     @staticmethod

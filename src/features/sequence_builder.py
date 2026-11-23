@@ -33,26 +33,34 @@ def precompute_vehicle_kinematics(
     speed_lookup: Dict[Tuple[float, str], float] = {}
 
     for vid, group in df.groupby("vehicle_id"):
-        vid_key = str(vid)  # always use string key
+        vid_str = str(vid)
+        vid_int = int(vid) if vid_str.isdigit() else None
         sorted_g = group.sort_values("time_s").reset_index(drop=True)
         for idx, row in sorted_g.iterrows():
             t = round(float(row["time_s"]), 2)
             pos_curr = (float(row["x"]), float(row["y"]))
             speed = float(row["speed_mps"])
 
-            pos_lookup[(t, vid_key)] = pos_curr
-            speed_lookup[(t, vid_key)] = speed
+            pos_lookup[(t, vid_str)] = pos_curr
+            speed_lookup[(t, vid_str)] = speed
+            if vid_int is not None:
+                pos_lookup[(t, vid_int)] = pos_curr
+                speed_lookup[(t, vid_int)] = speed
 
             if idx == 0:
                 # First observation: velocity direction approximated as stationary or zero
-                vel_lookup[(t, vid_key)] = (0.0, 0.0)
+                vel_lookup[(t, vid_str)] = (0.0, 0.0)
+                if vid_int is not None:
+                    vel_lookup[(t, vid_int)] = (0.0, 0.0)
             else:
                 prev_row = sorted_g.iloc[idx - 1]
                 t_prev = round(float(prev_row["time_s"]), 2)
                 pos_prev = (float(prev_row["x"]), float(prev_row["y"]))
                 dt = t - t_prev
                 vel_vec = estimate_velocity_vector(pos_curr, pos_prev, dt, speed_mps=speed)
-                vel_lookup[(t, vid_key)] = vel_vec
+                vel_lookup[(t, vid_str)] = vel_vec
+                if vid_int is not None:
+                    vel_lookup[(t, vid_int)] = vel_vec
 
     return pos_lookup, vel_lookup, speed_lookup
 
@@ -155,8 +163,8 @@ def build_feature_sequences(
                 samples_y.append(int(label))
                 samples_meta.append({
                     "time_s": t_curr,
-                    "provider_id": int(pid),
-                    "consumer_id": int(cid),
+                    "provider_id": int(pid) if str(pid).isdigit() else str(pid),
+                    "consumer_id": int(cid) if str(cid).isdigit() else str(cid),
                     "pair_id": f"{pid}_{cid}",
                     "current_distance_m": curr_dist,
                     "label": int(label)

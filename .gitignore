@@ -1,24 +1,76 @@
-# Python virtual environment
+# ==============================
+# Python virtual environments
+# ==============================
 .venv/
 venv/
 env/
 
+# ==============================
 # Python cache
+# ==============================
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
-# IDE
+# ==============================
+# IDE and editor
+# ==============================
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# System files
-.DS_Store
-
-# Secrets
+# ==============================
+# Environment variables / secrets
+# ==============================
 .env
 .env.*
 !.env.example
 
-# Logs
+# ==============================
+# Logs and temporary files
+# ==============================
 *.log
+*.tmp
+*.temp
+*.bak
+.DS_Store
+
+# ==============================
+# Backups
+# ==============================
+backups/
+
+# ==============================
+# Jupyter
+# ==============================
+.ipynb_checkpoints/
+
+# ==============================
+# Experiment outputs
+# ==============================
+outputs/*/logs/
+outputs/*/tensorboard/
+runs/
+wandb/
+
+# ==============================
+# Generated Python artifacts
+# ==============================
+build/
+dist/
+*.egg-info/
+
+# ==============================
+# SUMO temporary files
+# ==============================
+*.netstate
+*.tripinfo.xml
+*.emission.xml
+*.fcd.xml
+*.vehroute.xml
+*.summary.xml
+

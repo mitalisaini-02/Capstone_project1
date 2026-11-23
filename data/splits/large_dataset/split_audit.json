@@ -1,0 +1,47 @@
+{
+  "audit_passed": true,
+  "runs": {
+    "train": [
+      "pilot_001",
+      "run_002",
+      "run_003",
+      "run_007",
+      "run_008",
+      "run_009",
+      "run_011",
+      "run_014",
+      "run_015"
+    ],
+    "val": [
+      "run_000",
+      "run_001",
+      "run_006",
+      "run_013"
+    ],
+    "test": [
+      "run_004",
+      "run_005",
+      "run_010",
+      "run_012"
+    ],
+    "overlap_train_val": [],
+    "overlap_train_test": [],
+    "overlap_val_test": []
+  },
+  "vehicles": {
+    "train_count": 789,
+    "val_count": 261,
+    "test_count": 233,
+    "overlap_train_val_count": 0,
+    "overlap_train_test_count": 0,
+    "overlap_val_test_count": 0
+  },
+  "pairs": {
+    "train_count": 2624,
+    "val_count": 594,
+    "test_count": 550,
+    "overlap_train_val_count": 0,
+    "overlap_train_test_count": 0,
+    "overlap_val_test_count": 0
+  }
+}

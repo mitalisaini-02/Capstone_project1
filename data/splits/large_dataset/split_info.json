@@ -1,0 +1,43 @@
+{
+  "strategy": "run_disjoint",
+  "seed": 42,
+  "n_runs_total": 17,
+  "n_runs_train": 9,
+  "n_runs_val": 4,
+  "n_runs_test": 4,
+  "train_runs": [
+    "pilot_001",
+    "run_002",
+    "run_003",
+    "run_007",
+    "run_008",
+    "run_009",
+    "run_011",
+    "run_014",
+    "run_015"
+  ],
+  "val_runs": [
+    "run_000",
+    "run_001",
+    "run_006",
+    "run_013"
+  ],
+  "test_runs": [
+    "run_004",
+    "run_005",
+    "run_010",
+    "run_012"
+  ],
+  "train_samples": 119529,
+  "val_samples": 25602,
+  "test_samples": 25613,
+  "train_pos": 75018,
+  "train_neg": 44511,
+  "train_pos_fraction": 0.6276,
+  "val_pos": 16124,
+  "val_neg": 9478,
+  "val_pos_fraction": 0.6298,
+  "test_pos": 15867,
+  "test_neg": 9746,
+  "test_pos_fraction": 0.6195
+}

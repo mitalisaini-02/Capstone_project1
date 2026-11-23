@@ -1,70 +1,66 @@
 """
 generate_sumo_runs.py
 ---------------------
-Generates N independent SUMO mobility runs with varied vehicle counts,
-densities, simulation durations, and random seeds.
+Generates independent SUMO mobility simulation runs with varied vehicle counts,
+densities, and random seeds.
 
 Each run:
-  1. Generates random trips with randomTrips.py (seed-controlled)
+  1. Generates random trips using randomTrips.py
   2. Routes trips with duarouter
-  3. Runs SUMO headlessly and extracts mobility CSV via TraCI
-  4. Saves: data/raw/sumo/run_NNN/mobility.csv + run_config.json
+  3. Parses routed vehicle IDs and assigns roles (~60% PUE, ~40% CUE) reproducibly via run seed
+  4. Runs SUMO headlessly via TraCI and extracts mobility CSV
+  5. Records requested, routed, simulated, and failed vehicles
+  6. Saves: trips.xml, routes.rou.xml, run.sumocfg, mobility.csv, run_config.json
 
-Usage:
-  python scripts/generate_sumo_runs.py [--pilot] [--n_runs 40] [--out_dir data/raw/sumo]
+Traffic densities:
+  - light:      40–50 vehicles  (target 45, period 22.2s)
+  - medium:     60–80 vehicles  (target 70, period 14.3s)
+  - heavy:      90–110 vehicles (target 100, period 10.0s)
+  - very_heavy: 120–150 vehicles (target 135, period 7.4s)
 
 Do NOT modify Stage 1 (actual_mec_comparison.py) or Stage 2 (dynamic_method_comparison.py).
-Do NOT overwrite existing processed data, splits, or checkpoints.
+Do NOT overwrite existing pilot_001, processed datasets, splits, or checkpoints.
 """
 
 import argparse
 import csv
 import json
 import os
+import random
 import subprocess
 import sys
-import tempfile
 import time
+import xml.etree.ElementTree as ET
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Set
 
-# ---------------------------------------------------------------------------
-# Ensure SUMO tools importable
-# ---------------------------------------------------------------------------
+# SUMO tools
 SUMO_HOME = os.environ.get("SUMO_HOME", "/usr/share/sumo")
 sys.path.insert(0, os.path.join(SUMO_HOME, "tools"))
 
 try:
     import traci
 except ImportError as e:
-    print(f"ERROR: Cannot import traci — {e}")
-    print(f"  SUMO_HOME={SUMO_HOME}; ensure SUMO is installed.")
+    print(f"ERROR: Cannot import traci: {e}")
     sys.exit(1)
 
-# ---------------------------------------------------------------------------
-# Project root (capstone_sim/)
-# ---------------------------------------------------------------------------
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-NET_FILE = "/home/mitali/Downloads/osm.net.xml"  # fixed OSM network
+NET_FILE = "/home/mitali/Downloads/osm.net.xml"
 INFRA_FILE = str(PROJECT_ROOT / "infrastructure.add.xml")
 RANDOM_TRIPS_SCRIPT = os.path.join(SUMO_HOME, "tools", "randomTrips.py")
 
-# ---------------------------------------------------------------------------
-# Density configurations
-# ---------------------------------------------------------------------------
+# Traffic density tiers
 DENSITY_PROFILES: List[Dict[str, Any]] = [
-    {"label": "light",      "n_vehicles": 40,  "period": 25.0},
-    {"label": "medium",     "n_vehicles": 70,  "period": 14.0},
-    {"label": "heavy",      "n_vehicles": 100, "period": 10.0},
-    {"label": "very_heavy", "n_vehicles": 130, "period": 7.5},
+    {"label": "light",      "target_vehicles": 45,  "period": 22.2},
+    {"label": "medium",     "target_vehicles": 70,  "period": 14.3},
+    {"label": "heavy",      "target_vehicles": 100, "period": 10.0},
+    {"label": "very_heavy", "target_vehicles": 135, "period": 7.4},
 ]
 
-# Default simulation duration per run
 DEFAULT_DURATION = 1000  # seconds
 
 
-def _run_cmd(cmd: List[str], cwd: str = None, check: bool = True) -> subprocess.CompletedProcess:
-    """Run a shell command, print stderr on failure."""
+def _run_cmd(cmd: List[str], cwd: str = None) -> subprocess.CompletedProcess:
     result = subprocess.run(
         cmd,
         cwd=cwd,
@@ -72,26 +68,16 @@ def _run_cmd(cmd: List[str], cwd: str = None, check: bool = True) -> subprocess.
         stderr=subprocess.PIPE,
         text=True
     )
-    if check and result.returncode != 0:
+    if result.returncode != 0:
         print(f"  [ERROR] Command failed: {' '.join(cmd)}")
-        print(f"  STDOUT: {result.stdout[-2000:]}")
-        print(f"  STDERR: {result.stderr[-2000:]}")
+        print(f"  STDOUT: {result.stdout[-1000:]}")
+        print(f"  STDERR: {result.stderr[-1000:]}")
         raise RuntimeError(f"Command failed with code {result.returncode}")
     return result
 
 
-def generate_trips(
-    run_dir: Path,
-    n_vehicles: int,
-    duration: int,
-    seed: int,
-    period: float
-) -> Path:
-    """
-    Generate random trips XML using SUMO randomTrips.py.
-    Returns path to trips file.
-    """
-    trips_file = run_dir / "trips.xml"
+def generate_trips(run_dir: Path, period: float, duration: int, seed: int) -> Path:
+    trips_file = (run_dir / "trips.xml").resolve()
     cmd = [
         sys.executable,
         RANDOM_TRIPS_SCRIPT,
@@ -101,22 +87,15 @@ def generate_trips(
         "--end", str(duration),
         "--period", str(period),
         "--seed", str(seed),
-        "--validate",          # discard unroutable trips
-        "--fringe-factor", "1.0",
-        "--allow-fringe",
-        "--random-depart",
+        "--min-distance", "200.0",
+        "--vehicle-class", "passenger"
     ]
-    print(f"    Generating trips (n≈{n_vehicles}, period={period}s, seed={seed})...")
     _run_cmd(cmd, cwd=str(run_dir))
     return trips_file
 
 
 def route_trips(run_dir: Path, trips_file: Path, seed: int) -> Path:
-    """
-    Convert trips to routes using duarouter.
-    Returns path to routes file.
-    """
-    routes_file = run_dir / "routes.rou.xml"
+    routes_file = (run_dir / "routes.rou.xml").resolve()
     cmd = [
         "duarouter",
         "-n", NET_FILE,
@@ -126,15 +105,31 @@ def route_trips(run_dir: Path, trips_file: Path, seed: int) -> Path:
         "--ignore-errors", "true",
         "--no-warnings", "true",
     ]
-    print(f"    Routing trips → routes...")
     _run_cmd(cmd, cwd=str(run_dir))
     return routes_file
 
 
+def parse_routed_vehicles(routes_file: Path) -> List[str]:
+    tree = ET.parse(routes_file)
+    return [v.get("id") for v in tree.getroot().findall("vehicle")]
+
+
+def assign_roles(vids: List[str], seed: int, pue_ratio: float = 0.60) -> Dict[str, str]:
+    """
+    Reproducibly assign ~60% PUE (provider) and ~40% CUE (consumer) roles.
+    Distributes roles uniformly across departure times.
+    """
+    rng = random.Random(seed)
+    shuffled = sorted(vids).copy()
+    rng.shuffle(shuffled)
+    n_pue = int(round(len(shuffled) * pue_ratio))
+    pue_set = set(shuffled[:n_pue])
+    return {vid: ("provider" if vid in pue_set else "consumer") for vid in vids}
+
+
 def write_sumocfg(run_dir: Path, routes_file: Path, duration: int) -> Path:
-    """Write a SUMO config file for this run."""
-    cfg_file = run_dir / "run.sumocfg"
-    cfg_content = f"""<configuration>
+    cfg_file = (run_dir / "run.sumocfg").resolve()
+    content = f"""<configuration>
     <input>
         <net-file value="{NET_FILE}"/>
         <route-files value="{routes_file}"/>
@@ -149,26 +144,21 @@ def write_sumocfg(run_dir: Path, routes_file: Path, duration: int) -> Path:
         <no-warnings value="true"/>
         <no-step-log value="true"/>
     </report>
-</configuration>
-"""
-    cfg_file.write_text(cfg_content)
+</configuration>"""
+    cfg_file.write_text(content)
     return cfg_file
 
 
-def run_sumo_extract(
+def run_sumo_simulation(
     cfg_file: Path,
     mobility_out: Path,
-    n_vehicles: int,
+    roles: Dict[str, str],
     duration: int
-) -> int:
+) -> tuple:
     """
-    Run SUMO via TraCI and extract mobility CSV.
-    Provider/consumer split: first 60% of vehicles by sorted ID → providers,
-    remaining 40% → consumers.
-
-    Returns the total number of records written.
+    Executes SUMO simulation and extracts mobility CSV.
+    Returns: (records_count, simulated_vids_set)
     """
-    # Determine provider threshold dynamically based on vehicle IDs observed
     sumo_cmd = [
         "sumo",
         "-c", str(cfg_file),
@@ -178,7 +168,7 @@ def run_sumo_extract(
     ]
 
     records = 0
-    vehicle_roles: Dict[str, str] = {}  # cached role per vehicle_id string
+    simulated_vids: Set[str] = set()
 
     with open(mobility_out, "w", newline="") as f:
         writer = csv.writer(f)
@@ -186,38 +176,19 @@ def run_sumo_extract(
 
         traci.start(sumo_cmd)
         try:
-            # First pass: collect all vehicle IDs to determine split threshold
-            # We'll assign roles dynamically as we see new vehicles
-            seen_vehicles: List[str] = []
-
             step = 0
             while traci.simulation.getMinExpectedNumber() > 0 and step <= duration:
                 current_time = traci.simulation.getTime()
 
                 for vid_str in traci.vehicle.getIDList():
-                    # Assign role on first encounter
-                    if vid_str not in vehicle_roles:
-                        seen_vehicles.append(vid_str)
-                        # Sort all seen so far; first 60% → provider
-                        # Role may be re-assigned as new vehicles appear; we'll
-                        # lock assignments once first seen to avoid inconsistency
-                        # Simple rule: try to parse numeric ID; if < threshold → provider
-                        try:
-                            vid_int = int(vid_str)
-                        except ValueError:
-                            vid_int = abs(hash(vid_str)) % 10000
-
-                        # Provider threshold: 60% of n_vehicles by count
-                        threshold = int(n_vehicles * 0.6)
-                        vehicle_roles[vid_str] = "provider" if vid_int < threshold else "consumer"
-
-                    role = vehicle_roles[vid_str]
+                    simulated_vids.add(vid_str)
+                    role = roles.get(vid_str, "provider")
                     x, y = traci.vehicle.getPosition(vid_str)
                     speed = traci.vehicle.getSpeed(vid_str)
                     road_id = traci.vehicle.getRoadID(vid_str)
 
                     writer.writerow([
-                        current_time,
+                        round(current_time, 1),
                         vid_str,
                         role,
                         round(x, 2),
@@ -232,184 +203,152 @@ def run_sumo_extract(
         finally:
             traci.close()
 
-    return records
+    return records, simulated_vids
 
 
-def run_one(
+def execute_run(
     run_idx: int,
     density: Dict[str, Any],
     seed: int,
     out_base: Path,
-    duration: int,
-    dry_run: bool = False
+    duration: int = DEFAULT_DURATION
 ) -> Dict[str, Any]:
-    """
-    Execute one complete SUMO run: trips → routes → simulate → CSV.
-    Returns a summary dict.
-    """
     run_id = f"run_{run_idx:03d}"
     run_dir = out_base / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
 
-    mobility_out = run_dir / "mobility.csv"
+    mobility_out = (run_dir / "mobility.csv").resolve()
     cfg_path = run_dir / "run_config.json"
 
-    # Skip if already completed successfully
+    # Skip if already completed
     if mobility_out.exists() and cfg_path.exists():
         try:
             existing = json.loads(cfg_path.read_text())
-            if existing.get("status") == "done":
-                print(f"  [SKIP] {run_id} already completed ({existing.get('records', '?')} records).")
+            if existing.get("status") == "done" and existing.get("records", 0) > 0:
+                print(f"  [SKIP] {run_id} already completed ({existing.get('records')} records).")
                 return existing
         except Exception:
             pass
 
-    run_cfg: Dict[str, Any] = {
-        "run_id": run_id,
-        "run_idx": run_idx,
-        "density_label": density["label"],
-        "n_vehicles": density["n_vehicles"],
-        "period": density["period"],
-        "duration_s": duration,
-        "seed": seed,
-        "status": "pending",
-    }
-    cfg_path.write_text(json.dumps(run_cfg, indent=2))
-
-    if dry_run:
-        print(f"  [DRY-RUN] Would run {run_id}: {density['label']}, {density['n_vehicles']} vehicles, seed={seed}")
-        run_cfg["status"] = "dry_run"
-        return run_cfg
-
     t0 = time.time()
+    requested_vehicles = int(round(duration / density["period"]))
+    print(f"\n  === {run_id} | {density['label']} (req≈{requested_vehicles}) | seed={seed} ===")
+
     try:
-        print(f"\n  === {run_id} | density={density['label']} | n≈{density['n_vehicles']} | seed={seed} ===")
-
-        trips_file = generate_trips(run_dir, density["n_vehicles"], duration, seed, density["period"])
+        trips_file = generate_trips(run_dir, density["period"], duration, seed)
         routes_file = route_trips(run_dir, trips_file, seed)
-        cfg_file = write_sumocfg(run_dir, routes_file, duration)
-        records = run_sumo_extract(cfg_file, mobility_out, density["n_vehicles"], duration)
+        routed_vids = parse_routed_vehicles(routes_file)
+        roles = assign_roles(routed_vids, seed)
 
+        pue_count = sum(1 for r in roles.values() if r == "provider")
+        cue_count = sum(1 for r in roles.values() if r == "consumer")
+
+        cfg_file = write_sumocfg(run_dir, routes_file, duration)
+        records, simulated_vids = run_sumo_simulation(cfg_file, mobility_out, roles, duration)
+
+        failed_vids = sorted(list(set(routed_vids) - simulated_vids))
         elapsed = round(time.time() - t0, 1)
-        run_cfg.update({
-            "status": "done",
+
+        run_cfg = {
+            "run_id": run_id,
+            "run_idx": run_idx,
+            "density_label": density["label"],
+            "target_vehicles": density["target_vehicles"],
+            "requested_vehicles": requested_vehicles,
+            "routed_vehicles": len(routed_vids),
+            "simulated_vehicles": len(simulated_vids),
+            "pue_count": pue_count,
+            "cue_count": cue_count,
+            "failed_vehicles_count": len(failed_vids),
+            "failed_vehicles": failed_vids,
+            "period_s": density["period"],
+            "duration_s": duration,
+            "seed": seed,
             "records": records,
-            "mobility_csv": str(mobility_out),
             "elapsed_s": elapsed,
-        })
-        print(f"    ✓ Done in {elapsed}s — {records:,} records → {mobility_out}")
+            "status": "done",
+            "mobility_csv": str(mobility_out),
+        }
+        cfg_path.write_text(json.dumps(run_cfg, indent=2))
+        print(f"    ✓ Routed: {len(routed_vids)} | Simulated: {len(simulated_vids)} (PUE: {pue_count}, CUE: {cue_count}) | Records: {records:,} | {elapsed}s")
+        return run_cfg
 
     except Exception as e:
         elapsed = round(time.time() - t0, 1)
-        run_cfg.update({
+        err_cfg = {
+            "run_id": run_id,
+            "run_idx": run_idx,
+            "density_label": density["label"],
+            "seed": seed,
+            "duration_s": duration,
             "status": "error",
             "error": str(e),
             "elapsed_s": elapsed,
-        })
+        }
+        cfg_path.write_text(json.dumps(err_cfg, indent=2))
         print(f"    ✗ FAILED: {e}")
-
-    cfg_path.write_text(json.dumps(run_cfg, indent=2))
-    return run_cfg
+        return err_cfg
 
 
-def build_run_schedule(
-    n_runs: int,
-    seed_base: int = 100
-) -> List[Dict[str, Any]]:
-    """
-    Build a list of run specifications cycling through density profiles.
-    Each run gets a unique seed = seed_base + run_idx * 7 (prime step).
-    """
-    schedule = []
-    n_profiles = len(DENSITY_PROFILES)
-    for i in range(n_runs):
-        density = DENSITY_PROFILES[i % n_profiles]
-        seed = seed_base + i * 7  # unique, non-overlapping seeds
-        schedule.append({
-            "run_idx": i,
-            "density": density,
-            "seed": seed,
-        })
-    return schedule
-
-
-def main() -> None:
-    parser = argparse.ArgumentParser(description="Generate multi-run SUMO mobility dataset.")
-    parser.add_argument("--pilot", action="store_true",
-                        help="Run only 2 pilot simulations (light + medium density).")
-    parser.add_argument("--n_runs", type=int, default=40,
-                        help="Total number of runs (ignored if --pilot).")
+def main():
+    parser = argparse.ArgumentParser(description="Generate multi-run SUMO simulations.")
+    parser.add_argument("--n_runs", type=int, default=16,
+                        help="Number of runs to generate across density tiers (default: 16).")
     parser.add_argument("--duration", type=int, default=DEFAULT_DURATION,
                         help="Simulation duration per run in seconds (default: 1000).")
-    parser.add_argument("--seed_base", type=int, default=100,
-                        help="Base seed; each run uses seed_base + run_idx * 7.")
+    parser.add_argument("--seed_base", type=int, default=101,
+                        help="Base seed for reproducibility (default: 101).")
     parser.add_argument("--out_dir", type=str, default="data/raw/sumo",
-                        help="Output base directory for all runs.")
-    parser.add_argument("--dry_run", action="store_true",
-                        help="Print what would be run without executing SUMO.")
+                        help="Output directory.")
     args = parser.parse_args()
 
     out_base = PROJECT_ROOT / args.out_dir
     out_base.mkdir(parents=True, exist_ok=True)
 
-    if args.pilot:
-        # Two pilot runs: light (40 vehicles, seed=100) + medium (70 vehicles, seed=200)
-        schedule = [
-            {"run_idx": 0, "density": DENSITY_PROFILES[0], "seed": 100},  # light
-            {"run_idx": 1, "density": DENSITY_PROFILES[1], "seed": 200},  # medium
-        ]
-        print("=== PILOT MODE: 2 runs ===")
-    else:
-        schedule = build_run_schedule(args.n_runs, seed_base=args.seed_base)
-        print(f"=== FULL MODE: {args.n_runs} runs ===")
-
-    print(f"Output dir: {out_base}")
-    print(f"Duration per run: {args.duration}s\n")
+    print("=" * 70)
+    print(" MULTI-RUN SUMO MOBILITY GENERATION")
+    print(f" Total runs: {args.n_runs} | Duration: {args.duration}s | Seed base: {args.seed_base}")
+    print(f" Output dir: {out_base}")
+    print("=" * 70)
 
     results = []
-    for spec in schedule:
-        result = run_one(
-            run_idx=spec["run_idx"],
-            density=spec["density"],
-            seed=spec["seed"],
+    n_profiles = len(DENSITY_PROFILES)
+
+    for i in range(args.n_runs):
+        density = DENSITY_PROFILES[i % n_profiles]
+        seed = args.seed_base + i * 17  # unique seed per run
+        res = execute_run(
+            run_idx=i,
+            density=density,
+            seed=seed,
             out_base=out_base,
-            duration=args.duration,
-            dry_run=args.dry_run,
+            duration=args.duration
         )
-        results.append(result)
+        results.append(res)
 
-    # Summary
-    print("\n" + "=" * 60)
-    print("GENERATION SUMMARY")
-    print("=" * 60)
-    done = [r for r in results if r.get("status") == "done"]
-    errors = [r for r in results if r.get("status") == "error"]
-    skipped = [r for r in results if r.get("status") not in ("done", "error", "dry_run")]
-
-    total_records = sum(r.get("records", 0) for r in done)
-    print(f"  Completed: {len(done)}/{len(results)}")
-    if errors:
-        print(f"  Failed:    {len(errors)} runs")
-        for r in errors:
-            print(f"    - {r['run_id']}: {r.get('error', '?')}")
-    print(f"  Total mobility records: {total_records:,}")
-    print(f"\n  Run configs saved in: {out_base}/run_NNN/run_config.json")
-    print(f"  Mobility CSVs saved in: {out_base}/run_NNN/mobility.csv")
-
-    # Save manifest
+    # Save master manifest
     manifest_path = out_base / "manifest.json"
+    done_runs = [r for r in results if r.get("status") == "done"]
+    failed_runs = [r for r in results if r.get("status") == "error"]
+
     manifest = {
-        "n_runs_attempted": len(results),
-        "n_runs_done": len(done),
-        "n_runs_failed": len(errors),
-        "total_records": total_records,
-        "duration_per_run_s": args.duration,
-        "runs": results,
+        "n_runs_total": len(results),
+        "n_runs_done": len(done_runs),
+        "n_runs_failed": len(failed_runs),
+        "total_records": sum(r.get("records", 0) for r in done_runs),
+        "runs": results
     }
     manifest_path.write_text(json.dumps(manifest, indent=2))
-    print(f"\n  Manifest: {manifest_path}")
 
-    if errors:
+    print("\n" + "=" * 70)
+    print(" GENERATION SUMMARY")
+    print("=" * 70)
+    print(f" Completed: {len(done_runs)}/{len(results)} runs")
+    print(f" Failed:    {len(failed_runs)} runs")
+    print(f" Total records extracted: {manifest['total_records']:,}")
+    print(f" Manifest saved: {manifest_path}")
+
+    if failed_runs:
         sys.exit(1)
 
 

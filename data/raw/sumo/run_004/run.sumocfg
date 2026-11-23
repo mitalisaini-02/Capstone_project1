@@ -1,0 +1,16 @@
+<configuration>
+    <input>
+        <net-file value="/home/mitali/Downloads/osm.net.xml"/>
+        <route-files value="/home/mitali/Downloads/capstone_sim/data/raw/sumo/run_004/routes.rou.xml"/>
+        <additional-files value="/home/mitali/Downloads/capstone_sim/infrastructure.add.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="1000"/>
+        <step-length value="1"/>
+    </time>
+    <report>
+        <no-warnings value="true"/>
+        <no-step-log value="true"/>
+    </report>
+</configuration>

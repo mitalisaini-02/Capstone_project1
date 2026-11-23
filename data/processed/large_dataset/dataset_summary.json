@@ -1,0 +1,209 @@
+{
+  "total_simulation_runs": 17,
+  "total_mobility_records": 271586,
+  "total_vehicles": 1458,
+  "total_eligible_pairs": 3768,
+  "total_valid_sequences": 170744,
+  "survival_labels_positive": 107009,
+  "break_labels_negative": 63735,
+  "positive_class_ratio": 0.6267,
+  "pos_weight_for_bce": 0.5956,
+  "input_shape": [
+    170744,
+    10,
+    7
+  ],
+  "history_window_s": 10,
+  "prediction_horizon_s": 30,
+  "comm_range_m": 1000.0,
+  "step_length_s": 1.0,
+  "per_run_statistics": [
+    {
+      "run_id": "pilot_001",
+      "mobility_records": 8776,
+      "unique_vehicles": 50,
+      "providers": 30,
+      "consumers": 20,
+      "eligible_pairs": 8,
+      "sequences": 404,
+      "positive_surviving": 261,
+      "negative_breaking": 143
+    },
+    {
+      "run_id": "run_000",
+      "mobility_records": 7957,
+      "unique_vehicles": 46,
+      "providers": 28,
+      "consumers": 18,
+      "eligible_pairs": 49,
+      "sequences": 2029,
+      "positive_surviving": 1130,
+      "negative_breaking": 899
+    },
+    {
+      "run_id": "run_001",
+      "mobility_records": 14983,
+      "unique_vehicles": 70,
+      "providers": 42,
+      "consumers": 28,
+      "eligible_pairs": 167,
+      "sequences": 7294,
+      "positive_surviving": 4725,
+      "negative_breaking": 2569
+    },
+    {
+      "run_id": "run_002",
+      "mobility_records": 19279,
+      "unique_vehicles": 100,
+      "providers": 60,
+      "consumers": 40,
+      "eligible_pairs": 280,
+      "sequences": 12832,
+      "positive_surviving": 8128,
+      "negative_breaking": 4704
+    },
+    {
+      "run_id": "run_003",
+      "mobility_records": 24831,
+      "unique_vehicles": 136,
+      "providers": 82,
+      "consumers": 54,
+      "eligible_pairs": 441,
+      "sequences": 19533,
+      "positive_surviving": 12767,
+      "negative_breaking": 6766
+    },
+    {
+      "run_id": "run_004",
+      "mobility_records": 9181,
+      "unique_vehicles": 46,
+      "providers": 28,
+      "consumers": 18,
+      "eligible_pairs": 58,
+      "sequences": 3055,
+      "positive_surviving": 1982,
+      "negative_breaking": 1073
+    },
+    {
+      "run_id": "run_005",
+      "mobility_records": 13411,
+      "unique_vehicles": 70,
+      "providers": 42,
+      "consumers": 28,
+      "eligible_pairs": 127,
+      "sequences": 5591,
+      "positive_surviving": 3233,
+      "negative_breaking": 2358
+    },
+    {
+      "run_id": "run_006",
+      "mobility_records": 18304,
+      "unique_vehicles": 100,
+      "providers": 60,
+      "consumers": 40,
+      "eligible_pairs": 250,
+      "sequences": 10784,
+      "positive_surviving": 6999,
+      "negative_breaking": 3785
+    },
+    {
+      "run_id": "run_007",
+      "mobility_records": 24324,
+      "unique_vehicles": 136,
+      "providers": 82,
+      "consumers": 54,
+      "eligible_pairs": 427,
+      "sequences": 20135,
+      "positive_surviving": 12980,
+      "negative_breaking": 7155
+    },
+    {
+      "run_id": "run_008",
+      "mobility_records": 8801,
+      "unique_vehicles": 46,
+      "providers": 28,
+      "consumers": 18,
+      "eligible_pairs": 50,
+      "sequences": 2479,
+      "positive_surviving": 1500,
+      "negative_breaking": 979
+    },
+    {
+      "run_id": "run_009",
+      "mobility_records": 13052,
+      "unique_vehicles": 70,
+      "providers": 42,
+      "consumers": 28,
+      "eligible_pairs": 134,
+      "sequences": 5694,
+      "positive_surviving": 3322,
+      "negative_breaking": 2372
+    },
+    {
+      "run_id": "run_010",
+      "mobility_records": 18925,
+      "unique_vehicles": 100,
+      "providers": 60,
+      "consumers": 40,
+      "eligible_pairs": 312,
+      "sequences": 14717,
+      "positive_surviving": 9278,
+      "negative_breaking": 5439
+    },
+    {
+      "run_id": "run_011",
+      "mobility_records": 25729,
+      "unique_vehicles": 136,
+      "providers": 82,
+      "consumers": 54,
+      "eligible_pairs": 543,
+      "sequences": 25805,
+      "positive_surviving": 15956,
+      "negative_breaking": 9849
+    },
+    {
+      "run_id": "run_012",
+      "mobility_records": 8704,
+      "unique_vehicles": 46,
+      "providers": 28,
+      "consumers": 18,
+      "eligible_pairs": 53,
+      "sequences": 2250,
+      "positive_surviving": 1374,
+      "negative_breaking": 876
+    },
+    {
+      "run_id": "run_013",
+      "mobility_records": 12563,
+      "unique_vehicles": 70,
+      "providers": 42,
+      "consumers": 28,
+      "eligible_pairs": 128,
+      "sequences": 5495,
+      "positive_surviving": 3270,
+      "negative_breaking": 2225
+    },
+    {
+      "run_id": "run_014",
+      "mobility_records": 17895,
+      "unique_vehicles": 100,
+      "providers": 60,
+      "consumers": 40,
+      "eligible_pairs": 249,
+      "sequences": 11849,
+      "positive_surviving": 7411,
+      "negative_breaking": 4438
+    },
+    {
+      "run_id": "run_015",
+      "mobility_records": 24871,
+      "unique_vehicles": 136,
+      "providers": 82,
+      "consumers": 54,
+      "eligible_pairs": 492,
+      "sequences": 20798,
+      "positive_surviving": 12693,
+      "negative_breaking": 8105
+    }
+  ]
+}

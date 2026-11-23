@@ -2,7 +2,7 @@
 Plotting and visualization module for Stage 3 training and evaluation curves.
 """
 import os
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Tuple
 import matplotlib
 matplotlib.use("Agg")  # Non-interactive backend
 import matplotlib.pyplot as plt
@@ -68,6 +68,63 @@ def plot_confusion_matrix(
 
     plt.ylabel("Ground Truth")
     plt.xlabel("Predicted Class")
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=300)
+    plt.close()
+
+
+def plot_roc_curves(
+    models_curves: Dict[str, Tuple[np.ndarray, np.ndarray, float]],
+    output_path: str
+) -> None:
+    """
+    Plots multi-model ROC curves.
+    models_curves: {model_name: (fpr, tpr, roc_auc)}
+    """
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    plt.figure(figsize=(7, 5.5))
+    colors = ["#1f77b4", "#2ca02c", "#d62728", "#9467bd"]
+
+    for idx, (name, (fpr, tpr, auc_score)) in enumerate(models_curves.items()):
+        c = colors[idx % len(colors)]
+        plt.plot(fpr, tpr, label=f"{name} (AUC = {auc_score:.4f})", color=c, lw=2)
+
+    plt.plot([0, 1], [0, 1], color="gray", linestyle="--", label="Random Chance (0.50)")
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel("False Positive Rate (1 - Specificity)")
+    plt.ylabel("True Positive Rate (Recall)")
+    plt.title("ROC Curves — Model Comparison")
+    plt.legend(loc="lower right")
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=300)
+    plt.close()
+
+
+def plot_pr_curves(
+    models_pr_curves: Dict[str, Tuple[np.ndarray, np.ndarray, float]],
+    output_path: str
+) -> None:
+    """
+    Plots multi-model Precision-Recall curves.
+    models_pr_curves: {model_name: (recall, precision, pr_auc)}
+    """
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    plt.figure(figsize=(7, 5.5))
+    colors = ["#1f77b4", "#2ca02c", "#d62728", "#9467bd"]
+
+    for idx, (name, (rec, prec, pr_auc)) in enumerate(models_pr_curves.items()):
+        c = colors[idx % len(colors)]
+        plt.plot(rec, prec, label=f"{name} (PR-AUC = {pr_auc:.4f})", color=c, lw=2)
+
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel("Recall")
+    plt.ylabel("Precision")
+    plt.title("Precision-Recall Curves — Model Comparison")
+    plt.legend(loc="lower left")
+    plt.grid(True, alpha=0.3)
     plt.tight_layout()
     plt.savefig(output_path, dpi=300)
     plt.close()

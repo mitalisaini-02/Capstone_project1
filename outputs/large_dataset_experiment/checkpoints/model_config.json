@@ -1,0 +1,8 @@
+{
+  "name": "LinkSurvivalLSTM",
+  "input_dim": 7,
+  "hidden_dim": 64,
+  "num_layers": 2,
+  "dropout": 0.3,
+  "bidirectional": false
+}

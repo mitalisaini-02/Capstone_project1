@@ -1,4 +1,0 @@
-method,consumers,consumers_with_provider,consumers_fully_served,total_payment_model_units,total_achieved_rate_mbps,total_unmet_demand_mbps,provider_throughput_mbps,gnb_throughput_mbps,gnb_remaining_capacity_mbps,cost_per_mbps_delivered,solver_status,stage1_min_payment,payment_budget_cap
-gNB-only,20,0,14,5.0,100.0,34.306,0.0,100.0,0.0,0.05,N/A (Deterministic),,
-cheapest-first-greedy,20,17,20,3.5489,134.306,0.0,118.413,15.893,84.107,0.02642,N/A (Heuristic),,
-MEC-two-stage-LP,20,15,20,3.6215,134.306,0.0,104.61,29.696,70.304,0.02696,HiGHS Two-Stage Optimal (Status 7),3.449,3.6215

@@ -27,7 +27,16 @@ def compute_link_survival_label(
 
     # 1. Censoring check: both vehicles must remain active through target_end_t
     p_life = lifecycles.get(provider_id)
+    if p_life is None:
+        p_life = lifecycles.get(str(provider_id))
+    if p_life is None and isinstance(provider_id, str) and provider_id.isdigit():
+        p_life = lifecycles.get(int(provider_id))
+
     c_life = lifecycles.get(consumer_id)
+    if c_life is None:
+        c_life = lifecycles.get(str(consumer_id))
+    if c_life is None and isinstance(consumer_id, str) and consumer_id.isdigit():
+        c_life = lifecycles.get(int(consumer_id))
 
     if p_life is None or c_life is None:
         return None
@@ -41,7 +50,16 @@ def compute_link_survival_label(
         future_t = round(current_time_s + step_idx * step_s, 2)
 
         pos_p = trajectory_lookup.get((future_t, provider_id))
+        if pos_p is None:
+            pos_p = trajectory_lookup.get((future_t, str(provider_id)))
+        if pos_p is None and isinstance(provider_id, str) and provider_id.isdigit():
+            pos_p = trajectory_lookup.get((future_t, int(provider_id)))
+
         pos_c = trajectory_lookup.get((future_t, consumer_id))
+        if pos_c is None:
+            pos_c = trajectory_lookup.get((future_t, str(consumer_id)))
+        if pos_c is None and isinstance(consumer_id, str) and consumer_id.isdigit():
+            pos_c = trajectory_lookup.get((future_t, int(consumer_id)))
 
         if pos_p is None or pos_c is None:
             # Trajectory missing an intermediate second

@@ -1,0 +1,20 @@
+{
+  "run_id": "run_008",
+  "run_idx": 8,
+  "density_label": "light",
+  "target_vehicles": 45,
+  "requested_vehicles": 45,
+  "routed_vehicles": 46,
+  "simulated_vehicles": 46,
+  "pue_count": 28,
+  "cue_count": 18,
+  "failed_vehicles_count": 0,
+  "failed_vehicles": [],
+  "period_s": 22.2,
+  "duration_s": 1000,
+  "seed": 237,
+  "records": 8801,
+  "elapsed_s": 12.4,
+  "status": "done",
+  "mobility_csv": "/home/mitali/Downloads/capstone_sim/data/raw/sumo/run_008/mobility.csv"
+}

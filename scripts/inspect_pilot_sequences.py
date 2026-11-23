@@ -86,15 +86,9 @@ def main():
     print(f"    Total errors: {len(errors)}  warnings: {len(warnings)}")
 
     # --- 3. Build lifecycles
-    lifecycles = {}
-    for vid, grp in df.groupby("vehicle_id"):
-        lifecycles[vid] = {
-            "first_time": float(grp["time_s"].min()),
-            "last_time":  float(grp["time_s"].max()),
-        }
     print(f"\n[3] Vehicle lifecycles")
-    depart_times = [v["first_time"] for v in lifecycles.values()]
-    depart_arr = df.groupby("vehicle_id")["time_s"].min()
+    lifecycles = MobilityValidator.validate_timestamps_and_lifecycles(df)
+    depart_times = [v["start_t"] for v in lifecycles.values()]
     print(f"    First vehicle at t={min(depart_times):.0f}s")
     print(f"    Last vehicle at  t={max(depart_times):.0f}s")
 

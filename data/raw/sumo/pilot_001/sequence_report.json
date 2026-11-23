@@ -1,0 +1,19 @@
+{
+  "run_id": "pilot_001",
+  "records": 8776,
+  "sequences": 404,
+  "positive": 261,
+  "negative": 143,
+  "pos_fraction": 0.646,
+  "unique_pairs": 8,
+  "pure_positive_pairs": 1,
+  "pure_negative_pairs": 2,
+  "mixed_pairs": 5,
+  "nan_count": 0,
+  "inf_count": 0,
+  "shape_X": [
+    404,
+    10,
+    7
+  ]
+}
