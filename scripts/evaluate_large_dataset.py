@@ -196,30 +196,58 @@ def evaluate_baselines(X_val_unscaled, y_val, X_test_unscaled, y_test):
     results["kinematic"] = {"val_probs": kin_val_probs, "test_probs": kin_test_probs,
                             "test_metrics": kin_test_metrics, "threshold": kin_thresh}
 
+    
     # --- Distance Threshold ---
-    dist_base = DistanceThresholdBaseline(comm_range_m=1000.0, scale_m=100.0)
+    dist_base = DistanceThresholdBaseline(
+        comm_range_m=1000.0,
+        scale_m=100.0
+    )
 
+    # 1. Fit the distance threshold using validation data only.
+    best_distance = dist_base.fit_threshold(X_val_unscaled, y_val)
+
+    # 2. Generate validation probabilities after fitting.
     dist_val_probs = dist_base.predict_proba(X_val_unscaled)
-    # Tune distance threshold on val
-    dist_thresh, dist_val_ba = tune_classification_threshold(y_val, dist_val_probs, "balanced_accuracy")
-    # Also tune the internal d* on val
-    dist_base.tune_threshold(X_val_unscaled, y_val)
-    dist_thresh_prob, dist_val_ba2 = tune_classification_threshold(
-        y_val, dist_base.predict_proba(X_val_unscaled), "balanced_accuracy")
-    log(f"  Distance Threshold: d*={dist_base.distance_threshold_m:.1f}m, "
-        f"val θ*={dist_thresh_prob:.3f}, val balanced_acc={dist_val_ba2:.4f}")
 
+    # 3. Tune probability classification threshold on validation data.
+    dist_thresh_prob, dist_val_ba = tune_classification_threshold(
+        y_val,
+        dist_val_probs,
+        "balanced_accuracy"
+    )
+
+    log(
+        f"  Distance Threshold: d*={best_distance:.1f}m, "
+        f"val θ*={dist_thresh_prob:.3f}, "
+        f"val balanced_acc={dist_val_ba:.4f}"
+    )
+
+    # 4. Evaluate on test data without fitting or tuning.
     dist_test_probs = dist_base.predict_proba(X_test_unscaled)
-    dist_test_metrics = compute_classification_metrics(y_test, dist_test_probs, threshold=dist_thresh_prob)
-    dist_test_metrics["val_threshold"] = dist_thresh_prob
-    dist_test_metrics["val_balanced_accuracy"] = round(dist_val_ba2, 4)
-    dist_test_metrics["distance_threshold_m"] = dist_base.distance_threshold_m
-    log(f"  Distance Test: ROC-AUC={dist_test_metrics['roc_auc']}, "
-        f"F1={dist_test_metrics['f1_score']}, Spec={dist_test_metrics['specificity']}")
-    results["distance_threshold"] = {"val_probs": dist_val_probs, "test_probs": dist_test_probs,
-                                     "test_metrics": dist_test_metrics, "threshold": dist_thresh_prob}
 
-    return results
+    dist_test_metrics = compute_classification_metrics(
+        y_test,
+        dist_test_probs,
+        threshold=dist_thresh_prob
+    )
+
+    dist_test_metrics["val_threshold"] = dist_thresh_prob
+    dist_test_metrics["val_balanced_accuracy"] = round(dist_val_ba, 4)
+    dist_test_metrics["distance_threshold_m"] = best_distance
+
+    log(
+        f"  Distance Test: ROC-AUC={dist_test_metrics['roc_auc']}, "
+        f"F1={dist_test_metrics['f1_score']}, "
+        f"Spec={dist_test_metrics['specificity']}"
+    )
+
+    results["distance_threshold"] = {
+        "val_probs": dist_val_probs,
+        "test_probs": dist_test_probs,
+        "test_metrics": dist_test_metrics,
+        "threshold": dist_thresh_prob
+    }
+
 
 
 # ==============================================================================
