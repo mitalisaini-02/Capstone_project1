@@ -1,0 +1,12 @@
+{
+  "run_id": "run_000",
+  "run_idx": 0,
+  "density_label": "light",
+  "n_vehicles": 40,
+  "period": 25.0,
+  "duration_s": 1000,
+  "seed": 100,
+  "status": "error",
+  "error": "Command failed with code 1",
+  "elapsed_s": 0.2
+}

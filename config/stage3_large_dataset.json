@@ -1,0 +1,52 @@
+{
+  "dataset_tag": "large_multirun_sumo",
+  "_comment": "Config for LSTM trained on large multi-run SUMO dataset (run-disjoint split). Update pos_weight after running build_combined_dataset.py.",
+  "data": {
+    "processed_dir": "data/processed/large_dataset",
+    "splits_dir": "data/splits/large_dataset",
+    "step_length_s": 1.0
+  },
+  "link": {
+    "comm_range_m": 1000.0,
+    "prediction_horizon_s": 30,
+    "history_window_s": 10
+  },
+  "features": {
+    "feature_names": [
+      "distance_m",
+      "relative_speed_mps",
+      "provider_speed_mps",
+      "consumer_speed_mps",
+      "delta_x_m",
+      "delta_y_m",
+      "closing_speed_mps"
+    ]
+  },
+  "model": {
+    "name": "LinkSurvivalLSTM",
+    "input_dim": 7,
+    "hidden_dim": 64,
+    "num_layers": 2,
+    "dropout": 0.3,
+    "bidirectional": false
+  },
+  "training": {
+    "seed": 42,
+    "batch_size": 64,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "max_epochs": 60,
+    "early_stopping_patience": 10,
+    "pos_weight": 1.0,
+    "_pos_weight_note": "UPDATE this value using pos_weight_for_bce from data/processed/large_dataset/dataset_summary.json after running build_combined_dataset.py"
+  },
+  "evaluation": {
+    "classification_threshold": 0.50,
+    "tune_metric": "balanced_accuracy"
+  },
+  "outputs": {
+    "checkpoints_dir": "outputs/large_dataset_experiment/checkpoints",
+    "metrics_dir": "outputs/large_dataset_experiment/metrics",
+    "plots_dir": "outputs/large_dataset_experiment/plots"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "run_id": "pilot_001",
+  "run_idx": 0,
+  "density_label": "light_50v",
+  "n_vehicles": 50,
+  "provider_threshold": 30,
+  "duration_s": 1000,
+  "seed": 101,
+  "status": "done",
+  "records": 8776,
+  "elapsed_s": 4.5,
+  "mobility_csv": "/home/mitali/Downloads/capstone_sim/data/raw/sumo/pilot_001/mobility.csv"
+}

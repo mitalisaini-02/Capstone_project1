@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-10-13 03:13:12.365820 by Eclipse SUMO randomTrips.py v1.28.0
+<configuration>
+    <net-file value="/home/mitali/Downloads/osm.net.xml"/>
+    <vehicle-class value="passenger"/>
+    <min-distance value="200.0"/>
+    <end value="300.0"/>
+    <period value="6.0"/>
+</configuration>
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <vType id="passenger" vClass="passenger"/>
+    <trip id="0" depart="0.00" from="129545126#1" to="-129460541#0" type="passenger"/>
+    <trip id="1" depart="6.00" from="-129581118#0" to="-129560156#3" type="passenger"/>
+    <trip id="2" depart="12.00" from="129560154#4" to="129553501#1" type="passenger"/>
+    <trip id="3" depart="18.00" from="129720654" to="-129537769#7" type="passenger"/>
+    <trip id="4" depart="24.00" from="-675909145" to="-129460570#1" type="passenger"/>
+    <trip id="5" depart="30.00" from="-129460487" to="-129560060#0" type="passenger"/>
+    <trip id="6" depart="36.00" from="129553421#8" to="129464110#1" type="passenger"/>
+    <trip id="7" depart="42.00" from="-129560158#3" to="129537766#6" type="passenger"/>
+    <trip id="8" depart="48.00" from="129584347#5" to="-1135429214" type="passenger"/>
+    <trip id="9" depart="54.00" from="129581119#6" to="129559946#1" type="passenger"/>
+    <trip id="10" depart="60.00" from="-129585861#2" to="-129553488#0" type="passenger"/>
+    <trip id="11" depart="66.00" from="1465282091" to="-129585836#3" type="passenger"/>
+    <trip id="12" depart="72.00" from="-129537851#6" to="-129537900#1" type="passenger"/>
+    <trip id="13" depart="78.00" from="129584474#4" to="129537913#2" type="passenger"/>
+    <trip id="14" depart="84.00" from="129581124" to="129560133#3" type="passenger"/>
+    <trip id="15" depart="90.00" from="129464110#2" to="491245695" type="passenger"/>
+    <trip id="16" depart="96.00" from="-129720750#0" to="129464131#0" type="passenger"/>
+    <trip id="17" depart="102.00" from="129584418#1" to="129545037#6" type="passenger"/>
+    <trip id="18" depart="108.00" from="129585806#0" to="129476919#0" type="passenger"/>
+    <trip id="19" depart="114.00" from="129560010#1" to="-129464099#0" type="passenger"/>
+    <trip id="20" depart="120.00" from="-129573822#1" to="-129584379#0" type="passenger"/>
+    <trip id="21" depart="126.00" from="-129477557#5" to="-129573846#0" type="passenger"/>
+    <trip id="22" depart="132.00" from="-129537913#0" to="-129581110#3" type="passenger"/>
+    <trip id="23" depart="138.00" from="129545117#3" to="-129720697#0" type="passenger"/>
+    <trip id="24" depart="144.00" from="-129720739#0" to="-129560118#2" type="passenger"/>
+    <trip id="25" depart="150.00" from="-129581095#2" to="129774397#0" type="passenger"/>
+    <trip id="26" depart="156.00" from="129553420#4" to="129537935#4" type="passenger"/>
+    <trip id="27" depart="162.00" from="-129559862" to="129560132#3" type="passenger"/>
+    <trip id="28" depart="168.00" from="-129559808#7" to="-129720739#1" type="passenger"/>
+    <trip id="29" depart="174.00" from="689986937#0" to="129545117#3" type="passenger"/>
+    <trip id="30" depart="180.00" from="129473727#1" to="129559823#4" type="passenger"/>
+    <trip id="31" depart="186.00" from="129584464#2" to="129581028#1" type="passenger"/>
+    <trip id="32" depart="192.00" from="-129573849#1" to="-129460586#0" type="passenger"/>
+    <trip id="33" depart="198.00" from="-129585764#7" to="-129581078#1" type="passenger"/>
+    <trip id="34" depart="204.00" from="-129560133#3" to="129774428#0" type="passenger"/>
+    <trip id="35" depart="210.00" from="129585851#1" to="-129584473#0" type="passenger"/>
+    <trip id="36" depart="216.00" from="129553448#0" to="-129722948#1" type="passenger"/>
+    <trip id="37" depart="222.00" from="129720735#1" to="1076837058" type="passenger"/>
+    <trip id="38" depart="228.00" from="-129581087#2" to="-129573945#0" type="passenger"/>
+    <trip id="39" depart="234.00" from="129473834#1" to="-129581058#0" type="passenger"/>
+    <trip id="40" depart="240.00" from="129537791" to="129720699#3" type="passenger"/>
+    <trip id="41" depart="246.00" from="-156944403#0" to="-129560149#0" type="passenger"/>
+    <trip id="42" depart="252.00" from="-129537811" to="-129464105#1" type="passenger"/>
+    <trip id="43" depart="258.00" from="-129544990" to="129545076#18" type="passenger"/>
+    <trip id="44" depart="264.00" from="129581086#3" to="-491594497" type="passenger"/>
+    <trip id="45" depart="270.00" from="-129473495#5" to="-129720742#3" type="passenger"/>
+    <trip id="46" depart="276.00" from="491112003" to="129585814#1" type="passenger"/>
+    <trip id="47" depart="282.00" from="-1258941442" to="129560102#2" type="passenger"/>
+    <trip id="48" depart="288.00" from="129559823#6" to="129464070#1" type="passenger"/>
+    <trip id="49" depart="294.00" from="-129581095#1" to="129545121#1" type="passenger"/>
+</routes>

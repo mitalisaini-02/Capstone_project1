@@ -1,0 +1,12 @@
+<configuration>
+    <input>
+        <net-file value="/home/mitali/Downloads/osm.net.xml"/>
+        <route-files value="routes_colored.rou.xml"/>
+        <additional-files value="infrastructure.add.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="300"/>
+        <step-length value="1"/>
+    </time>
+</configuration>

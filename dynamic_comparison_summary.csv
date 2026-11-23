@@ -1,0 +1,4 @@
+method,simulation_seconds,active_consumer_seconds,total_consumer_records,total_demanded_volume_mb,total_delivered_volume_mb,total_unmet_demand_mb,average_achieved_rate_mbps,fully_served_records,fully_served_percent,records_with_pue,records_with_pue_percent,total_payment_model_units,cost_per_mb_delivered,pue_delivered_volume_mb,gnb_delivered_volume_mb,gnb_capacity_utilization_pct,infeasible_time_steps,total_runtime_seconds,avg_step_runtime_ms
+gNB-only,300.0,120,1190,8322.685,7849.656,473.029,6.596,1100,92.44,0,0.0,392.4828,0.05,0.0,7849.656,65.41,0,0.0,0.0
+cheapest-first-greedy,300.0,120,1190,8322.685,8322.685,0.0,6.994,1190,100.0,986,82.86,351.2592,0.04221,6597.369,1725.315,14.38,0,0.0,0.0
+MEC-lexicographic-LP,300.0,120,1190,8322.685,8322.685,0.0,6.994,1190,100.0,766,64.37,315.3368,0.03789,4515.664,3807.02,31.73,0,1.1116,9.26

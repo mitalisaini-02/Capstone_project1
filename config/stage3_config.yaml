@@ -1,0 +1,59 @@
+# =============================================================================
+# Stage 3 Configuration: LSTM Link-Survival Prediction
+# =============================================================================
+
+data:
+  raw_mobility_file: "mobility.csv"
+  ue_roles_file: "ue_roles.csv"
+  processed_dir: "data/processed"
+  splits_dir: "data/splits"
+  max_simulation_time_s: 300.0
+  step_length_s: 1.0
+
+link:
+  comm_range_m: 1000.0
+  prediction_horizon_s: 30
+  history_window_s: 10
+
+split:
+  strategy: "vehicle_disjoint_consumer" # "vehicle_disjoint_consumer" or "disjoint_pairs"
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+  seed: 42
+
+features:
+  feature_names:
+    - "distance_m"
+    - "relative_speed_mps"
+    - "provider_speed_mps"
+    - "consumer_speed_mps"
+    - "delta_x_m"
+    - "delta_y_m"
+    - "closing_speed_mps"
+
+model:
+  name: "LinkSurvivalLSTM"
+  input_dim: 7
+  hidden_dim: 64
+  num_layers: 2
+  dropout: 0.2
+  bidirectional: false
+
+training:
+  seed: 42
+  batch_size: 32
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  max_epochs: 50
+  early_stopping_patience: 10
+  pos_weight: null # null for standard BCE, or float to re-weight minority class
+
+evaluation:
+  classification_threshold: 0.50 # default initial, tuned on validation set
+  tune_metric: "f1"
+
+outputs:
+  checkpoints_dir: "outputs/checkpoints"
+  metrics_dir: "outputs/metrics"
+  plots_dir: "outputs/plots"

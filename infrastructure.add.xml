@@ -1,0 +1,9 @@
+<additional>
+    <poi id="gNB-1" x="500"  y="500"  type="gNodeB" color="0,0,1" layer="10" />
+    <poi id="gNB-2" x="2500" y="500"  type="gNodeB" color="0,0,1" layer="10" />
+    <poi id="gNB-3" x="5000" y="500"  type="gNodeB" color="0,0,1" layer="10" />
+    <poi id="gNB-4" x="500"  y="4000" type="gNodeB" color="0,0,1" layer="10" />
+    <poi id="gNB-5" x="2500" y="4000" type="gNodeB" color="0,0,1" layer="10" />
+    <poi id="gNB-6" x="5000" y="4000" type="gNodeB" color="0,0,1" layer="10" />
+    <poi id="MEC-1" x="2800" y="2300" type="MEC" color="1,0,0" layer="20" />
+</additional>
