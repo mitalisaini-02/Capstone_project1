@@ -1,0 +1,2824 @@
+{
+  "checks": {
+    "test_code_sha256_equals_frozen": true,
+    "current_code_sha256_equals_frozen": true,
+    "test_thresholds": {
+      "primary": 0.62,
+      "sensitivity": 0.65
+    },
+    "test_scenarios": 156,
+    "test_scenarios_match_phase3_test_manifest": true,
+    "test_runs": [
+      "run_004",
+      "run_005",
+      "run_010",
+      "run_012"
+    ],
+    "val_test_run_overlap": [],
+    "test_output_files_match_manifest": true,
+    "audit_violations_total": 0,
+    "audit_violations_from_manifest": 0,
+    "dominance_violations": {
+      "milp_admits_less_than_greedy": 0,
+      "milp_costs_more_than_greedy_at_equal_admission": 0,
+      "milp_admits_less_than_gnb_only": 0,
+      "milp_costs_more_than_gnb_only_at_equal_admission": 0
+    },
+    "phantom_x_events_handled": 20152,
+    "all_passed": true,
+    "wall_time_s": 2295.0
+  },
+  "pooled": [
+    {
+      "method": "gnb_only",
+      "channel_scenario": "none",
+      "theta_tag": "none",
+      "n_scenarios_val": 156,
+      "request_seconds_val": 200682,
+      "admitted_share_val": 0.519374,
+      "admitted_share_mean_over_scen_val": 0.529684,
+      "payment_total_val": 55.92326,
+      "payment_per_gb_val": 1.0,
+      "pue_volume_share_val": 0.0,
+      "gnb_volume_share_val": 1.0,
+      "served_pue_only_val": 0.0,
+      "served_pue_plus_gnb_val": 0.0,
+      "served_gnb_only_val": 0.529684,
+      "served_rejected_val": 0.470316,
+      "reject_no_service_option_val": 12566,
+      "reject_insufficient_capacity_standalone_val": 15065,
+      "reject_budget_exceeded_val": 67905,
+      "reject_capacity_contention_val": 917,
+      "runtime_total_s_val": 403.202902,
+      "runtime_p95_ms_mean_val": 4.89758,
+      "audit_violations_val": 0,
+      "phantom_x_val": 0,
+      "n_scenarios_test": 156,
+      "request_seconds_test": 221530,
+      "admitted_share_test": 0.48328,
+      "admitted_share_mean_over_scen_test": 0.464842,
+      "payment_total_test": 55.466923,
+      "payment_per_gb_test": 1.0,
+      "pue_volume_share_test": 0.0,
+      "gnb_volume_share_test": 1.0,
+      "served_pue_only_test": 0.0,
+      "served_pue_plus_gnb_test": 0.0,
+      "served_gnb_only_test": 0.464842,
+      "served_rejected_test": 0.535158,
+      "reject_no_service_option_test": 12511,
+      "reject_insufficient_capacity_standalone_test": 15619,
+      "reject_budget_exceeded_test": 84987,
+      "reject_capacity_contention_test": 1352,
+      "runtime_total_s_test": 438.833545,
+      "runtime_p95_ms_mean_test": 4.88678,
+      "audit_violations_test": 0,
+      "phantom_x_test": 0,
+      "admitted_share_delta": -0.036094,
+      "payment_per_gb_delta": 0.0,
+      "pue_volume_share_delta": 0.0,
+      "gnb_volume_share_delta": 0.0
+    },
+    {
+      "method": "greedy",
+      "channel_scenario": "F1",
+      "theta_tag": "primary",
+      "n_scenarios_val": 156,
+      "request_seconds_val": 200682,
+      "admitted_share_val": 0.530905,
+      "admitted_share_mean_over_scen_val": 0.538904,
+      "payment_total_val": 56.408444,
+      "payment_per_gb_val": 0.984895,
+      "pue_volume_share_val": 0.047673,
+      "gnb_volume_share_val": 0.952327,
+      "served_pue_only_val": 0.015708,
+      "served_pue_plus_gnb_val": 0.006482,
+      "served_gnb_only_val": 0.516713,
+      "served_rejected_val": 0.461096,
+      "reject_no_service_option_val": 12312,
+      "reject_insufficient_capacity_standalone_val": 14500,
+      "reject_budget_exceeded_val": 66470,
+      "reject_capacity_contention_val": 857,
+      "runtime_total_s_val": 9.0133,
+      "runtime_p95_ms_mean_val": 0.127215,
+      "audit_violations_val": 0,
+      "phantom_x_val": 0,
+      "n_scenarios_test": 156,
+      "request_seconds_test": 221530,
+      "admitted_share_test": 0.491762,
+      "admitted_share_mean_over_scen_test": 0.472588,
+      "payment_total_test": 55.782846,
+      "payment_per_gb_test": 0.979872,
+      "pue_volume_share_test": 0.049721,
+      "gnb_volume_share_test": 0.950279,
+      "served_pue_only_test": 0.01392,
+      "served_pue_plus_gnb_test": 0.005727,
+      "served_gnb_only_test": 0.452941,
+      "served_rejected_test": 0.527412,
+      "reject_no_service_option_test": 11985,
+      "reject_insufficient_capacity_standalone_test": 15268,
+      "reject_budget_exceeded_test": 83991,
+      "reject_capacity_contention_test": 1346,
+      "runtime_total_s_test": 9.998344,
+      "runtime_p95_ms_mean_test": 0.130134,
+      "audit_violations_test": 0,
+      "phantom_x_test": 0,
+      "admitted_share_delta": -0.039143,
+      "payment_per_gb_delta": -0.005023,
+      "pue_volume_share_delta": 0.002048,
+      "gnb_volume_share_delta": -0.002048
+    },
+    {
+      "method": "greedy",
+      "channel_scenario": "F1",
+      "theta_tag": "sensitivity",
+      "n_scenarios_val": 156,
+      "request_seconds_val": 200682,
+      "admitted_share_val": 0.530307,
+      "admitted_share_mean_over_scen_val": 0.538489,
+      "payment_total_val": 56.372357,
+      "payment_per_gb_val": 0.985431,
+      "pue_volume_share_val": 0.045838,
+      "gnb_volume_share_val": 0.954162,
+      "served_pue_only_val": 0.014812,
+      "served_pue_plus_gnb_val": 0.006325,
+      "served_gnb_only_val": 0.517352,
+      "served_rejected_val": 0.461511,
+      "reject_no_service_option_val": 12324,
+      "reject_insufficient_capacity_standalone_val": 14522,
+      "reject_budget_exceeded_val": 66553,
+      "reject_capacity_contention_val": 860,
+      "runtime_total_s_val": 9.098167,
+      "runtime_p95_ms_mean_val": 0.129236,
+      "audit_violations_val": 0,
+      "phantom_x_val": 0,
+      "n_scenarios_test": 156,
+      "request_seconds_test": 221530,
+      "admitted_share_test": 0.491518,
+      "admitted_share_mean_over_scen_test": 0.472348,
+      "payment_total_test": 55.787783,
+      "payment_per_gb_test": 0.980463,
+      "pue_volume_share_test": 0.048281,
+      "gnb_volume_share_test": 0.951719,
+      "served_pue_only_test": 0.013428,
+      "served_pue_plus_gnb_test": 0.005525,
+      "served_gnb_only_test": 0.453395,
+      "served_rejected_test": 0.527652,
+      "reject_no_service_option_test": 12001,
+      "reject_insufficient_capacity_standalone_test": 15284,
+      "reject_budget_exceeded_test": 84013,
+      "reject_capacity_contention_test": 1346,
+      "runtime_total_s_test": 9.759198,
+      "runtime_p95_ms_mean_test": 0.126964,
+      "audit_violations_test": 0,
+      "phantom_x_test": 0,
+      "admitted_share_delta": -0.038789,
+      "payment_per_gb_delta": -0.004968,
+      "pue_volume_share_delta": 0.002443,
+      "gnb_volume_share_delta": -0.002443
+    },
+    {
+      "method": "greedy",
+      "channel_scenario": "F2",
+      "theta_tag": "primary",
+      "n_scenarios_val": 156,
+      "request_seconds_val": 200682,
+      "admitted_share_val": 0.530905,
+      "admitted_share_mean_over_scen_val": 0.538904,
+      "payment_total_val": 56.408444,
+      "payment_per_gb_val": 0.984895,
+      "pue_volume_share_val": 0.047673,
+      "gnb_volume_share_val": 0.952327,
+      "served_pue_only_val": 0.015708,
+      "served_pue_plus_gnb_val": 0.006482,
+      "served_gnb_only_val": 0.516713,
+      "served_rejected_val": 0.461096,
+      "reject_no_service_option_val": 12312,
+      "reject_insufficient_capacity_standalone_val": 14500,
+      "reject_budget_exceeded_val": 66470,
+      "reject_capacity_contention_val": 857,
+      "runtime_total_s_val": 9.134289,
+      "runtime_p95_ms_mean_val": 0.129515,
+      "audit_violations_val": 0,
+      "phantom_x_val": 0,
+      "n_scenarios_test": 156,
+      "request_seconds_test": 221530,
+      "admitted_share_test": 0.491762,
+      "admitted_share_mean_over_scen_test": 0.472588,
+      "payment_total_test": 55.783528,
+      "payment_per_gb_test": 0.979884,
+      "pue_volume_share_test": 0.04971,
+      "gnb_volume_share_test": 0.95029,
+      "served_pue_only_test": 0.013908,
+      "served_pue_plus_gnb_test": 0.005739,
+      "served_gnb_only_test": 0.452941,
+      "served_rejected_test": 0.527412,
+      "reject_no_service_option_test": 11985,
+      "reject_insufficient_capacity_standalone_test": 15268,
+      "reject_budget_exceeded_test": 83991,
+      "reject_capacity_contention_test": 1346,
+      "runtime_total_s_test": 9.894226,
+      "runtime_p95_ms_mean_test": 0.126993,
+      "audit_violations_test": 0,
+      "phantom_x_test": 0,
+      "admitted_share_delta": -0.039143,
+      "payment_per_gb_delta": -0.005011,
+      "pue_volume_share_delta": 0.002037,
+      "gnb_volume_share_delta": -0.002037
+    },
+    {
+      "method": "greedy",
+      "channel_scenario": "F2",
+      "theta_tag": "sensitivity",
+      "n_scenarios_val": 156,
+      "request_seconds_val": 200682,
+      "admitted_share_val": 0.530307,
+      "admitted_share_mean_over_scen_val": 0.538489,
+      "payment_total_val": 56.372357,
+      "payment_per_gb_val": 0.985431,
+      "pue_volume_share_val": 0.045838,
+      "gnb_volume_share_val": 0.954162,
+      "served_pue_only_val": 0.014812,
+      "served_pue_plus_gnb_val": 0.006325,
+      "served_gnb_only_val": 0.517352,
+      "served_rejected_val": 0.461511,
+      "reject_no_service_option_val": 12324,
+      "reject_insufficient_capacity_standalone_val": 14522,
+      "reject_budget_exceeded_val": 66553,
+      "reject_capacity_contention_val": 860,
+      "runtime_total_s_val": 9.109984,
+      "runtime_p95_ms_mean_val": 0.128971,
+      "audit_violations_val": 0,
+      "phantom_x_val": 0,
+      "n_scenarios_test": 156,
+      "request_seconds_test": 221530,
+      "admitted_share_test": 0.491518,
+      "admitted_share_mean_over_scen_test": 0.472348,
+      "payment_total_test": 55.788465,
+      "payment_per_gb_test": 0.980475,
+      "pue_volume_share_test": 0.04827,
+      "gnb_volume_share_test": 0.95173,
+      "served_pue_only_test": 0.013416,
+      "served_pue_plus_gnb_test": 0.005537,
+      "served_gnb_only_test": 0.453395,
+      "served_rejected_test": 0.527652,
+      "reject_no_service_option_test": 12001,
+      "reject_insufficient_capacity_standalone_test": 15284,
+      "reject_budget_exceeded_test": 84013,
+      "reject_capacity_contention_test": 1346,
+      "runtime_total_s_test": 10.020587,
+      "runtime_p95_ms_mean_test": 0.131288,
+      "audit_violations_test": 0,
+      "phantom_x_test": 0,
+      "admitted_share_delta": -0.038789,
+      "payment_per_gb_delta": -0.004956,
+      "pue_volume_share_delta": 0.002432,
+      "gnb_volume_share_delta": -0.002432
+    },
+    {
+      "method": "greedy",
+      "channel_scenario": "F3",
+      "theta_tag": "primary",
+      "n_scenarios_val": 156,
+      "request_seconds_val": 200682,
+      "admitted_share_val": 0.554021,
+      "admitted_share_mean_over_scen_val": 0.557971,
+      "payment_total_val": 57.84645,
+      "payment_per_gb_val": 0.959908,
+      "pue_volume_share_val": 0.13828,
+      "gnb_volume_share_val": 0.86172,
+      "served_pue_only_val": 0.055033,
+      "served_pue_plus_gnb_val": 0.004175,
+      "served_gnb_only_val": 0.498763,
+      "served_rejected_val": 0.442029,
+      "reject_no_service_option_val": 11014,
+      "reject_insufficient_capacity_standalone_val": 13164,
+      "reject_budget_exceeded_val": 64543,
+      "reject_capacity_contention_val": 779,
+      "runtime_total_s_val": 9.078205,
+      "runtime_p95_ms_mean_val": 0.130229,
+      "audit_violations_val": 0,
+      "phantom_x_val": 0,
+      "n_scenarios_test": 156,
+      "request_seconds_test": 221530,
+      "admitted_share_test": 0.509805,
+      "admitted_share_mean_over_scen_test": 0.488246,
+      "payment_total_test": 56.721626,
+      "payment_per_gb_test": 0.948544,
+      "pue_volume_share_test": 0.138353,
+      "gnb_volume_share_test": 0.861647,
+      "served_pue_only_test": 0.047003,
+      "served_pue_plus_gnb_test": 0.003151,
+      "served_gnb_only_test": 0.438092,
+      "served_rejected_test": 0.511754,
+      "reject_no_service_option_test": 11303,
+      "reject_insufficient_capacity_standalone_test": 14110,
+      "reject_budget_exceeded_test": 81919,
+      "reject_capacity_contention_test": 1261,
+      "runtime_total_s_test": 10.309017,
+      "runtime_p95_ms_mean_test": 0.136318,
+      "audit_violations_test": 0,
+      "phantom_x_test": 0,
+      "admitted_share_delta": -0.044216,
+      "payment_per_gb_delta": -0.011364,
+      "pue_volume_share_delta": 7.3e-05,
+      "gnb_volume_share_delta": -7.3e-05
+    },
+    {
+      "method": "greedy",
+      "channel_scenario": "F3",
+      "theta_tag": "sensitivity",
+      "n_scenarios_val": 156,
+      "request_seconds_val": 200682,
+      "admitted_share_val": 0.551519,
+      "admitted_share_mean_over_scen_val": 0.55611,
+      "payment_total_val": 57.639505,
+      "payment_per_gb_val": 0.961717,
+      "pue_volume_share_val": 0.130234,
+      "gnb_volume_share_val": 0.869766,
+      "served_pue_only_val": 0.051659,
+      "served_pue_plus_gnb_val": 0.003876,
+      "served_gnb_only_val": 0.500574,
+      "served_rejected_val": 0.44389,
+      "reject_no_service_option_val": 11177,
+      "reject_insufficient_capacity_standalone_val": 13283,
+      "reject_budget_exceeded_val": 64758,
+      "reject_capacity_contention_val": 784,
+      "runtime_total_s_val": 8.96643,
+      "runtime_p95_ms_mean_val": 0.127887,
+      "audit_violations_val": 0,
+      "phantom_x_val": 0,
+      "n_scenarios_test": 156,
+      "request_seconds_test": 221530,
+      "admitted_share_test": 0.508211,
+      "admitted_share_mean_over_scen_test": 0.486921,
+      "payment_total_test": 56.667522,
+      "payment_per_gb_test": 0.951056,
+      "pue_volume_share_test": 0.131354,
+      "gnb_volume_share_test": 0.868646,
+      "served_pue_only_test": 0.044273,
+      "served_pue_plus_gnb_test": 0.002996,
+      "served_gnb_only_test": 0.439652,
+      "served_rejected_test": 0.513079,
+      "reject_no_service_option_test": 11409,
+      "reject_insufficient_capacity_standalone_test": 14213,
+      "reject_budget_exceeded_test": 82051,
+      "reject_capacity_contention_test": 1273,
+      "runtime_total_s_test": 9.983899,
+      "runtime_p95_ms_mean_test": 0.131642,
+      "audit_violations_test": 0,
+      "phantom_x_test": 0,
+      "admitted_share_delta": -0.043308,
+      "payment_per_gb_delta": -0.010662,
+      "pue_volume_share_delta": 0.00112,
+      "gnb_volume_share_delta": -0.00112
+    },
+    {
+      "method": "greedy",
+      "channel_scenario": "G",
+      "theta_tag": "primary",
+      "n_scenarios_val": 156,
+      "request_seconds_val": 200682,
+      "admitted_share_val": 0.543188,
+      "admitted_share_mean_over_scen_val": 0.548806,
+      "payment_total_val": 57.264223,
+      "payment_per_gb_val": 0.972849,
+      "pue_volume_share_val": 0.093108,
+      "gnb_volume_share_val": 0.906892,
+      "served_pue_only_val": 0.036835,
+      "served_pue_plus_gnb_val": 0.005054,
+      "served_gnb_only_val": 0.506917,
+      "served_rejected_val": 0.451194,
+      "reject_no_service_option_val": 11523,
+      "reject_insufficient_capacity_standalone_val": 13813,
+      "reject_budget_exceeded_val": 65545,
+      "reject_capacity_contention_val": 793,
+      "runtime_total_s_val": 9.298993,
+      "runtime_p95_ms_mean_val": 0.134259,
+      "audit_violations_val": 0,
+      "phantom_x_val": 0,
+      "n_scenarios_test": 156,
+      "request_seconds_test": 221530,
+      "admitted_share_test": 0.501733,
+      "admitted_share_mean_over_scen_test": 0.481135,
+      "payment_total_test": 56.379698,
+      "payment_per_gb_test": 0.963161,
+      "pue_volume_share_test": 0.097464,
+      "gnb_volume_share_test": 0.902536,
+      "served_pue_only_test": 0.030732,
+      "served_pue_plus_gnb_test": 0.00351,
+      "served_gnb_only_test": 0.446893,
+      "served_rejected_test": 0.518865,
+      "reject_no_service_option_test": 11681,
+      "reject_insufficient_capacity_standalone_test": 14627,
+      "reject_budget_exceeded_test": 82761,
+      "reject_capacity_contention_test": 1312,
+      "runtime_total_s_test": 9.962514,
+      "runtime_p95_ms_mean_test": 0.131712,
+      "audit_violations_test": 0,
+      "phantom_x_test": 0,
+      "admitted_share_delta": -0.041454,
+      "payment_per_gb_delta": -0.009688,
+      "pue_volume_share_delta": 0.004355,
+      "gnb_volume_share_delta": -0.004355
+    },
+    {
+      "method": "greedy",
+      "channel_scenario": "G",
+      "theta_tag": "sensitivity",
+      "n_scenarios_val": 156,
+      "request_seconds_val": 200682,
+      "admitted_share_val": 0.541479,
+      "admitted_share_mean_over_scen_val": 0.547585,
+      "payment_total_val": 57.12479,
+      "payment_per_gb_val": 0.973998,
+      "pue_volume_share_val": 0.088268,
+      "gnb_volume_share_val": 0.911732,
+      "served_pue_only_val": 0.034644,
+      "served_pue_plus_gnb_val": 0.004842,
+      "served_gnb_only_val": 0.508099,
+      "served_rejected_val": 0.452415,
+      "reject_no_service_option_val": 11644,
+      "reject_insufficient_capacity_standalone_val": 13879,
+      "reject_budget_exceeded_val": 65697,
+      "reject_capacity_contention_val": 797,
+      "runtime_total_s_val": 8.985968,
+      "runtime_p95_ms_mean_val": 0.129412,
+      "audit_violations_val": 0,
+      "phantom_x_val": 0,
+      "n_scenarios_test": 156,
+      "request_seconds_test": 221530,
+      "admitted_share_test": 0.500858,
+      "admitted_share_mean_over_scen_test": 0.480402,
+      "payment_total_test": 56.341464,
+      "payment_per_gb_test": 0.964632,
+      "pue_volume_share_test": 0.093221,
+      "gnb_volume_share_test": 0.906779,
+      "served_pue_only_test": 0.0294,
+      "served_pue_plus_gnb_test": 0.003205,
+      "served_gnb_only_test": 0.447796,
+      "served_rejected_test": 0.519598,
+      "reject_no_service_option_test": 11735,
+      "reject_insufficient_capacity_standalone_test": 14694,
+      "reject_budget_exceeded_test": 82833,
+      "reject_capacity_contention_test": 1313,
+      "runtime_total_s_test": 10.092341,
+      "runtime_p95_ms_mean_test": 0.131152,
+      "audit_violations_test": 0,
+      "phantom_x_test": 0,
+      "admitted_share_delta": -0.040621,
+      "payment_per_gb_delta": -0.009367,
+      "pue_volume_share_delta": 0.004952,
+      "gnb_volume_share_delta": -0.004952
+    },
+    {
+      "method": "milp",
+      "channel_scenario": "F1",
+      "theta_tag": "primary",
+      "n_scenarios_val": 156,
+      "request_seconds_val": 200682,
+      "admitted_share_val": 0.530949,
+      "admitted_share_mean_over_scen_val": 0.538949,
+      "payment_total_val": 56.315428,
+      "payment_per_gb_val": 0.984869,
+      "pue_volume_share_val": 0.047778,
+      "gnb_volume_share_val": 0.952222,
+      "served_pue_only_val": 0.015721,
+      "served_pue_plus_gnb_val": 0.006501,
+      "served_gnb_only_val": 0.516728,
+      "served_rejected_val": 0.461051,
+      "reject_no_service_option_val": 12312,
+      "reject_insufficient_capacity_standalone_val": 14500,
+      "reject_budget_exceeded_val": 66470,
+      "reject_capacity_contention_val": 848,
+      "runtime_total_s_val": 450.440348,
+      "runtime_p95_ms_mean_val": 7.039147,
+      "audit_violations_val": 0,
+      "phantom_x_val": 1708,
+      "n_scenarios_test": 156,
+      "request_seconds_test": 221530,
+      "admitted_share_test": 0.491911,
+      "admitted_share_mean_over_scen_test": 0.472686,
+      "payment_total_test": 55.544879,
+      "payment_per_gb_test": 0.97979,
+      "pue_volume_share_test": 0.049934,
+      "gnb_volume_share_test": 0.950066,
+      "served_pue_only_test": 0.01392,
+      "served_pue_plus_gnb_test": 0.005728,
+      "served_gnb_only_test": 0.453038,
+      "served_rejected_test": 0.527314,
+      "reject_no_service_option_test": 11985,
+      "reject_insufficient_capacity_standalone_test": 15268,
+      "reject_budget_exceeded_test": 83991,
+      "reject_capacity_contention_test": 1313,
+      "runtime_total_s_test": 510.945794,
+      "runtime_p95_ms_mean_test": 7.163962,
+      "audit_violations_test": 0,
+      "phantom_x_test": 1169,
+      "admitted_share_delta": -0.039039,
+      "payment_per_gb_delta": -0.005079,
+      "pue_volume_share_delta": 0.002156,
+      "gnb_volume_share_delta": -0.002156
+    },
+    {
+      "method": "milp",
+      "channel_scenario": "F1",
+      "theta_tag": "sensitivity",
+      "n_scenarios_val": 156,
+      "request_seconds_val": 200682,
+      "admitted_share_val": 0.530352,
+      "admitted_share_mean_over_scen_val": 0.538534,
+      "payment_total_val": 56.278782,
+      "payment_per_gb_val": 0.985405,
+      "pue_volume_share_val": 0.045941,
+      "gnb_volume_share_val": 0.954059,
+      "served_pue_only_val": 0.014824,
+      "served_pue_plus_gnb_val": 0.006343,
+      "served_gnb_only_val": 0.517367,
+      "served_rejected_val": 0.461466,
+      "reject_no_service_option_val": 12324,
+      "reject_insufficient_capacity_standalone_val": 14522,
+      "reject_budget_exceeded_val": 66553,
+      "reject_capacity_contention_val": 851,
+      "runtime_total_s_val": 457.273589,
+      "runtime_p95_ms_mean_val": 6.875121,
+      "audit_violations_val": 0,
+      "phantom_x_val": 1659,
+      "n_scenarios_test": 156,
+      "request_seconds_test": 221530,
+      "admitted_share_test": 0.491663,
+      "admitted_share_mean_over_scen_test": 0.472443,
+      "payment_total_test": 55.549563,
+      "payment_per_gb_test": 0.980382,
+      "pue_volume_share_test": 0.048485,
+      "gnb_volume_share_test": 0.951515,
+      "served_pue_only_test": 0.013428,
+      "served_pue_plus_gnb_test": 0.005526,
+      "served_gnb_only_test": 0.453489,
+      "served_rejected_test": 0.527557,
+      "reject_no_service_option_test": 12001,
+      "reject_insufficient_capacity_standalone_test": 15284,
+      "reject_budget_exceeded_test": 84013,
+      "reject_capacity_contention_test": 1314,
+      "runtime_total_s_test": 505.522942,
+      "runtime_p95_ms_mean_test": 6.704291,
+      "audit_violations_test": 0,
+      "phantom_x_test": 1113,
+      "admitted_share_delta": -0.038689,
+      "payment_per_gb_delta": -0.005023,
+      "pue_volume_share_delta": 0.002544,
+      "gnb_volume_share_delta": -0.002544
+    },
+    {
+      "method": "milp",
+      "channel_scenario": "F2",
+      "theta_tag": "primary",
+      "n_scenarios_val": 156,
+      "request_seconds_val": 200682,
+      "admitted_share_val": 0.530949,
+      "admitted_share_mean_over_scen_val": 0.538949,
+      "payment_total_val": 56.315428,
+      "payment_per_gb_val": 0.984869,
+      "pue_volume_share_val": 0.047778,
+      "gnb_volume_share_val": 0.952222,
+      "served_pue_only_val": 0.015721,
+      "served_pue_plus_gnb_val": 0.006501,
+      "served_gnb_only_val": 0.516728,
+      "served_rejected_val": 0.461051,
+      "reject_no_service_option_val": 12312,
+      "reject_insufficient_capacity_standalone_val": 14500,
+      "reject_budget_exceeded_val": 66470,
+      "reject_capacity_contention_val": 848,
+      "runtime_total_s_val": 463.457959,
+      "runtime_p95_ms_mean_val": 7.086362,
+      "audit_violations_val": 0,
+      "phantom_x_val": 1708,
+      "n_scenarios_test": 156,
+      "request_seconds_test": 221530,
+      "admitted_share_test": 0.491911,
+      "admitted_share_mean_over_scen_test": 0.472686,
+      "payment_total_test": 55.545562,
+      "payment_per_gb_test": 0.979802,
+      "pue_volume_share_test": 0.049924,
+      "gnb_volume_share_test": 0.950076,
+      "served_pue_only_test": 0.013908,
+      "served_pue_plus_gnb_test": 0.00574,
+      "served_gnb_only_test": 0.453038,
+      "served_rejected_test": 0.527314,
+      "reject_no_service_option_test": 11985,
+      "reject_insufficient_capacity_standalone_test": 15268,
+      "reject_budget_exceeded_test": 83991,
+      "reject_capacity_contention_test": 1313,
+      "runtime_total_s_test": 516.967616,
+      "runtime_p95_ms_mean_test": 7.029499,
+      "audit_violations_test": 0,
+      "phantom_x_test": 1169,
+      "admitted_share_delta": -0.039039,
+      "payment_per_gb_delta": -0.005067,
+      "pue_volume_share_delta": 0.002145,
+      "gnb_volume_share_delta": -0.002145
+    },
+    {
+      "method": "milp",
+      "channel_scenario": "F2",
+      "theta_tag": "sensitivity",
+      "n_scenarios_val": 156,
+      "request_seconds_val": 200682,
+      "admitted_share_val": 0.530352,
+      "admitted_share_mean_over_scen_val": 0.538534,
+      "payment_total_val": 56.278782,
+      "payment_per_gb_val": 0.985405,
+      "pue_volume_share_val": 0.045941,
+      "gnb_volume_share_val": 0.954059,
+      "served_pue_only_val": 0.014824,
+      "served_pue_plus_gnb_val": 0.006343,
+      "served_gnb_only_val": 0.517367,
+      "served_rejected_val": 0.461466,
+      "reject_no_service_option_val": 12324,
+      "reject_insufficient_capacity_standalone_val": 14522,
+      "reject_budget_exceeded_val": 66553,
+      "reject_capacity_contention_val": 851,
+      "runtime_total_s_val": 465.792192,
+      "runtime_p95_ms_mean_val": 7.015477,
+      "audit_violations_val": 0,
+      "phantom_x_val": 1659,
+      "n_scenarios_test": 156,
+      "request_seconds_test": 221530,
+      "admitted_share_test": 0.491663,
+      "admitted_share_mean_over_scen_test": 0.472443,
+      "payment_total_test": 55.550245,
+      "payment_per_gb_test": 0.980395,
+      "pue_volume_share_test": 0.048474,
+      "gnb_volume_share_test": 0.951526,
+      "served_pue_only_test": 0.013416,
+      "served_pue_plus_gnb_test": 0.005538,
+      "served_gnb_only_test": 0.453489,
+      "served_rejected_test": 0.527557,
+      "reject_no_service_option_test": 12001,
+      "reject_insufficient_capacity_standalone_test": 15284,
+      "reject_budget_exceeded_test": 84013,
+      "reject_capacity_contention_test": 1314,
+      "runtime_total_s_test": 524.258562,
+      "runtime_p95_ms_mean_test": 6.96478,
+      "audit_violations_test": 0,
+      "phantom_x_test": 1113,
+      "admitted_share_delta": -0.038689,
+      "payment_per_gb_delta": -0.005011,
+      "pue_volume_share_delta": 0.002533,
+      "gnb_volume_share_delta": -0.002533
+    },
+    {
+      "method": "milp",
+      "channel_scenario": "F3",
+      "theta_tag": "primary",
+      "n_scenarios_val": 156,
+      "request_seconds_val": 200682,
+      "admitted_share_val": 0.55413,
+      "admitted_share_mean_over_scen_val": 0.558056,
+      "payment_total_val": 57.80816,
+      "payment_per_gb_val": 0.959893,
+      "pue_volume_share_val": 0.138557,
+      "gnb_volume_share_val": 0.861443,
+      "served_pue_only_val": 0.055033,
+      "served_pue_plus_gnb_val": 0.004241,
+      "served_gnb_only_val": 0.498782,
+      "served_rejected_val": 0.441944,
+      "reject_no_service_option_val": 11014,
+      "reject_insufficient_capacity_standalone_val": 13164,
+      "reject_budget_exceeded_val": 64543,
+      "reject_capacity_contention_val": 757,
+      "runtime_total_s_val": 502.619996,
+      "runtime_p95_ms_mean_val": 9.886012,
+      "audit_violations_val": 0,
+      "phantom_x_val": 4072,
+      "n_scenarios_test": 156,
+      "request_seconds_test": 221530,
+      "admitted_share_test": 0.510193,
+      "admitted_share_mean_over_scen_test": 0.488478,
+      "payment_total_test": 56.53144,
+      "payment_per_gb_test": 0.948437,
+      "pue_volume_share_test": 0.139145,
+      "gnb_volume_share_test": 0.860855,
+      "served_pue_only_test": 0.047024,
+      "served_pue_plus_gnb_test": 0.003272,
+      "served_gnb_only_test": 0.438182,
+      "served_rejected_test": 0.511522,
+      "reject_no_service_option_test": 11303,
+      "reject_insufficient_capacity_standalone_test": 14110,
+      "reject_budget_exceeded_test": 81919,
+      "reject_capacity_contention_test": 1175,
+      "runtime_total_s_test": 584.697095,
+      "runtime_p95_ms_mean_test": 9.602554,
+      "audit_violations_test": 0,
+      "phantom_x_test": 4326,
+      "admitted_share_delta": -0.043938,
+      "payment_per_gb_delta": -0.011456,
+      "pue_volume_share_delta": 0.000588,
+      "gnb_volume_share_delta": -0.000588
+    },
+    {
+      "method": "milp",
+      "channel_scenario": "F3",
+      "theta_tag": "sensitivity",
+      "n_scenarios_val": 156,
+      "request_seconds_val": 200682,
+      "admitted_share_val": 0.551629,
+      "admitted_share_mean_over_scen_val": 0.556195,
+      "payment_total_val": 57.599529,
+      "payment_per_gb_val": 0.961702,
+      "pue_volume_share_val": 0.130511,
+      "gnb_volume_share_val": 0.869489,
+      "served_pue_only_val": 0.051659,
+      "served_pue_plus_gnb_val": 0.003942,
+      "served_gnb_only_val": 0.500593,
+      "served_rejected_val": 0.443805,
+      "reject_no_service_option_val": 11177,
+      "reject_insufficient_capacity_standalone_val": 13283,
+      "reject_budget_exceeded_val": 64758,
+      "reject_capacity_contention_val": 762,
+      "runtime_total_s_val": 499.634125,
+      "runtime_p95_ms_mean_val": 9.580765,
+      "audit_violations_val": 0,
+      "phantom_x_val": 3810,
+      "n_scenarios_test": 156,
+      "request_seconds_test": 221530,
+      "admitted_share_test": 0.50859,
+      "admitted_share_mean_over_scen_test": 0.487146,
+      "payment_total_test": 56.475441,
+      "payment_per_gb_test": 0.950952,
+      "pue_volume_share_test": 0.132114,
+      "gnb_volume_share_test": 0.867886,
+      "served_pue_only_test": 0.044292,
+      "served_pue_plus_gnb_test": 0.003117,
+      "served_gnb_only_test": 0.439738,
+      "served_rejected_test": 0.512854,
+      "reject_no_service_option_test": 11409,
+      "reject_insufficient_capacity_standalone_test": 14213,
+      "reject_budget_exceeded_test": 82051,
+      "reject_capacity_contention_test": 1189,
+      "runtime_total_s_test": 574.693774,
+      "runtime_p95_ms_mean_test": 9.480985,
+      "audit_violations_test": 0,
+      "phantom_x_test": 3938,
+      "admitted_share_delta": -0.043039,
+      "payment_per_gb_delta": -0.01075,
+      "pue_volume_share_delta": 0.001604,
+      "gnb_volume_share_delta": -0.001604
+    },
+    {
+      "method": "milp",
+      "channel_scenario": "G",
+      "theta_tag": "primary",
+      "n_scenarios_val": 156,
+      "request_seconds_val": 200682,
+      "admitted_share_val": 0.543297,
+      "admitted_share_mean_over_scen_val": 0.548891,
+      "payment_total_val": 57.223343,
+      "payment_per_gb_val": 0.972839,
+      "pue_volume_share_val": 0.093375,
+      "gnb_volume_share_val": 0.906625,
+      "served_pue_only_val": 0.036835,
+      "served_pue_plus_gnb_val": 0.005124,
+      "served_gnb_only_val": 0.506932,
+      "served_rejected_val": 0.451109,
+      "reject_no_service_option_val": 11523,
+      "reject_insufficient_capacity_standalone_val": 13813,
+      "reject_budget_exceeded_val": 65545,
+      "reject_capacity_contention_val": 771,
+      "runtime_total_s_val": 478.698676,
+      "runtime_p95_ms_mean_val": 8.572456,
+      "audit_violations_val": 0,
+      "phantom_x_val": 2984,
+      "n_scenarios_test": 156,
+      "request_seconds_test": 221530,
+      "admitted_share_test": 0.502036,
+      "admitted_share_mean_over_scen_test": 0.481309,
+      "payment_total_test": 56.171251,
+      "payment_per_gb_test": 0.963065,
+      "pue_volume_share_test": 0.097989,
+      "gnb_volume_share_test": 0.902011,
+      "served_pue_only_test": 0.030755,
+      "served_pue_plus_gnb_test": 0.00359,
+      "served_gnb_only_test": 0.446964,
+      "served_rejected_test": 0.518691,
+      "reject_no_service_option_test": 11681,
+      "reject_insufficient_capacity_standalone_test": 14627,
+      "reject_budget_exceeded_test": 82761,
+      "reject_capacity_contention_test": 1245,
+      "runtime_total_s_test": 520.582408,
+      "runtime_p95_ms_mean_test": 7.580445,
+      "audit_violations_test": 0,
+      "phantom_x_test": 3801,
+      "admitted_share_delta": -0.041262,
+      "payment_per_gb_delta": -0.009774,
+      "pue_volume_share_delta": 0.004614,
+      "gnb_volume_share_delta": -0.004614
+    },
+    {
+      "method": "milp",
+      "channel_scenario": "G",
+      "theta_tag": "sensitivity",
+      "n_scenarios_val": 156,
+      "request_seconds_val": 200682,
+      "admitted_share_val": 0.541588,
+      "admitted_share_mean_over_scen_val": 0.54767,
+      "payment_total_val": 57.082223,
+      "payment_per_gb_val": 0.973988,
+      "pue_volume_share_val": 0.088535,
+      "gnb_volume_share_val": 0.911465,
+      "served_pue_only_val": 0.034644,
+      "served_pue_plus_gnb_val": 0.004912,
+      "served_gnb_only_val": 0.508114,
+      "served_rejected_val": 0.45233,
+      "reject_no_service_option_val": 11644,
+      "reject_insufficient_capacity_standalone_val": 13879,
+      "reject_budget_exceeded_val": 65697,
+      "reject_capacity_contention_val": 775,
+      "runtime_total_s_val": 465.915187,
+      "runtime_p95_ms_mean_val": 8.350805,
+      "audit_violations_val": 0,
+      "phantom_x_val": 2844,
+      "n_scenarios_test": 156,
+      "request_seconds_test": 221530,
+      "admitted_share_test": 0.501147,
+      "admitted_share_mean_over_scen_test": 0.480568,
+      "payment_total_test": 56.131178,
+      "payment_per_gb_test": 0.964538,
+      "pue_volume_share_test": 0.093724,
+      "gnb_volume_share_test": 0.906276,
+      "served_pue_only_test": 0.029419,
+      "served_pue_plus_gnb_test": 0.003282,
+      "served_gnb_only_test": 0.447867,
+      "served_rejected_test": 0.519432,
+      "reject_no_service_option_test": 11735,
+      "reject_insufficient_capacity_standalone_test": 14694,
+      "reject_budget_exceeded_test": 82833,
+      "reject_capacity_contention_test": 1249,
+      "runtime_total_s_test": 528.481972,
+      "runtime_p95_ms_mean_test": 7.651445,
+      "audit_violations_test": 0,
+      "phantom_x_test": 3523,
+      "admitted_share_delta": -0.040442,
+      "payment_per_gb_delta": -0.009451,
+      "pue_volume_share_delta": 0.005189,
+      "gnb_volume_share_delta": -0.005189
+    }
+  ],
+  "paired": {
+    "milp_vs_greedy|F1|primary": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 4.550136344000793e-05,
+          "ci95": [
+            0.0,
+            0.00011151295914930935
+          ]
+        },
+        "payment_total": {
+          "mean_diff": -0.0005962580760169937,
+          "ci95": [
+            -0.0011622707403947917,
+            -0.00017565575075504327
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -2.6417459739248896e-05,
+          "ci95": [
+            -4.965634881947642e-05,
+            -7.458450452023533e-06
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.00012619494751939567,
+          "ci95": [
+            4.35470323147238e-05,
+            0.00022163961378924416
+          ]
+        },
+        "scenarios_where_a_admits_more": 3,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 142
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 9.852780748387424e-05,
+          "ci95": [
+            2.080576569378881e-06,
+            0.00028475314427388613
+          ]
+        },
+        "payment_total": {
+          "mean_diff": -0.001525428074155973,
+          "ci95": [
+            -0.00225639671068034,
+            -0.0008845821039920166
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -4.808947415297801e-05,
+          "ci95": [
+            -8.209934618204309e-05,
+            -2.107931311044927e-05
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.00013749538245423366,
+          "ci95": [
+            6.015835820421055e-05,
+            0.00023998223872494912
+          ]
+        },
+        "scenarios_where_a_admits_more": 4,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 128
+      }
+    },
+    "milp_vs_greedy|F1|sensitivity": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 4.550136344000864e-05,
+          "ci95": [
+            0.0,
+            0.00011370081940862709
+          ]
+        },
+        "payment_total": {
+          "mean_diff": -0.0005998374029400706,
+          "ci95": [
+            -0.0011493511952256317,
+            -0.00016990957345519936
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -2.4844882812038934e-05,
+          "ci95": [
+            -4.723007042196685e-05,
+            -6.241264606998118e-06
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.00011962343138447108,
+          "ci95": [
+            4.48632813447295e-05,
+            0.0002053286334765665
+          ]
+        },
+        "scenarios_where_a_admits_more": 3,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 142
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 9.525058028026622e-05,
+          "ci95": [
+            2.080576569378881e-06,
+            0.0002603795117318405
+          ]
+        },
+        "payment_total": {
+          "mean_diff": -0.0015270493289105114,
+          "ci95": [
+            -0.002248802101910453,
+            -0.0008764274923371813
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -4.78541830262718e-05,
+          "ci95": [
+            -8.261168357981043e-05,
+            -2.0437644878583633e-05
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.00013167495572473376,
+          "ci95": [
+            5.825857603170617e-05,
+            0.00022616520225032287
+          ]
+        },
+        "scenarios_where_a_admits_more": 4,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 128
+      }
+    },
+    "milp_vs_greedy|F2|primary": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 4.550136344000793e-05,
+          "ci95": [
+            0.0,
+            0.00011297420387440647
+          ]
+        },
+        "payment_total": {
+          "mean_diff": -0.0005962580760169937,
+          "ci95": [
+            -0.0011538351168964313,
+            -0.00017524075801008044
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -2.6417459739248896e-05,
+          "ci95": [
+            -5.1581092574979244e-05,
+            -6.583288579205688e-06
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.00012619494751939567,
+          "ci95": [
+            4.6558900312891205e-05,
+            0.00022569924113867247
+          ]
+        },
+        "scenarios_where_a_admits_more": 3,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 142
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 9.852780748387424e-05,
+          "ci95": [
+            2.080576569378881e-06,
+            0.00027215169917336405
+          ]
+        },
+        "payment_total": {
+          "mean_diff": -0.0015254280741559723,
+          "ci95": [
+            -0.002312194797525058,
+            -0.0008617782766795456
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -4.8089081167944605e-05,
+          "ci95": [
+            -8.489560182737116e-05,
+            -2.0523667871154966e-05
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.00013749503087039008,
+          "ci95": [
+            5.711773373334865e-05,
+            0.00022731392925342243
+          ]
+        },
+        "scenarios_where_a_admits_more": 4,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 128
+      }
+    },
+    "milp_vs_greedy|F2|sensitivity": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 4.550136344000864e-05,
+          "ci95": [
+            0.0,
+            0.00011453523939931413
+          ]
+        },
+        "payment_total": {
+          "mean_diff": -0.0005998374029400706,
+          "ci95": [
+            -0.0011551730393532312,
+            -0.0001822100395670253
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -2.4844882812038934e-05,
+          "ci95": [
+            -4.8237967022933645e-05,
+            -6.742329894419296e-06
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.00011962343138447108,
+          "ci95": [
+            4.372262272491423e-05,
+            0.0002111092727323742
+          ]
+        },
+        "scenarios_where_a_admits_more": 3,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 142
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 9.525058028026622e-05,
+          "ci95": [
+            2.080576569378881e-06,
+            0.00027742345706977743
+          ]
+        },
+        "payment_total": {
+          "mean_diff": -0.0015270493289105107,
+          "ci95": [
+            -0.002245409539397061,
+            -0.0009065757505419869
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -4.7853787314315716e-05,
+          "ci95": [
+            -8.324711172851085e-05,
+            -2.026671709298471e-05
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.0001316746017012505,
+          "ci95": [
+            5.791356171356565e-05,
+            0.000225944364586621
+          ]
+        },
+        "scenarios_where_a_admits_more": 4,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 128
+      }
+    },
+    "milp_vs_greedy|F3|primary": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 8.479100669004633e-05,
+          "ci95": [
+            1.8946570670708437e-05,
+            0.00017637734630799297
+          ]
+        },
+        "payment_total": {
+          "mean_diff": -0.0002454456371163054,
+          "ci95": [
+            -0.0007115034088326535,
+            0.0001932680632918896
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -4.7219726475425454e-05,
+          "ci95": [
+            -0.00011337682789263721,
+            -6.983047097222552e-06
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.0003243427795122804,
+          "ci95": [
+            0.00011606766900496088,
+            0.0005764823206086809
+          ]
+        },
+        "scenarios_where_a_admits_more": 4,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 141
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.00023264063292362922,
+          "ci95": [
+            4.067167143928839e-05,
+            0.000533099914510454
+          ]
+        },
+        "payment_total": {
+          "mean_diff": -0.0012191428310357056,
+          "ci95": [
+            -0.0019162292999756806,
+            -0.0005877066394866021
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -1.3319414077290503e-05,
+          "ci95": [
+            -9.903234512340008e-05,
+            7.383963977494423e-05
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.000370450444541081,
+          "ci95": [
+            0.00016776121810225123,
+            0.0005992653095716141
+          ]
+        },
+        "scenarios_where_a_admits_more": 7,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 127
+      }
+    },
+    "milp_vs_greedy|F3|sensitivity": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 8.479100669004668e-05,
+          "ci95": [
+            1.8946570670708437e-05,
+            0.0001719585641493695
+          ]
+        },
+        "payment_total": {
+          "mean_diff": -0.00025625653455220345,
+          "ci95": [
+            -0.0007433963988134023,
+            0.00018612030094873006
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -4.876103875724216e-05,
+          "ci95": [
+            -0.0001128260206325171,
+            -6.234207406050875e-06
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.00032552447959853417,
+          "ci95": [
+            0.00012392570260880275,
+            0.0006001309839212468
+          ]
+        },
+        "scenarios_where_a_admits_more": 4,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 141
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.00022530514011499483,
+          "ci95": [
+            3.536980167944169e-05,
+            0.0005290127739759455
+          ]
+        },
+        "payment_total": {
+          "mean_diff": -0.0012312939955407415,
+          "ci95": [
+            -0.001964108224117408,
+            -0.0006032363916862872
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -1.33056200291254e-05,
+          "ci95": [
+            -8.702539332114589e-05,
+            7.131971413871157e-05
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.0003583859285257447,
+          "ci95": [
+            0.00016402881715446886,
+            0.0006039739592676178
+          ]
+        },
+        "scenarios_where_a_admits_more": 7,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 127
+      }
+    },
+    "milp_vs_greedy|G|primary": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 8.479100669004775e-05,
+          "ci95": [
+            1.894657067070915e-05,
+            0.00017416795522868215
+          ]
+        },
+        "payment_total": {
+          "mean_diff": -0.00026204924224740024,
+          "ci95": [
+            -0.0007476600309407722,
+            0.00021431274956821604
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -4.432310559461065e-05,
+          "ci95": [
+            -0.00011138570459093913,
+            -4.450896542164735e-06
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.0003052934413862941,
+          "ci95": [
+            0.00012722782192862617,
+            0.0005478121235554434
+          ]
+        },
+        "scenarios_where_a_admits_more": 4,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 140
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.00017476374311251646,
+          "ci95": [
+            2.588103353815199e-05,
+            0.00039155755761719873
+          ]
+        },
+        "payment_total": {
+          "mean_diff": -0.001336198547446425,
+          "ci95": [
+            -0.002055057578978913,
+            -0.0006959592150583496
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -2.7427100203967015e-05,
+          "ci95": [
+            -7.813824435662347e-05,
+            2.105786360527454e-05
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.0002550742471587683,
+          "ci95": [
+            0.0001230099432123658,
+            0.0004241201495253173
+          ]
+        },
+        "scenarios_where_a_admits_more": 6,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 127
+      }
+    },
+    "milp_vs_greedy|G|sensitivity": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 8.479100669004703e-05,
+          "ci95": [
+            1.8946570670708437e-05,
+            0.00017195856414936847
+          ]
+        },
+        "payment_total": {
+          "mean_diff": -0.00027286013968329736,
+          "ci95": [
+            -0.000772839389302119,
+            0.00019800118878113783
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -4.392338583216734e-05,
+          "ci95": [
+            -0.00010681368225047356,
+            -4.543072738043349e-06
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.00030075566464016153,
+          "ci95": [
+            0.00011441225864312096,
+            0.0005315103713029969
+          ]
+        },
+        "scenarios_where_a_admits_more": 4,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 140
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.00016598504983984157,
+          "ci95": [
+            2.3007919504818544e-05,
+            0.00036315230054635185
+          ]
+        },
+        "payment_total": {
+          "mean_diff": -0.0013479859958679262,
+          "ci95": [
+            -0.0020514899204934333,
+            -0.0007285997049185322
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -2.8401178506769744e-05,
+          "ci95": [
+            -7.641462087625983e-05,
+            1.4645179359641822e-05
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.0002489274995220322,
+          "ci95": [
+            0.00012064583970688842,
+            0.0004095743591865958
+          ]
+        },
+        "scenarios_where_a_admits_more": 6,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 127
+      }
+    },
+    "milp_vs_gnb_only|F1|primary": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.009264787166205808,
+          "ci95": [
+            0.006968960401037464,
+            0.011880299166432155
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.0025138923363057985,
+          "ci95": [
+            0.0001137215765102748,
+            0.005111544001812927
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.014451993997662541,
+          "ci95": [
+            -0.0183047477498431,
+            -0.01113378152178001
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.045869760011019986,
+          "ci95": [
+            0.03636205933561092,
+            0.05677122666474012
+          ]
+        },
+        "scenarios_where_a_admits_more": 60,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 46
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.007844400567960168,
+          "ci95": [
+            0.00574160352800829,
+            0.010228406995470677
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.0004997173432508869,
+          "ci95": [
+            -0.0016212704160422857,
+            0.002608570065052627
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.016544385931567922,
+          "ci95": [
+            -0.020959276966834205,
+            -0.012495751273635206
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.04236039271545195,
+          "ci95": [
+            0.033784569395818705,
+            0.05164678167474569
+          ]
+        },
+        "scenarios_where_a_admits_more": 64,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 53
+      }
+    },
+    "milp_vs_gnb_only|F1|sensitivity": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.008849732383560873,
+          "ci95": [
+            0.006611320306713089,
+            0.011246164990315013
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.002278986144436004,
+          "ci95": [
+            7.398203277246963e-05,
+            0.00477316234407621
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.01405958227393115,
+          "ci95": [
+            -0.017784704873371634,
+            -0.010584517570583913
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.04436832960649957,
+          "ci95": [
+            0.034758362605854014,
+            0.05478331760632509
+          ]
+        },
+        "scenarios_where_a_admits_more": 60,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 46
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.007601249147673263,
+          "ci95": [
+            0.005548477588968858,
+            0.009963543125383651
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.0005297417230543517,
+          "ci95": [
+            -0.0014498732309304325,
+            0.002605495989485163
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.016073697299001582,
+          "ci95": [
+            -0.020234036366033666,
+            -0.012333015386530836
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.04098393453198828,
+          "ci95": [
+            0.0326837877107322,
+            0.04998320592275426
+          ]
+        },
+        "scenarios_where_a_admits_more": 64,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 53
+      }
+    },
+    "milp_vs_gnb_only|F2|primary": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.009264787166205808,
+          "ci95": [
+            0.006830934488583681,
+            0.011847059661269619
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.0025138923363057985,
+          "ci95": [
+            0.00014944624889259847,
+            0.005104652159913713
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.014451993997662541,
+          "ci95": [
+            -0.018099282858990772,
+            -0.0108715657660444
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.045869760011019986,
+          "ci95": [
+            0.03563531314269724,
+            0.05661058787600763
+          ]
+        },
+        "scenarios_where_a_admits_more": 60,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 46
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.007844400567960168,
+          "ci95": [
+            0.005697792535343182,
+            0.01030270093029966
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.0005040929777786401,
+          "ci95": [
+            -0.0015857770962867301,
+            0.00255491013906384
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.01653924195625982,
+          "ci95": [
+            -0.02075148472887873,
+            -0.012560636080031523
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.0423557906607545,
+          "ci95": [
+            0.03335404191727916,
+            0.051802875816191085
+          ]
+        },
+        "scenarios_where_a_admits_more": 64,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 53
+      }
+    },
+    "milp_vs_gnb_only|F2|sensitivity": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.008849732383560873,
+          "ci95": [
+            0.0065576475005456394,
+            0.0113781246055856
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.002278986144436004,
+          "ci95": [
+            0.00011229058722932014,
+            0.004768117657114752
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.01405958227393115,
+          "ci95": [
+            -0.01769498828996346,
+            -0.010507291585358859
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.04436832960649957,
+          "ci95": [
+            0.034082319330115525,
+            0.055812048495127685
+          ]
+        },
+        "scenarios_where_a_admits_more": 60,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 46
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.007601249147673263,
+          "ci95": [
+            0.005516495885964619,
+            0.009778872779929037
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.0005341173575821056,
+          "ci95": [
+            -0.001524758460999098,
+            0.002558541777830598
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.016068538948056182,
+          "ci95": [
+            -0.020205125851839006,
+            -0.012123565694289245
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.040979319616134775,
+          "ci95": [
+            0.03253029558787468,
+            0.04973913272421931
+          ]
+        },
+        "scenarios_where_a_admits_more": 64,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 53
+      }
+    },
+    "milp_vs_gnb_only|F3|primary": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.028371985223644505,
+          "ci95": [
+            0.022873301060783915,
+            0.03432368978128609
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.012082690702708197,
+          "ci95": [
+            0.0065058455446207995,
+            0.018561369154912726
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.03778580066287893,
+          "ci95": [
+            -0.04465564913619846,
+            -0.030883640639931424
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.13178250974241543,
+          "ci95": [
+            0.11129414528457746,
+            0.15331014394941558
+          ]
+        },
+        "scenarios_where_a_admits_more": 109,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 26
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.02363683248855069,
+          "ci95": [
+            0.01932506728782315,
+            0.02826159515059711
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.006823824084096812,
+          "ci95": [
+            0.001998237774707544,
+            0.011878845267762035
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.04109832078050512,
+          "ci95": [
+            -0.04874113294210333,
+            -0.033608990763510184
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.10992660084680492,
+          "ci95": [
+            0.09276376618384767,
+            0.1280017537061048
+          ]
+        },
+        "scenarios_where_a_admits_more": 101,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 31
+      }
+    },
+    "milp_vs_gnb_only|F3|sensitivity": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.026510589485624028,
+          "ci95": [
+            0.02123174770449882,
+            0.03232892841360898
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.01074530881550716,
+          "ci95": [
+            0.005516998495803932,
+            0.0171213772818208
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.03626757797746534,
+          "ci95": [
+            -0.0434303523580043,
+            -0.030139587063698094
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.12473466435581734,
+          "ci95": [
+            0.10562396507175296,
+            0.14524315232296156
+          ]
+        },
+        "scenarios_where_a_admits_more": 109,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 26
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.0223046146995234,
+          "ci95": [
+            0.017723158149340577,
+            0.02677901200954996
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.006464855772597442,
+          "ci95": [
+            0.001985823356120779,
+            0.011640872843362541
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.039206970972584146,
+          "ci95": [
+            -0.04644950941413477,
+            -0.03204973708346306
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.10456164928872536,
+          "ci95": [
+            0.08746297832800183,
+            0.12299426672111347
+          ]
+        },
+        "scenarios_where_a_admits_more": 101,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 31
+      }
+    },
+    "milp_vs_gnb_only|G|primary": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.019206647656133544,
+          "ci95": [
+            0.015455393659594866,
+            0.023180160163979533
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.008333861901079214,
+          "ci95": [
+            0.004399851003230571,
+            0.012980525886366978
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.025459908781349322,
+          "ci95": [
+            -0.030756678048815902,
+            -0.020680494151281866
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.08810503318266841,
+          "ci95": [
+            0.07317612273321754,
+            0.10325157030250963
+          ]
+        },
+        "scenarios_where_a_admits_more": 103,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 30
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.016467675435501452,
+          "ci95": [
+            0.013027801689052628,
+            0.020174743883044632
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.0045149209339565245,
+          "ci95": [
+            0.0007676581421434763,
+            0.00838870974876893
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.029206398297178904,
+          "ci95": [
+            -0.03513674288918521,
+            -0.02335985581395819
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.07816251885522024,
+          "ci95": [
+            0.06407033300997758,
+            0.0938172538406107
+          ]
+        },
+        "scenarios_where_a_admits_more": 95,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 38
+      }
+    },
+    "milp_vs_gnb_only|G|sensitivity": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.017985502957966026,
+          "ci95": [
+            0.01449271327946917,
+            0.02172542601004479
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.007429250020883442,
+          "ci95": [
+            0.0036372281075764306,
+            0.01169725410711936
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.024460516005744438,
+          "ci95": [
+            -0.029792800046063925,
+            -0.019634725596030564
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.08395677951650539,
+          "ci95": [
+            0.07068488859159382,
+            0.0988830518081528
+          ]
+        },
+        "scenarios_where_a_admits_more": 103,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 30
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.01572612211782178,
+          "ci95": [
+            0.01237487063208795,
+            0.01937628533985782
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.004258043836454112,
+          "ci95": [
+            0.0007868807032299558,
+            0.007808077524677203
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.028206278610031818,
+          "ci95": [
+            -0.03413217379319929,
+            -0.02254464801616479
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.07506012934809873,
+          "ci95": [
+            0.0620945222138289,
+            0.08937743497174272
+          ]
+        },
+        "scenarios_where_a_admits_more": 94,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 38
+      }
+    },
+    "greedy_vs_gnb_only|F1|primary": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.0092192858027658,
+          "ci95": [
+            0.006914935273186858,
+            0.011806856051403518
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.003110150412322792,
+          "ci95": [
+            0.0005807216819518936,
+            0.00588935193877355
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.014425576537923295,
+          "ci95": [
+            -0.018275991502954,
+            -0.011106974410091442
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.04574356506350059,
+          "ci95": [
+            0.03624872723240406,
+            0.056632147808051536
+          ]
+        },
+        "scenarios_where_a_admits_more": 60,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 45
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.007745872760476294,
+          "ci95": [
+            0.005683699946933637,
+            0.01011472077375313
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.0020251454174068603,
+          "ci95": [
+            -0.00026271273303781167,
+            0.0042928178463290355
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.016496296457414943,
+          "ci95": [
+            -0.020891380133046762,
+            -0.012448905037630645
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.042222897332997715,
+          "ci95": [
+            0.03366037308485007,
+            0.05144669263803838
+          ]
+        },
+        "scenarios_where_a_admits_more": 64,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 52
+      }
+    },
+    "greedy_vs_gnb_only|F1|sensitivity": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.008804231020120864,
+          "ci95": [
+            0.0065417102671044905,
+            0.011175404582387508
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.0028788235473760746,
+          "ci95": [
+            0.00046322348090911534,
+            0.0054776330782130836
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.014034737391119111,
+          "ci95": [
+            -0.01777868964613883,
+            -0.010565051348487816
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.0442487061751151,
+          "ci95": [
+            0.03460759833587572,
+            0.054675863721071485
+          ]
+        },
+        "scenarios_where_a_admits_more": 60,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 45
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.007505998567392997,
+          "ci95": [
+            0.005403197290520918,
+            0.009839098393862995
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.002056791051964863,
+          "ci95": [
+            -4.693399643556433e-05,
+            0.004198602022950419
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.016025843115975307,
+          "ci95": [
+            -0.020191449370244332,
+            -0.012300493803903701
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.040852259576263546,
+          "ci95": [
+            0.03256939501679586,
+            0.049845052913863624
+          ]
+        },
+        "scenarios_where_a_admits_more": 64,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 52
+      }
+    },
+    "greedy_vs_gnb_only|F2|primary": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.0092192858027658,
+          "ci95": [
+            0.006788346158752644,
+            0.011820543682488853
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.003110150412322792,
+          "ci95": [
+            0.0005912907882164524,
+            0.005759387002720818
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.014425576537923295,
+          "ci95": [
+            -0.01806126800433567,
+            -0.010848749846426744
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.04574356506350059,
+          "ci95": [
+            0.03549232955283412,
+            0.05642938186134123
+          ]
+        },
+        "scenarios_where_a_admits_more": 60,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 45
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.007745872760476294,
+          "ci95": [
+            0.005632398839754418,
+            0.01014987370440268
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.0020295210519346127,
+          "ci95": [
+            -0.0002712959122765838,
+            0.004271864540447607
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.01649115287509188,
+          "ci95": [
+            -0.020694525387360486,
+            -0.012529838049082361
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.042218295629884106,
+          "ci95": [
+            0.03331702966764857,
+            0.05164330068002524
+          ]
+        },
+        "scenarios_where_a_admits_more": 64,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 52
+      }
+    },
+    "greedy_vs_gnb_only|F2|sensitivity": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.008804231020120864,
+          "ci95": [
+            0.006499603604063531,
+            0.011304518245437737
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.0028788235473760746,
+          "ci95": [
+            0.0005582946344123836,
+            0.005561729647005284
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.014034737391119111,
+          "ci95": [
+            -0.017652703865562006,
+            -0.010493596392413368
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.0442487061751151,
+          "ci95": [
+            0.03396787652671694,
+            0.05572145991108207
+          ]
+        },
+        "scenarios_where_a_admits_more": 60,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 45
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.007505998567392997,
+          "ci95": [
+            0.00542375345745547,
+            0.00966540512584754
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.0020611666864926164,
+          "ci95": [
+            -0.00011299306441575525,
+            0.004244918717467827
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.016020685160741868,
+          "ci95": [
+            -0.020140223587995085,
+            -0.01207910399904592
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.040847645014433526,
+          "ci95": [
+            0.03244046963847165,
+            0.049651811646626784
+          ]
+        },
+        "scenarios_where_a_admits_more": 64,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 52
+      }
+    },
+    "greedy_vs_gnb_only|F3|primary": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.028287194216954453,
+          "ci95": [
+            0.0228402780571072,
+            0.03424679374138618
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.012328136339824504,
+          "ci95": [
+            0.0065931730644575755,
+            0.018886241711450424
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.037738580936403504,
+          "ci95": [
+            -0.04461450295335835,
+            -0.030857883458550135
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.13145816696290313,
+          "ci95": [
+            0.11097804291166459,
+            0.1530810716023808
+          ]
+        },
+        "scenarios_where_a_admits_more": 108,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 26
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.023404191855627057,
+          "ci95": [
+            0.01923238825035595,
+            0.027934085896900652
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.008042966915132517,
+          "ci95": [
+            0.0031800429080185225,
+            0.0130798352186136
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.04108500136642783,
+          "ci95": [
+            -0.04877263640278775,
+            -0.03355901259325396
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.10955615040226384,
+          "ci95": [
+            0.09242441283105353,
+            0.12762818144402155
+          ]
+        },
+        "scenarios_where_a_admits_more": 101,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 30
+      }
+    },
+    "greedy_vs_gnb_only|F3|sensitivity": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.026425798478933987,
+          "ci95": [
+            0.021121374790797336,
+            0.03218186792422636
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.011001565350059365,
+          "ci95": [
+            0.005555576555946505,
+            0.017599486985158876
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.0362188169387081,
+          "ci95": [
+            -0.043392541401293595,
+            -0.030078737940198882
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.12440913987621882,
+          "ci95": [
+            0.10539845936269374,
+            0.14471813316335888
+          ]
+        },
+        "scenarios_where_a_admits_more": 108,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 26
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.022079309559408403,
+          "ci95": [
+            0.017517300403369962,
+            0.02644056124653817
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.0076961497681381835,
+          "ci95": [
+            0.003263828285680828,
+            0.012884037956604597
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.03919366535255502,
+          "ci95": [
+            -0.04638824842248925,
+            -0.03200143014773568
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.10420326336019961,
+          "ci95": [
+            0.08698418527792122,
+            0.12255312445230385
+          ]
+        },
+        "scenarios_where_a_admits_more": 101,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 30
+      }
+    },
+    "greedy_vs_gnb_only|G|primary": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.019121856649443495,
+          "ci95": [
+            0.015308022076481692,
+            0.023089158084393078
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.008595911143326616,
+          "ci95": [
+            0.004559642002462127,
+            0.013316052732786528
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.025415585675754714,
+          "ci95": [
+            -0.030662281355207308,
+            -0.020660084378338883
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.0877997397412821,
+          "ci95": [
+            0.07302709441185509,
+            0.1029056629245864
+          ]
+        },
+        "scenarios_where_a_admits_more": 102,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 30
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.016292911692388935,
+          "ci95": [
+            0.012930322322388528,
+            0.019933301323586845
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.005851119481402951,
+          "ci95": [
+            0.001983392108406949,
+            0.009753816037655084
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.029178971196974934,
+          "ci95": [
+            -0.035131851413040434,
+            -0.023319217535718563
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.07790744460806145,
+          "ci95": [
+            0.06390954778158191,
+            0.09352845109780045
+          ]
+        },
+        "scenarios_where_a_admits_more": 95,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 37
+      }
+    },
+    "greedy_vs_gnb_only|G|sensitivity": {
+      "val": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.01790071195127598,
+          "ci95": [
+            0.01436325716171833,
+            0.021671670647796126
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.0077021101605667395,
+          "ci95": [
+            0.0037319434097411227,
+            0.012032316052454348
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.02441659261991227,
+          "ci95": [
+            -0.029723161417630168,
+            -0.019624103124603977
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.08365602385186523,
+          "ci95": [
+            0.07043244930859252,
+            0.09861723848565843
+          ]
+        },
+        "scenarios_where_a_admits_more": 102,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 30
+      },
+      "test": {
+        "n_scenarios": 156,
+        "admitted_share": {
+          "mean_diff": 0.015560137067981938,
+          "ci95": [
+            0.01224515626140982,
+            0.01918028661158079
+          ]
+        },
+        "payment_total": {
+          "mean_diff": 0.005606029832322039,
+          "ci95": [
+            0.0020973914187490867,
+            0.009250617478970775
+          ]
+        },
+        "payment_per_gb": {
+          "mean_diff": -0.02817787743152505,
+          "ci95": [
+            -0.03406934229216712,
+            -0.0225204683148267
+          ]
+        },
+        "pue_volume_share": {
+          "mean_diff": 0.0748112018485767,
+          "ci95": [
+            0.06191111618027986,
+            0.08898200214881684
+          ]
+        },
+        "scenarios_where_a_admits_more": 94,
+        "scenarios_where_a_admits_less": 0,
+        "scenarios_identical_admission_and_payment": 37
+      }
+    }
+  },
+  "per_config_G_primary": {
+    "val": {
+      "('admitted_share', 'gnb_only')": {
+        "C00_baseline": 0.602659,
+        "C01_avail_low": 0.602659,
+        "C02_avail_high": 0.602659,
+        "C03_demand_low": 0.604211,
+        "C04_demand_high": 0.557881,
+        "C05_price_cheap": 0.602659,
+        "C06_price_expensive": 0.602659,
+        "C07_gnb_insufficient": 0.393416,
+        "C08_coverage_gaps": 0.407879,
+        "C09_withdrawals_some": 0.602659,
+        "S01_highdemand_gnbinsufficient": 0.318619,
+        "S02_lowavail_withdrawals": 0.602659,
+        "S03_expensive_coveragegaps": 0.407879
+      },
+      "('admitted_share', 'greedy')": {
+        "C00_baseline": 0.626283,
+        "C01_avail_low": 0.605345,
+        "C02_avail_high": 0.643157,
+        "C03_demand_low": 0.620451,
+        "C04_demand_high": 0.579583,
+        "C05_price_cheap": 0.646188,
+        "C06_price_expensive": 0.602727,
+        "C07_gnb_insufficient": 0.433639,
+        "C08_coverage_gaps": 0.440251,
+        "C09_withdrawals_some": 0.623666,
+        "S01_highdemand_gnbinsufficient": 0.363212,
+        "S02_lowavail_withdrawals": 0.605345,
+        "S03_expensive_coveragegaps": 0.411392
+      },
+      "('admitted_share', 'milp')": {
+        "C00_baseline": 0.626283,
+        "C01_avail_low": 0.605345,
+        "C02_avail_high": 0.643157,
+        "C03_demand_low": 0.620451,
+        "C04_demand_high": 0.579583,
+        "C05_price_cheap": 0.646188,
+        "C06_price_expensive": 0.60321,
+        "C07_gnb_insufficient": 0.433845,
+        "C08_coverage_gaps": 0.440251,
+        "C09_withdrawals_some": 0.623666,
+        "S01_highdemand_gnbinsufficient": 0.363417,
+        "S02_lowavail_withdrawals": 0.605345,
+        "S03_expensive_coveragegaps": 0.411874
+      },
+      "('payment_per_gb', 'gnb_only')": {
+        "C00_baseline": 1.0,
+        "C01_avail_low": 1.0,
+        "C02_avail_high": 1.0,
+        "C03_demand_low": 1.0,
+        "C04_demand_high": 1.0,
+        "C05_price_cheap": 1.0,
+        "C06_price_expensive": 1.0,
+        "C07_gnb_insufficient": 1.0,
+        "C08_coverage_gaps": 1.0,
+        "C09_withdrawals_some": 1.0,
+        "S01_highdemand_gnbinsufficient": 1.0,
+        "S02_lowavail_withdrawals": 1.0,
+        "S03_expensive_coveragegaps": 1.0
+      },
+      "('payment_per_gb', 'greedy')": {
+        "C00_baseline": 0.976,
+        "C01_avail_low": 0.992897,
+        "C02_avail_high": 0.952184,
+        "C03_demand_low": 0.984286,
+        "C04_demand_high": 0.97091,
+        "C05_price_cheap": 0.93249,
+        "C06_price_expensive": 0.999088,
+        "C07_gnb_insufficient": 0.954163,
+        "C08_coverage_gaps": 0.969487,
+        "C09_withdrawals_some": 0.981229,
+        "S01_highdemand_gnbinsufficient": 0.94206,
+        "S02_lowavail_withdrawals": 0.997136,
+        "S03_expensive_coveragegaps": 1.000217
+      },
+      "('payment_per_gb', 'milp')": {
+        "C00_baseline": 0.976,
+        "C01_avail_low": 0.992897,
+        "C02_avail_high": 0.952184,
+        "C03_demand_low": 0.984286,
+        "C04_demand_high": 0.970856,
+        "C05_price_cheap": 0.93249,
+        "C06_price_expensive": 0.999149,
+        "C07_gnb_insufficient": 0.953758,
+        "C08_coverage_gaps": 0.969487,
+        "C09_withdrawals_some": 0.981229,
+        "S01_highdemand_gnbinsufficient": 0.941555,
+        "S02_lowavail_withdrawals": 0.997136,
+        "S03_expensive_coveragegaps": 1.000294
+      },
+      "('pue_volume_share', 'gnb_only')": {
+        "C00_baseline": 0.0,
+        "C01_avail_low": 0.0,
+        "C02_avail_high": 0.0,
+        "C03_demand_low": 0.0,
+        "C04_demand_high": 0.0,
+        "C05_price_cheap": 0.0,
+        "C06_price_expensive": 0.0,
+        "C07_gnb_insufficient": 0.0,
+        "C08_coverage_gaps": 0.0,
+        "C09_withdrawals_some": 0.0,
+        "S01_highdemand_gnbinsufficient": 0.0,
+        "S02_lowavail_withdrawals": 0.0,
+        "S03_expensive_coveragegaps": 0.0
+      },
+      "('pue_volume_share', 'greedy')": {
+        "C00_baseline": 0.091569,
+        "C01_avail_low": 0.032813,
+        "C02_avail_high": 0.156607,
+        "C03_demand_low": 0.066949,
+        "C04_demand_high": 0.090514,
+        "C05_price_cheap": 0.142412,
+        "C06_price_expensive": 0.014296,
+        "C07_gnb_insufficient": 0.188958,
+        "C08_coverage_gaps": 0.126961,
+        "C09_withdrawals_some": 0.075506,
+        "S01_highdemand_gnbinsufficient": 0.210961,
+        "S02_lowavail_withdrawals": 0.0207,
+        "S03_expensive_coveragegaps": 0.025354
+      },
+      "('pue_volume_share', 'milp')": {
+        "C00_baseline": 0.091569,
+        "C01_avail_low": 0.032813,
+        "C02_avail_high": 0.156607,
+        "C03_demand_low": 0.066949,
+        "C04_demand_high": 0.090682,
+        "C05_price_cheap": 0.142412,
+        "C06_price_expensive": 0.015353,
+        "C07_gnb_insufficient": 0.190627,
+        "C08_coverage_gaps": 0.126961,
+        "C09_withdrawals_some": 0.075506,
+        "S01_highdemand_gnbinsufficient": 0.213104,
+        "S02_lowavail_withdrawals": 0.0207,
+        "S03_expensive_coveragegaps": 0.026723
+      }
+    },
+    "test": {
+      "('admitted_share', 'gnb_only')": {
+        "C00_baseline": 0.552217,
+        "C01_avail_low": 0.552217,
+        "C02_avail_high": 0.552217,
+        "C03_demand_low": 0.555076,
+        "C04_demand_high": 0.571417,
+        "C05_price_cheap": 0.552217,
+        "C06_price_expensive": 0.552217,
+        "C07_gnb_insufficient": 0.364445,
+        "C08_coverage_gaps": 0.34243,
+        "C09_withdrawals_some": 0.552217,
+        "S01_highdemand_gnbinsufficient": 0.316857,
+        "S02_lowavail_withdrawals": 0.552217,
+        "S03_expensive_coveragegaps": 0.34243
+      },
+      "('admitted_share', 'greedy')": {
+        "C00_baseline": 0.565708,
+        "C01_avail_low": 0.55792,
+        "C02_avail_high": 0.57785,
+        "C03_demand_low": 0.564994,
+        "C04_demand_high": 0.587052,
+        "C05_price_cheap": 0.576991,
+        "C06_price_expensive": 0.554118,
+        "C07_gnb_insufficient": 0.393819,
+        "C08_coverage_gaps": 0.374931,
+        "C09_withdrawals_some": 0.564849,
+        "S01_highdemand_gnbinsufficient": 0.352335,
+        "S02_lowavail_withdrawals": 0.55792,
+        "S03_expensive_coveragegaps": 0.358006
+      },
+      "('admitted_share', 'milp')": {
+        "C00_baseline": 0.565708,
+        "C01_avail_low": 0.55792,
+        "C02_avail_high": 0.57785,
+        "C03_demand_low": 0.564994,
+        "C04_demand_high": 0.587092,
+        "C05_price_cheap": 0.576991,
+        "C06_price_expensive": 0.554118,
+        "C07_gnb_insufficient": 0.395474,
+        "C08_coverage_gaps": 0.374931,
+        "C09_withdrawals_some": 0.564849,
+        "S01_highdemand_gnbinsufficient": 0.353899,
+        "S02_lowavail_withdrawals": 0.55792,
+        "S03_expensive_coveragegaps": 0.358006
+      },
+      "('payment_per_gb', 'gnb_only')": {
+        "C00_baseline": 1.0,
+        "C01_avail_low": 1.0,
+        "C02_avail_high": 1.0,
+        "C03_demand_low": 1.0,
+        "C04_demand_high": 1.0,
+        "C05_price_cheap": 1.0,
+        "C06_price_expensive": 1.0,
+        "C07_gnb_insufficient": 1.0,
+        "C08_coverage_gaps": 1.0,
+        "C09_withdrawals_some": 1.0,
+        "S01_highdemand_gnbinsufficient": 1.0,
+        "S02_lowavail_withdrawals": 1.0,
+        "S03_expensive_coveragegaps": 1.0
+      },
+      "('payment_per_gb', 'greedy')": {
+        "C00_baseline": 0.962895,
+        "C01_avail_low": 0.98812,
+        "C02_avail_high": 0.945727,
+        "C03_demand_low": 0.966725,
+        "C04_demand_high": 0.965967,
+        "C05_price_cheap": 0.928443,
+        "C06_price_expensive": 0.993252,
+        "C07_gnb_insufficient": 0.9366,
+        "C08_coverage_gaps": 0.948066,
+        "C09_withdrawals_some": 0.968413,
+        "S01_highdemand_gnbinsufficient": 0.929462,
+        "S02_lowavail_withdrawals": 0.988462,
+        "S03_expensive_coveragegaps": 0.99127
+      },
+      "('payment_per_gb', 'milp')": {
+        "C00_baseline": 0.962723,
+        "C01_avail_low": 0.988064,
+        "C02_avail_high": 0.945478,
+        "C03_demand_low": 0.966725,
+        "C04_demand_high": 0.965917,
+        "C05_price_cheap": 0.928117,
+        "C06_price_expensive": 0.99322,
+        "C07_gnb_insufficient": 0.936436,
+        "C08_coverage_gaps": 0.948066,
+        "C09_withdrawals_some": 0.968266,
+        "S01_highdemand_gnbinsufficient": 0.92939,
+        "S02_lowavail_withdrawals": 0.988408,
+        "S03_expensive_coveragegaps": 0.99127
+      },
+      "('pue_volume_share', 'gnb_only')": {
+        "C00_baseline": 0.0,
+        "C01_avail_low": 0.0,
+        "C02_avail_high": 0.0,
+        "C03_demand_low": 0.0,
+        "C04_demand_high": 0.0,
+        "C05_price_cheap": 0.0,
+        "C06_price_expensive": 0.0,
+        "C07_gnb_insufficient": 0.0,
+        "C08_coverage_gaps": 0.0,
+        "C09_withdrawals_some": 0.0,
+        "S01_highdemand_gnbinsufficient": 0.0,
+        "S02_lowavail_withdrawals": 0.0,
+        "S03_expensive_coveragegaps": 0.0
+      },
+      "('pue_volume_share', 'greedy')": {
+        "C00_baseline": 0.088168,
+        "C01_avail_low": 0.036578,
+        "C02_avail_high": 0.13681,
+        "C03_demand_low": 0.07151,
+        "C04_demand_high": 0.084155,
+        "C05_price_cheap": 0.141032,
+        "C06_price_expensive": 0.047853,
+        "C07_gnb_insufficient": 0.166872,
+        "C08_coverage_gaps": 0.138736,
+        "C09_withdrawals_some": 0.072587,
+        "S01_highdemand_gnbinsufficient": 0.204786,
+        "S02_lowavail_withdrawals": 0.035254,
+        "S03_expensive_coveragegaps": 0.08305
+      },
+      "('pue_volume_share', 'milp')": {
+        "C00_baseline": 0.088579,
+        "C01_avail_low": 0.036751,
+        "C02_avail_high": 0.137438,
+        "C03_demand_low": 0.07151,
+        "C04_demand_high": 0.084278,
+        "C05_price_cheap": 0.141675,
+        "C06_price_expensive": 0.048081,
+        "C07_gnb_insufficient": 0.168756,
+        "C08_coverage_gaps": 0.138736,
+        "C09_withdrawals_some": 0.072925,
+        "S01_highdemand_gnbinsufficient": 0.207779,
+        "S02_lowavail_withdrawals": 0.03542,
+        "S03_expensive_coveragegaps": 0.08305
+      }
+    }
+  }
+}
