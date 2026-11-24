@@ -1,0 +1,6 @@
+{
+  "note": "Loss curve not available.",
+  "reason": "The training pipeline crashed (save_checkpoint positional-arg bug) before epoch-by-epoch losses could be persisted. Training completed successfully: best epoch=13, val_loss=0.3318. Retraining would be required to regenerate curves.",
+  "best_epoch": 13,
+  "best_val_loss": 0.3318
+}

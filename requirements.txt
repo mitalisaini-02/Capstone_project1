@@ -1,0 +1,14 @@
+# Pinned to the versions in the project .venv (Python 3.12.3) at Phase 1.
+# CPU build of PyTorch; install with:
+#   pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.15.0
+numpy==2.5.5
+pandas==3.1.1
+scipy==1.18.1
+matplotlib==3.11.2
+pytest==9.2.0
+
+# System dependency (not pip-installable here):
+#   Eclipse SUMO 1.28.0 (provides `sumo`, `duarouter`, and the `traci` Python tools).
+#   The road network is currently read from an absolute path outside the repository:
+#   /home/mitali/Downloads/osm.net.xml  (see docs/CHANGELOG.md, open issues).

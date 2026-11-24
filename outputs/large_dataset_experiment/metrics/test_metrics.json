@@ -1,0 +1,102 @@
+{
+  "experiment": "large_dataset_experiment",
+  "evaluation_timestamp": "2026-11-24T03:51:13.752574",
+  "dataset": {
+    "total_sequences": 170744,
+    "train": 119529,
+    "val": 25602,
+    "test": 25613
+  },
+  "lstm": {
+    "architecture": {
+      "input_dim": 7,
+      "hidden_dim": 64,
+      "num_layers": 2,
+      "dropout": 0.3,
+      "bidirectional": false,
+      "total_params": 54081
+    },
+    "training": {
+      "best_epoch": 13,
+      "best_val_loss": 0.3318,
+      "val_balanced_accuracy": 0.7805,
+      "val_f1_score": 0.8136,
+      "val_threshold": 0.53
+    },
+    "test_metrics": {
+      "threshold": 0.53,
+      "predicted_positive_count": 13852,
+      "predicted_negative_count": 11761,
+      "accuracy": 0.7541,
+      "precision": 0.8454,
+      "recall": 0.738,
+      "specificity": 0.7802,
+      "f1_score": 0.788,
+      "balanced_accuracy": 0.7591,
+      "roc_auc": 0.8506,
+      "pr_auc": 0.8967,
+      "brier_score": 0.1574,
+      "confusion_matrix": {
+        "tp": 11710,
+        "fp": 2142,
+        "tn": 7604,
+        "fn": 4157
+      },
+      "val_threshold": 0.53
+    }
+  },
+  "baselines": {
+    "kinematic_extrapolation": {
+      "threshold": 0.43,
+      "predicted_positive_count": 14578,
+      "predicted_negative_count": 11035,
+      "accuracy": 0.7552,
+      "precision": 0.8292,
+      "recall": 0.7618,
+      "specificity": 0.7445,
+      "f1_score": 0.7941,
+      "balanced_accuracy": 0.7532,
+      "roc_auc": 0.8354,
+      "pr_auc": 0.8783,
+      "brier_score": 0.1951,
+      "confusion_matrix": {
+        "tp": 12088,
+        "fp": 2490,
+        "tn": 7256,
+        "fn": 3779
+      },
+      "val_threshold": 0.43000000000000005,
+      "val_balanced_accuracy": 0.7612
+    },
+    "distance_threshold": {
+      "threshold": 0.5,
+      "predicted_positive_count": 13650,
+      "predicted_negative_count": 11963,
+      "accuracy": 0.6187,
+      "precision": 0.7235,
+      "recall": 0.6224,
+      "specificity": 0.6128,
+      "f1_score": 0.6692,
+      "balanced_accuracy": 0.6176,
+      "roc_auc": 0.6562,
+      "pr_auc": 0.7388,
+      "brier_score": 0.2671,
+      "confusion_matrix": {
+        "tp": 9876,
+        "fp": 3774,
+        "tn": 5972,
+        "fn": 5991
+      },
+      "val_threshold": 0.5,
+      "val_balanced_accuracy": 0.6478,
+      "distance_threshold_m": 740.0
+    }
+  },
+  "split_strategy": "run_disjoint (zero run/vehicle/pair overlap)",
+  "notes": [
+    "LSTM threshold \u03b8*=0.530 was fixed from validation tuning; not touched during test.",
+    "Baseline thresholds were tuned on validation data using balanced_accuracy.",
+    "Scaler was fitted on training sequences only.",
+    "Loss curve data unavailable (pipeline crashed before persisting epoch history)."
+  ]
+}

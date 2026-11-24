@@ -1,0 +1,4 @@
+Model,Threshold,ROC-AUC,PR-AUC,F1-Score,Balanced Accuracy,Precision,Recall (TPR),Specificity (TNR),Accuracy,Brier Score,TP,FP,TN,FN,Threshold Note
+LSTM (this work),0.53,0.8506,0.8967,0.788,0.7591,0.8454,0.738,0.7802,0.7541,0.1574,11710,2142,7604,4157,"θ*=0.53 (val-tuned, epoch 13)"
+Kinematic Extrapolation,0.43000000000000005,0.8354,0.8783,0.7941,0.7532,0.8292,0.7618,0.7445,0.7552,0.1951,12088,2490,7256,3779,θ* tuned on val (balanced_accuracy)
+Distance Threshold,0.5,0.6562,0.7388,0.6692,0.6176,0.7235,0.6224,0.6128,0.6187,0.2671,9876,3774,5972,5991,"d*=740.0m, θ* tuned on val"

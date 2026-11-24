@@ -1,0 +1,79 @@
+{
+  "generated": "2026-11-24T19:55:13",
+  "description": "Corrected metadata for the large-dataset LinkSurvivalLSTM. Supersedes the 'best_threshold'/'val_f1' fields stored inside best_model.pt (0.5 / 0.0), which were never updated because the pipeline crashed.",
+  "model": {
+    "checkpoint": "outputs/large_dataset_experiment/checkpoints/best_model.pt",
+    "model_config": "outputs/large_dataset_experiment/checkpoints/model_config.json",
+    "scaler": "outputs/large_dataset_experiment/checkpoints/scaler.json",
+    "architecture": {
+      "name": "LinkSurvivalLSTM",
+      "input_dim": 7,
+      "hidden_dim": 64,
+      "num_layers": 2,
+      "dropout": 0.3,
+      "bidirectional": false
+    }
+  },
+  "training": {
+    "best_epoch": 13,
+    "best_val_loss": 0.3318,
+    "retrained": false
+  },
+  "features": {
+    "names_in_order": [
+      "distance_m",
+      "relative_speed_mps",
+      "provider_speed_mps",
+      "consumer_speed_mps",
+      "delta_x_m",
+      "delta_y_m",
+      "closing_speed_mps"
+    ],
+    "history_window_s": 10,
+    "prediction_horizon_s": 30,
+    "comm_range_m": 1000.0,
+    "step_length_s": 1.0,
+    "link_model": "abstracted vehicular sidelink/access link (range-based)"
+  },
+  "classification_threshold": {
+    "value": 0.53,
+    "selected_by": "max validation balanced accuracy in [0.15, 0.85] (original training run)"
+  },
+  "reliability_threshold": {
+    "value": 0.62,
+    "rule_used": "precision_constrained",
+    "selected_by": "smallest theta in [0.50, 0.90] with val precision >= 0.9 and val recall >= 0.5",
+    "details": "outputs/large_dataset_experiment/reliability_threshold/selected_threshold.json"
+  },
+  "split": {
+    "strategy": "run_disjoint",
+    "train_runs": [
+      "pilot_001",
+      "run_002",
+      "run_003",
+      "run_007",
+      "run_008",
+      "run_009",
+      "run_011",
+      "run_014",
+      "run_015"
+    ],
+    "val_runs": [
+      "run_000",
+      "run_001",
+      "run_006",
+      "run_013"
+    ],
+    "test_runs": [
+      "run_004",
+      "run_005",
+      "run_010",
+      "run_012"
+    ]
+  },
+  "sha256": {
+    "outputs/large_dataset_experiment/checkpoints/best_model.pt": "1337a37f1bd29fb6e5e711d9e40449d99798eca3f8b1fe8f92e376339d21aa36",
+    "outputs/large_dataset_experiment/checkpoints/scaler.json": "bbeab30a9132fa7fb14291f986b236826a7b71883cc26ffeb522550681a6401f",
+    "outputs/large_dataset_experiment/checkpoints/model_config.json": "546291c1277a7a0a69d56bbe5079c097b20016ad7defac1543c73ceacf03ed1b"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "generated": "2026-11-24T19:55:13",
+  "threshold": 0.62,
+  "threshold_selected_on": "validation (frozen before test evaluation)",
+  "test_runs": [
+    "run_004",
+    "run_005",
+    "run_010",
+    "run_012"
+  ],
+  "test_samples": 25613,
+  "metrics": {
+    "threshold": 0.62,
+    "predicted_positive_count": 11434,
+    "predicted_negative_count": 14179,
+    "accuracy": 0.72,
+    "precision": 0.8803,
+    "recall": 0.6343,
+    "specificity": 0.8595,
+    "f1_score": 0.7373,
+    "balanced_accuracy": 0.7469,
+    "roc_auc": 0.8506,
+    "pr_auc": 0.8967,
+    "brier_score": 0.1574,
+    "confusion_matrix": {
+      "tp": 10065,
+      "fp": 1369,
+      "tn": 8377,
+      "fn": 5802
+    }
+  },
+  "approved_link_break_rate": 0.1197,
+  "note": "Single evaluation at the frozen threshold; not used for any tuning."
+}

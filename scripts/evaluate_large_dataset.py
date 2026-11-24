@@ -247,6 +247,7 @@ def evaluate_baselines(X_val_unscaled, y_val, X_test_unscaled, y_test):
         "test_metrics": dist_test_metrics,
         "threshold": dist_thresh_prob
     }
+    return results
 
 
 
@@ -263,33 +264,49 @@ def save_confusion_matrix_plot(metrics: dict, name: str, path: str) -> None:
 def save_roc_pr_comparison(lstm_probs, kin_probs, dist_probs, y_test) -> None:
     log("\nGenerating ROC and PR curve comparisons...")
 
-    # --- ROC ---
-    lstm_fpr, lstm_tpr, lstm_auc = compute_roc_curve_points(y_test, lstm_probs)
-    kin_fpr,  kin_tpr,  kin_auc  = compute_roc_curve_points(y_test, kin_probs)
-    dist_fpr, dist_tpr, dist_auc = compute_roc_curve_points(y_test, dist_probs)
+    # ---------------- ROC CURVES ----------------
+    lstm_fpr, lstm_tpr, lstm_auc = compute_roc_curve_points(
+        y_test, lstm_probs
+    )
+    kin_fpr, kin_tpr, kin_auc = compute_roc_curve_points(
+        y_test, kin_probs
+    )
+    dist_fpr, dist_tpr, dist_auc = compute_roc_curve_points(
+        y_test, dist_probs
+    )
 
-    roc_data = [
-        {"label": f"LSTM (AUC={lstm_auc:.4f})", "fpr": lstm_fpr, "tpr": lstm_tpr},
-        {"label": f"Kinematic (AUC={kin_auc:.4f})", "fpr": kin_fpr, "tpr": kin_tpr},
-        {"label": f"Distance Threshold (AUC={dist_auc:.4f})", "fpr": dist_fpr, "tpr": dist_tpr},
-    ]
+    # Dictionary format expected by plot_roc_curves()
+    roc_data = {
+        "LSTM": (lstm_fpr, lstm_tpr, lstm_auc),
+        "Kinematic": (kin_fpr, kin_tpr, kin_auc),
+        "Distance Threshold": (dist_fpr, dist_tpr, dist_auc),
+    }
+
     roc_path = str(PLOTS_DIR / "roc_curves_comparison.png")
     plot_roc_curves(roc_data, roc_path)
-    log(f"  Saved: roc_curves_comparison.png")
+    log("  Saved: roc_curves_comparison.png")
 
-    # --- PR ---
-    lstm_rec, lstm_prec, lstm_pr_auc   = compute_pr_curve_points(y_test, lstm_probs)
-    kin_rec,  kin_prec,  kin_pr_auc    = compute_pr_curve_points(y_test, kin_probs)
-    dist_rec, dist_prec, dist_pr_auc   = compute_pr_curve_points(y_test, dist_probs)
+    # ---------------- PRECISION-RECALL CURVES ----------------
+    lstm_rec, lstm_prec, lstm_pr_auc = compute_pr_curve_points(
+        y_test, lstm_probs
+    )
+    kin_rec, kin_prec, kin_pr_auc = compute_pr_curve_points(
+        y_test, kin_probs
+    )
+    dist_rec, dist_prec, dist_pr_auc = compute_pr_curve_points(
+        y_test, dist_probs
+    )
 
-    pr_data = [
-        {"label": f"LSTM (AUC={lstm_pr_auc:.4f})", "recall": lstm_rec, "precision": lstm_prec},
-        {"label": f"Kinematic (AUC={kin_pr_auc:.4f})", "recall": kin_rec, "precision": kin_prec},
-        {"label": f"Distance Threshold (AUC={dist_pr_auc:.4f})", "recall": dist_rec, "precision": dist_prec},
-    ]
+    # Dictionary format expected by plot_pr_curves()
+    pr_data = {
+        "LSTM": (lstm_rec, lstm_prec, lstm_pr_auc),
+        "Kinematic": (kin_rec, kin_prec, kin_pr_auc),
+        "Distance Threshold": (dist_rec, dist_prec, dist_pr_auc),
+    }
+
     pr_path = str(PLOTS_DIR / "pr_curves_comparison.png")
     plot_pr_curves(pr_data, pr_path)
-    log(f"  Saved: pr_curves_comparison.png")
+    log("  Saved: pr_curves_comparison.png")
 
     return lstm_auc, lstm_pr_auc
 
@@ -312,47 +329,10 @@ def save_loss_curves_note() -> None:
     log(f"  Loss curves: not available (see {note_path.name})")
 
 
-# ==============================================================================
-# 7. Update checkpoint metadata (without overwriting weights)
-# ==============================================================================
-
-def update_checkpoint_metadata(model: LinkSurvivalLSTM, model_cfg: dict, lstm_val_f1: float) -> None:
-    log("\nUpdating checkpoint metadata (preserving model weights)...")
-    # Load full checkpoint to preserve weights + optimizer
-    raw = torch.load(str(CHECKPOINT_PATH), map_location="cpu", weights_only=False)
-
-    # Read config from file
-    with open(str(MODEL_CONFIG_PATH)) as f:
-        file_cfg = json.load(f)
-
-    # Overwrite only the metadata fields
-    raw["val_f1"] = round(lstm_val_f1, 6)
-    raw["best_threshold"] = LSTM_THRESHOLD
-    raw["epoch"] = BEST_EPOCH
-    raw["val_loss"] = BEST_VAL_LOSS
-
-    torch.save(raw, str(CHECKPOINT_PATH))
-
-    # Verify round-trip
-    verify = torch.load(str(CHECKPOINT_PATH), map_location="cpu", weights_only=False)
-    assert verify["epoch"] == BEST_EPOCH, "epoch mismatch after update"
-    assert abs(verify["val_loss"] - BEST_VAL_LOSS) < 1e-6, "val_loss mismatch"
-    assert abs(verify["best_threshold"] - LSTM_THRESHOLD) < 1e-6, "threshold mismatch"
-    assert abs(verify["val_f1"] - lstm_val_f1) < 1e-6, "val_f1 mismatch"
-
-    # Verify model weights still intact
-    test_model = LinkSurvivalLSTM(
-        input_dim=7, hidden_dim=64, num_layers=2, dropout=0.3, bidirectional=False)
-    test_model.load_state_dict(verify["model_state_dict"])
-    test_model.eval()
-    dummy = torch.zeros(1, 10, 7)
-    with torch.no_grad():
-        out = test_model(dummy)
-    assert out.shape == (1,), f"Unexpected output shape: {out.shape}"
-
-    log(f"  Checkpoint metadata updated: epoch={BEST_EPOCH}, val_loss={BEST_VAL_LOSS}, "
-        f"threshold={LSTM_THRESHOLD}, val_f1={lstm_val_f1:.4f}")
-    log("  Model weights verified intact (inference test passed).")
+# NOTE (Phase 1): update_checkpoint_metadata() was removed. It called
+# torch.save() directly on best_model.pt, overwriting the trained checkpoint.
+# Corrected metadata now lives in a separate file:
+#   outputs/large_dataset_experiment/checkpoints/checkpoint_metadata.json
 
 
 # ==============================================================================
@@ -554,53 +534,9 @@ LSTM vs Kinematic:
     log(f"  Saved: {path.name}")
 
 
-# ==============================================================================
-# 11. Fix pipeline checkpoint-saving bug
-# ==============================================================================
-
-def fix_pipeline_checkpoint_bug() -> None:
-    pipeline_path = PROJECT_ROOT / "scripts" / "run_large_dataset_pipeline.py"
-    if not pipeline_path.exists():
-        log("  Pipeline script not found — skipping bug fix.")
-        return
-
-    with open(str(pipeline_path)) as f:
-        source = f.read()
-
-    # Look for the buggy positional call pattern
-    buggy_pattern = (
-        "save_checkpoint(best_ckpt_path, model, history[\"best_epoch\"], "
-        "history[\"best_val_loss\"],\n                lstm_val_score, lstm_thresh, config)"
-    )
-    fixed_pattern = (
-        "save_checkpoint(\n"
-        "            filepath=best_ckpt_path,\n"
-        "            model=model,\n"
-        "            epoch=history[\"best_epoch\"],\n"
-        "            val_loss=history[\"best_val_loss\"],\n"
-        "            val_f1=lstm_val_score,\n"
-        "            best_threshold=lstm_thresh,\n"
-        "            config=config\n"
-        "        )"
-    )
-
-    if buggy_pattern in source:
-        source = source.replace(buggy_pattern, fixed_pattern)
-        with open(str(pipeline_path), "w") as f:
-            f.write(source)
-        log("  Fixed positional-arg bug in run_large_dataset_pipeline.py")
-    else:
-        # Try a broader search
-        import re
-        # Look for any positional save_checkpoint call after training
-        m = re.search(
-            r'save_checkpoint\(best_ckpt_path,\s*model,\s*history\[.best_epoch.\]',
-            source
-        )
-        if m:
-            log("  WARNING: Found buggy pattern at different position — please fix manually.")
-        else:
-            log("  Pipeline save_checkpoint call appears already fixed or uses different pattern.")
+# NOTE (Phase 1): fix_pipeline_checkpoint_bug() was removed. It rewrote the
+# source of scripts/run_large_dataset_pipeline.py at runtime. The bug is now
+# fixed directly in that script.
 
 
 # ==============================================================================
@@ -668,8 +604,7 @@ def main():
     # 9. Loss curves note
     save_loss_curves_note()
 
-    # 10. Update checkpoint metadata
-    update_checkpoint_metadata(model, model_cfg, lstm_val_f1)
+    # 10. (removed) checkpoint metadata is no longer written into best_model.pt
 
     # 11. Save metrics JSON
     log("\nSaving metrics and reports...")
@@ -682,9 +617,7 @@ def main():
     save_summary_md(lstm_test_metrics, baseline_results,
                     lstm_val_f1, lstm_roc_auc, lstm_pr_auc)
 
-    # 14. Fix pipeline bug
-    log("\nFixing pipeline checkpoint-saving bug...")
-    fix_pipeline_checkpoint_bug()
+    # 14. (removed) pipeline bug is fixed in source; no runtime self-patching
 
     # 15. Final summary
     log("\n" + "=" * 70)

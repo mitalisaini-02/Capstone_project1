@@ -108,11 +108,24 @@ def main():
     parser = argparse.ArgumentParser(description="Stage 3 pipeline for large multi-run SUMO dataset.")
     parser.add_argument("--config", type=str, default="config/stage3_large_dataset.json",
                         help="Path to config JSON file.")
+    parser.add_argument("--output-dir", type=str, default="outputs/large_dataset_experiment",
+                        help="Base output directory. Use a NEW directory to train a new model.")
+    parser.add_argument("--allow-overwrite", action="store_true",
+                        help="Allow replacing an existing best_model.pt in --output-dir (dangerous).")
     args = parser.parse_args()
 
     # Setup directories
-    outputs_base = "outputs/large_dataset_experiment"
+    outputs_base = args.output_dir
     checkpoints_dir = os.path.join(outputs_base, "checkpoints")
+
+    # Guard: never silently replace an existing trained checkpoint.
+    existing_ckpt = os.path.join(checkpoints_dir, "best_model.pt")
+    if os.path.exists(existing_ckpt) and not args.allow_overwrite:
+        raise SystemExit(
+            f"Refusing to run: '{existing_ckpt}' already exists and would be overwritten.\n"
+            f"Pass --output-dir <new_dir> to train into a fresh directory, or "
+            f"--allow-overwrite if you really intend to replace it."
+        )
     metrics_dir = os.path.join(outputs_base, "metrics")
     plots_dir = os.path.join(outputs_base, "plots")
     logs_dir = os.path.join(outputs_base, "logs")
@@ -250,8 +263,19 @@ def main():
     lstm_thresh, lstm_val_score = tune_classification_threshold(y_val, val_probs_lstm, target_metric=tune_metric)
     logger.info(f"Validation threshold tuned: optimal θ* = {lstm_thresh:.3f} (Val {tune_metric}: {lstm_val_score:.4f})")
 
-    save_checkpoint(best_ckpt_path, model, history["best_epoch"], history["best_val_loss"],
-                    lstm_val_score, lstm_thresh, config)
+    # Keyword arguments are required: the previous positional call passed
+    # history["best_epoch"] into the `optimizer` slot and crashed here.
+    # NOTE: `val_f1` holds the validation score of `tune_metric`
+    # (balanced_accuracy by default), not necessarily F1.
+    save_checkpoint(
+        filepath=best_ckpt_path,
+        model=model,
+        epoch=history["best_epoch"],
+        val_loss=history["best_val_loss"],
+        val_f1=lstm_val_score,
+        best_threshold=lstm_thresh,
+        config=config,
+    )
 
     # 9. Test Set Evaluation
     _, test_probs_lstm, _ = evaluate_loss_and_predictions(model, test_loader, criterion, torch.device("cpu"))

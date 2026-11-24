@@ -4,11 +4,14 @@ Stage 4 Clean Prediction Interface: Encapsulates LSTM model, feature scaler, and
 import os
 import json
 from typing import Dict, Any, Union, Optional
+import logging
 import numpy as np
 import torch
 
 from src.models.lstm import LinkSurvivalLSTM
 from src.features.scaler import SequenceStandardScaler
+
+logger = logging.getLogger(__name__)
 
 
 class LinkSurvivalPredictor:
@@ -22,8 +25,16 @@ class LinkSurvivalPredictor:
         checkpoint_path: str = "outputs/checkpoints/best_model.pt",
         config_path: str = "outputs/checkpoints/model_config.json",
         scaler_path: str = "outputs/checkpoints/scaler.json",
-        device: Optional[str] = None
+        device: Optional[str] = None,
+        metadata_path: Optional[str] = None
     ):
+        """
+        metadata_path: optional checkpoint_metadata.json (written by
+        scripts/sweep_reliability_threshold.py). When given, the decision
+        threshold is taken from its "reliability_threshold" entry instead of
+        the checkpoint's stored "best_threshold". When omitted, behaviour is
+        unchanged.
+        """
         if not os.path.exists(checkpoint_path):
             raise FileNotFoundError(f"Checkpoint '{checkpoint_path}' not found.")
         if not os.path.exists(config_path):
@@ -56,6 +67,25 @@ class LinkSurvivalPredictor:
         self.model.eval()
 
         self.tuned_threshold = checkpoint.get("best_threshold", 0.50)
+        self.threshold_source = "checkpoint"
+        self.metadata: Optional[Dict[str, Any]] = None
+
+        if metadata_path is not None:
+            if not os.path.exists(metadata_path):
+                raise FileNotFoundError(f"Checkpoint metadata '{metadata_path}' not found.")
+            with open(metadata_path, "r") as f:
+                self.metadata = json.load(f)
+            rel = self.metadata.get("reliability_threshold", {})
+            if "value" not in rel:
+                raise ValueError(f"'{metadata_path}' has no reliability_threshold.value entry.")
+            self.tuned_threshold = float(rel["value"])
+            self.threshold_source = "metadata"
+        elif "best_threshold" not in checkpoint or abs(self.tuned_threshold - 0.5) < 1e-12:
+            logger.warning(
+                "Checkpoint '%s' stores the default threshold 0.5, which may not be the tuned "
+                "value. Pass metadata_path=... to use the validated reliability threshold.",
+                checkpoint_path,
+            )
 
     def predict_probability(self, history_sequence: np.ndarray) -> float:
         """

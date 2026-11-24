@@ -11,6 +11,7 @@ import torch.optim as optim
 def save_checkpoint(
     filepath: str,
     model: nn.Module,
+    *,
     optimizer: Optional[optim.Optimizer] = None,
     epoch: int = 0,
     val_loss: float = 0.0,
@@ -18,7 +19,12 @@ def save_checkpoint(
     best_threshold: float = 0.5,
     config: Optional[Dict[str, Any]] = None
 ) -> None:
-    """Atomically saves model checkpoint to disk."""
+    """Saves model checkpoint to disk.
+
+    All arguments after ``model`` are keyword-only. A previous positional call
+    passed the epoch number into the ``optimizer`` slot and crashed the large
+    dataset pipeline after training (see docs/CHANGELOG.md, Phase 1).
+    """
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     state = {
         "epoch": epoch,
