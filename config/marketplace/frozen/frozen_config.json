@@ -1,0 +1,28 @@
+{
+  "frozen_at": "2026-11-24T20:25:12",
+  "calibrated_on_runs": [
+    "run_000",
+    "run_001",
+    "run_006",
+    "run_013"
+  ],
+  "calibrated_on_split": "val",
+  "values": {
+    "p_register": {
+      "low": 0.1,
+      "med": 0.2,
+      "high": 0.35
+    },
+    "gnb_total_capacity_mbps": {
+      "sufficient": 30,
+      "insufficient": 30
+    }
+  },
+  "config_sha256": {
+    "config/marketplace/base.json": "cc1e8cd53e5fc01de2d5aef022038bead55a83ebfbf4b4699a287c0b99bc9b34",
+    "config/marketplace/scenarios.json": "6d17ff592db037a842fe4af13f923cd4635622127c0004a3fedab57151ec45af",
+    "config/marketplace/link_profiles.json": "3864ccb227af1465db138761d482b684f10a77d8453c053ca35e1175e4fa7483"
+  },
+  "calibration_report": "config/marketplace/frozen/calibration_report.json",
+  "rule": "Frozen before any test scenario is generated. Never re-tune using test outcomes."
+}

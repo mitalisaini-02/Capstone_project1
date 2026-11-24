@@ -1,42 +1,40 @@
 """
-Configuration loader with dual YAML/JSON support.
+Configuration loader (JSON, or YAML when PyYAML is installed).
+
+Strict: the requested file is loaded or a clear error is raised. A different
+configuration is NEVER substituted silently (previous versions fell back to
+config/stage3_config.json or to a .json sibling of a missing .yaml file).
 """
-import os
 import json
-from typing import Dict, Any
+import os
+from typing import Any, Dict
 
 
-def load_config(config_path: str = "config/stage3_config.json") -> Dict[str, Any]:
-    """Loads configuration dictionary from JSON or YAML file."""
-    # If .yaml was requested but doesn't exist, check .json
-    if config_path.endswith(".yaml") and not os.path.exists(config_path):
-        json_alt = config_path.replace(".yaml", ".json")
-        if os.path.exists(json_alt):
-            config_path = json_alt
+class ConfigNotFoundError(FileNotFoundError):
+    """Raised when the requested configuration file does not exist."""
 
+
+def load_config(config_path: str) -> Dict[str, Any]:
+    """Loads exactly `config_path`. Raises ConfigNotFoundError if it does not exist."""
+    if not config_path:
+        raise ValueError("config_path must be given explicitly")
     if not os.path.exists(config_path):
-        # Also try default json if path not found
-        if os.path.exists("config/stage3_config.json"):
-            config_path = "config/stage3_config.json"
-        else:
-            raise FileNotFoundError(f"Configuration file '{config_path}' not found.")
+        raise ConfigNotFoundError(
+            f"Configuration file '{config_path}' not found. "
+            f"No other configuration is substituted; pass an existing path explicitly.")
 
     if config_path.endswith(".json"):
         with open(config_path, "r") as f:
             return json.load(f)
 
-    # Try YAML if installed
-    try:
-        import yaml
+    if config_path.endswith((".yaml", ".yml")):
+        try:
+            import yaml
+        except ImportError as e:
+            raise RuntimeError(
+                f"'{config_path}' is YAML but PyYAML is not installed. Install PyYAML or pass a "
+                f"JSON configuration explicitly (no automatic substitution is performed).") from e
         with open(config_path, "r") as f:
             return yaml.safe_load(f)
-    except ImportError:
-        # Fall back to json version
-        json_alt = config_path.replace(".yaml", ".json")
-        if os.path.exists(json_alt):
-            with open(json_alt, "r") as f:
-                return json.load(f)
-        raise RuntimeError(
-            f"PyYAML is not installed in the environment to read '{config_path}'. "
-            f"Please use JSON config '{json_alt}' or install PyYAML."
-        )
+
+    raise ValueError(f"Unsupported configuration format: '{config_path}' (expected .json/.yaml/.yml)")

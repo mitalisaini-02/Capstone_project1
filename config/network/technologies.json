@@ -1,0 +1,19 @@
+{
+  "_notice": "Technology profiles: which discovery range and which link model a marketplace experiment uses. Reliability models declare their own label range separately; a mismatch is recorded, never silently ignored.",
+  "nr_sidelink_u2n_relay": {
+    "description": "NR sidelink UE-to-Network relay (3GPP Rel-17, TR 38.836 / TS 23.304). PUE = U2N relay UE, CUE = U2N remote UE, PUE-CUE hop = PC5 sidelink, PUE Internet = cellular Uu backhaul, MEC = marketplace coordinator.",
+    "discovery_range_m": 1000.0,
+    "link_profiles_file": "config/network/link_profiles_nr.json",
+    "link_profile": "nr_sidelink_tr37885_v1",
+    "device_assumptions": "Vehicle-mounted UEs with NR sidelink (PC5) and U2N relay capability. NOT assumed to be ordinary smartphones; consumer handsets generally do not expose sidelink relay.",
+    "network_assumptions": "In-coverage operation; gNB-scheduled sidelink resources (mode 1); operator authorises relay and remote UEs; MEC coordinates matching and pricing."
+  },
+  "abstract_sidelink": {
+    "description": "Provisional technology-agnostic profile used in Phase 2 (kept for comparison).",
+    "discovery_range_m": 1000.0,
+    "link_profiles_file": "config/marketplace/link_profiles.json",
+    "link_profile": "abstract_sidelink_v0",
+    "device_assumptions": "None (abstract).",
+    "network_assumptions": "None (abstract)."
+  }
+}

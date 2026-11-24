@@ -1,0 +1,144 @@
+{
+  "frozen_at": "2026-11-25T01:10:10",
+  "phase": "Phase 4 - marketplace allocation (per-second snapshot, lexicographic MILP / greedy / gNodeB-only)",
+  "experiment_id": "phase4_allocation_v1",
+  "rule": "Implementation and configuration frozen after validation; the test split may only run with identical code/config hashes. Never tune on test outcomes.",
+  "code_sha256": {
+    "src/marketplace/__init__.py": "5489378a3b731d301858488d4189817c203ec4e054b71411fc327b28fc0808c2",
+    "src/marketplace/admission.py": "3f74bfa8734d0f1198c708f67d56532e5d95c86f0f629538f48ee21e553d7fdd",
+    "src/marketplace/allocation.py": "bba38063491ce6f7595630094c0471c2026ba6ba8e0d6a337639cc16dc5a6c04",
+    "src/marketplace/eligibility.py": "751905b55ffd4a492d3ec155618ae0c25e914342ecfdadf9cc9b8ece744bb939",
+    "src/marketplace/evaluation.py": "1ac1c99a8b076412a5b9e83e1844d918debbc7f55f0eca52b0430582f7335388",
+    "src/marketplace/greedy.py": "5cfd0c9b0b138e13946a5f17b1ea7bd858631689572b244d1022c70f3ba09def",
+    "src/marketplace/milp.py": "91ba11230d04f01efb7137acc4e05df3a7f858b3c591a8b22557679e623dd3d2",
+    "src/marketplace/pricing.py": "8802d609530ad9ebe4969618a8e36ec287a1b7972551499ba44e9e9cc193a9fe",
+    "src/marketplace/problem.py": "42da92093175e2e0a71d2a6db183d1a8213d3488f8eb6d086ebf8a68aedc3c6a",
+    "scripts/run_phase4_allocation.py": "f585b23604dc22d96960b5b86b87441c55bd64f5507d0f4b6c0bc0b1cbe34f6d",
+    "config/marketplace/phase4.json": "a2b8858b20da722861ba0274381eb5dd2a639d53dfb402e914eb7be40840c0f2",
+    "src/common/units.py": "dee4d16c64f26dae58e1ca41c50c661af8fa5373b36ef4cba399313d5086c4fe"
+  },
+  "config": {
+    "path": "config/marketplace/phase4.json",
+    "sha256": "a2b8858b20da722861ba0274381eb5dd2a639d53dfb402e914eb7be40840c0f2",
+    "thresholds": {
+      "primary": 0.62,
+      "sensitivity": 0.65
+    }
+  },
+  "upstream_inputs": {
+    "phase3_val_manifest_sha256": "ef26bf8f35f701ac5f22321fd9676e99f3662c79aa2fe0bcedc1ce4016cad3a5",
+    "phase2_val_manifest_sha256": "ce7fc1b49f66ce049eed98fdac88ac903282b5b36c105b3dac02166921f32037",
+    "protected_artifacts_manifest_sha256": "92dba09d1dd06f65ef26483ae9df0fe7118e6fb62c12737e817328cefabe9237"
+  },
+  "validation": {
+    "split": "val",
+    "scenarios_passed": "156/156",
+    "scenarios": 156,
+    "audit_violations_total": 0,
+    "dominance_violations": {
+      "milp_admits_less_than_greedy": 0,
+      "milp_costs_more_than_greedy_at_equal_admission": 0,
+      "milp_admits_less_than_gnb_only": 0,
+      "milp_costs_more_than_gnb_only_at_equal_admission": 0
+    },
+    "phantom_x_events_handled": 20444,
+    "all_passed": true,
+    "wall_time_s": 2073.4,
+    "files_sha256": {
+      "data/allocation/phase4/val/validation_report.json": "f2a18314b1b66476ed9be83f991a33220b92050db1ccde2754c401cc44a46847",
+      "data/allocation/phase4/val/experiment_config.json": "efcbbd479d69f3e7122b66a460aa76efda6edb885b224912710ab32aefd86152",
+      "data/allocation/phase4/val/phase4_manifest.csv": "146e055c1daba9eacfb7564ecde34dccee0428d37e04a9b9aeaf72f716d4831f",
+      "data/allocation/phase4/val/metrics.csv.gz": "a8d8d45a953c2912408abc6e8468f96880209871c7dc0a08cb681dddc29608d5",
+      "data/allocation/phase4/val/comparison.json": "0197c86e78c31bd750a1f4cd8c8e19553a877dd5083e71dea9395ec424e6f85f"
+    },
+    "benchmark_sha256": {
+      "data/allocation/phase4/benchmark/val_benchmark.json": "b90e208e615a17e8a3ddc26273ad502318a0a9795ecedc4f495a2110883194d6"
+    },
+    "all_outputs_list": {
+      "path": "data/allocation/phase4/freeze/val_outputs.sha256",
+      "sha256": "113541bc7de2ab4e338ce3a6ef83bf61c1662d61d2893903c6caf668cc6aaae6",
+      "n_files": 318
+    },
+    "epoch_summary_content_hashes": {
+      "path": "data/allocation/phase4/freeze/epoch_summary_content.csv",
+      "sha256": "e2455f3a1976ceac24459df3f1c63c3d7b747e6111a9c389514f0f255559d9af",
+      "n_scenarios": 156,
+      "canonicalisation": "pandas.read_csv(low_memory=False) -> drop runtime_s -> to_csv(index=False, lineterminator='\\n') -> SHA-256 (UTF-8)"
+    }
+  },
+  "reproducibility": {
+    "definition": {
+      "allocation_results": "byte-identical (SHA-256 of the .csv.gz file must match)",
+      "epoch_summary": "content-identical after excluding the runtime_s column (all other columns, all rows equal)",
+      "excluded_nondeterministic": [
+        "epoch_summary.runtime_s",
+        "metrics.runtime_total_s",
+        "metrics.runtime_p95_ms",
+        "phase4_manifest.milp_runtime_s",
+        "experiment_config.wall_time_s",
+        "experiment_config.generated"
+      ],
+      "rationale": "runtime_s is wall-clock solver time, a nondeterministic performance measurement; it never influences any allocation decision. Its derived aggregates are excluded likewise."
+    },
+    "check": {
+      "scenarios": [
+        "C00_baseline__run_000__r0",
+        "C00_baseline__run_006__r0",
+        "C02_avail_high__run_000__r0",
+        "C02_avail_high__run_006__r0",
+        "C04_demand_high__run_000__r0",
+        "C04_demand_high__run_006__r0",
+        "C07_gnb_insufficient__run_000__r0",
+        "C07_gnb_insufficient__run_006__r0",
+        "S01_highdemand_gnbinsufficient__run_000__r0",
+        "S01_highdemand_gnbinsufficient__run_006__r0"
+      ],
+      "scope": "configured benchmark set (config.benchmark): 5 configs x {run_000, run_006}, replicate 0",
+      "generated": "2026-11-25T00:36:03",
+      "allocation_results_byte_identical": "10/10",
+      "epoch_summary_byte_identical": "0/10",
+      "epoch_summary_content_identical_excl_runtime_s": "10/10",
+      "only_differing_column": [
+        "runtime_s"
+      ],
+      "audit_violations_rerun": 0,
+      "originals_unchanged": true,
+      "reports_and_drivers_sha256": {
+        "data/allocation/phase4/freeze/reproducibility/phase4_reproducibility_report.json": "0f2f660f83c759b859ae6f0ff5c4025b071f517fea1ee8495622d72704a8176e",
+        "data/allocation/phase4/freeze/reproducibility/phase4_repro_content_report.json": "f8778870054d1df7ea8153ab8374ffa203bb96b0b34ad07d2d47f986cfd5fd36",
+        "data/allocation/phase4/freeze/reproducibility/phase4_repro.py": "08ca4c6cf5641a4e771de92e1294627b36d92d57456f1df0c7e6d1a473ebc4fd",
+        "data/allocation/phase4/freeze/reproducibility/phase4_repro_content.py": "af36a606edf28ba9cb10373f9ad895fc3aed4ca0d1d9f63a1e0a8ba433b8a00d"
+      }
+    },
+    "status": "PASSED"
+  },
+  "integrity_at_freeze": {
+    "protected_artifacts": {
+      "entries": 53,
+      "verified": 53,
+      "failures": []
+    },
+    "phase2": {
+      "entries": 1921,
+      "verified": 1921,
+      "failures": []
+    },
+    "phase3": {
+      "entries": 695,
+      "verified": 695,
+      "failures": []
+    },
+    "phase4_val_outputs": {
+      "entries": 318,
+      "verified": 318,
+      "failures": []
+    }
+  },
+  "environment": {
+    "python": "3.12.3",
+    "pandas": "3.1.1",
+    "numpy": "2.5.5",
+    "scipy": "1.18.1",
+    "platform": "Linux-7.0.0-43-generic-x86_64-with-glibc2.39"
+  }
+}

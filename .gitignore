@@ -74,3 +74,20 @@ dist/
 *.vehroute.xml
 *.summary.xml
 
+
+# ==============================
+# Phase 2: bulk generated marketplace data (regenerable from config + seed)
+# Kept in git: configs, frozen config, manifests, stats, validation/reproducibility reports
+# ==============================
+data/synthetic/marketplace/*/*/
+data/derived/connectivity/*/*.csv.gz
+
+# Building geometry derived from OSM via polyconvert (regenerable; manifest kept in git)
+data/derived/geometry/*.poly.xml
+
+# Phase 3 bulk outputs (regenerable from config + seeds; manifests/stats/reports kept)
+data/derived/phase3_cache/*/*.csv.gz
+data/simulation/phase3/*/*/
+
+# Phase 4 bulk outputs (regenerable; manifests/metrics/reports kept)
+data/allocation/phase4/*/*/

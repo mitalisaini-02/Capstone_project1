@@ -10,6 +10,7 @@ import torch
 
 from src.models.lstm import LinkSurvivalLSTM
 from src.features.scaler import SequenceStandardScaler
+from src.reliability.policy import ThresholdPolicy
 
 logger = logging.getLogger(__name__)
 
@@ -118,4 +119,5 @@ class LinkSurvivalPredictor:
     def is_link_reliable(self, probability: float, threshold: Optional[float] = None) -> bool:
         """Checks if survival probability satisfies reliability threshold."""
         th = threshold if threshold is not None else self.tuned_threshold
-        return bool(probability >= th)
+        # Decision rule delegated to the separate policy module (identical semantics: p >= theta).
+        return ThresholdPolicy(float(th), source=self.threshold_source).is_reliable(probability)

@@ -1,0 +1,33 @@
+{
+  "_notice": "Phase 3 mobility and network simulation. No tuned parameters: every value is a fixed modelling input or a path. Thresholds are read from the recorded Phase 1/2 files.",
+  "experiment_id": "phase3_network_sim_v1",
+  "split_info": "data/splits/large_dataset/split_info.json",
+  "splits": ["val", "test"],
+  "technology_file": "config/network/technologies.json",
+  "technology": "nr_sidelink_u2n_relay",
+  "map_scenario": "urban",
+  "geometry": {
+    "buildings": "data/derived/geometry/buildings.poly.xml",
+    "coverage": "data/derived/geometry/coverage.poly.xml",
+    "building_types": ["building"],
+    "index_cell_size_m": 100.0
+  },
+  "channel_scenarios": ["G", "F1", "F2", "F3"],
+  "primary_channel_scenario": "G",
+  "g_fallback_scenario": "F2",
+  "channel_seed": 20261125,
+  "reliability": {
+    "checkpoint": "outputs/large_dataset_experiment/checkpoints/best_model.pt",
+    "model_config": "outputs/large_dataset_experiment/checkpoints/model_config.json",
+    "scaler": "outputs/large_dataset_experiment/checkpoints/scaler.json",
+    "metadata": "outputs/large_dataset_experiment/checkpoints/checkpoint_metadata.json",
+    "primary_threshold_source": "outputs/large_dataset_experiment/checkpoints/checkpoint_metadata.json",
+    "sensitivity_threshold_source": "outputs/large_dataset_experiment/reliability_threshold_robust/sensitivity_threshold.json"
+  },
+  "raw_mobility_dir": "data/raw/sumo",
+  "connectivity_dir": "data/derived/connectivity",
+  "phase2_root": "data/synthetic/marketplace",
+  "gnb_sites_file": "infrastructure.add.xml",
+  "cache_dir": "data/derived/phase3_cache",
+  "output_root": "data/simulation/phase3"
+}

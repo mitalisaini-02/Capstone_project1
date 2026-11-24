@@ -1,0 +1,62 @@
+{
+  "_notice": "Phase 5 MEC session management (Design Revision 2). Paths and fixed modelling inputs only; nothing here is tuned on test data. Values marked pending are open design decisions (Revision 2 section 13) and must be set by the user before the milestone that needs them; the loader refuses to use a pending value.",
+  "experiment_id": "phase5_sessions_v1",
+  "phase4_dependency": {
+    "frozen_manifest": "config/marketplace/phase4_frozen.json",
+    "frozen_manifest_sha256": "f5308b352ac84484a4ab420136727a960a6f3357226392fd54456368ce6b583b",
+    "interface_sha256": {
+      "src/marketplace/__init__.py": "5489378a3b731d301858488d4189817c203ec4e054b71411fc327b28fc0808c2",
+      "src/marketplace/admission.py": "3f74bfa8734d0f1198c708f67d56532e5d95c86f0f629538f48ee21e553d7fdd",
+      "src/marketplace/allocation.py": "bba38063491ce6f7595630094c0471c2026ba6ba8e0d6a337639cc16dc5a6c04",
+      "src/marketplace/eligibility.py": "751905b55ffd4a492d3ec155618ae0c25e914342ecfdadf9cc9b8ece744bb939",
+      "src/marketplace/evaluation.py": "1ac1c99a8b076412a5b9e83e1844d918debbc7f55f0eca52b0430582f7335388",
+      "src/marketplace/greedy.py": "5cfd0c9b0b138e13946a5f17b1ea7bd858631689572b244d1022c70f3ba09def",
+      "src/marketplace/milp.py": "91ba11230d04f01efb7137acc4e05df3a7f858b3c591a8b22557679e623dd3d2",
+      "src/marketplace/pricing.py": "8802d609530ad9ebe4969618a8e36ec287a1b7972551499ba44e9e9cc193a9fe",
+      "src/marketplace/problem.py": "42da92093175e2e0a71d2a6db183d1a8213d3488f8eb6d086ebf8a68aedc3c6a",
+      "src/common/units.py": "dee4d16c64f26dae58e1ca41c50c661af8fa5373b36ef4cba399313d5086c4fe",
+      "src/mobility/trace.py": "e3f69922c8d5512c874fd8e839fc9af8cf379ae7e17c2c57f04c4b7038a6c25e",
+      "src/data/validator.py": "fcf66370138ab380e0415500b33dc0213f816931db90189dc81129bf9db5d67b",
+      "src/utils/integrity.py": "8f89c8852c78839d62dc59bfabf79980eec044c5b81f669660ab87584956be82"
+    }
+  },
+  "inputs": {
+    "phase2_root": "data/synthetic/marketplace",
+    "phase3_root": "data/simulation/phase3",
+    "raw_mobility_dir": "data/raw/sumo",
+    "phase4_config": "config/marketplace/phase4.json",
+    "evaluation_only_ground_truth_dir": "data/derived/phase3_cache"
+  },
+  "output_root": "data/mec/phase5",
+  "dt_s": 1.0,
+  "rate_eps_mbps": 1e-6,
+  "audit_tolerance_mbps": 1e-6,
+  "channel_scenarios": ["G", "F1", "F2", "F3"],
+  "primary_channel_scenario": "G",
+  "policies": {
+    "aware_primary": {"kind": "aware", "theta_tag": "primary"},
+    "aware_sensitivity": {"kind": "aware", "theta_tag": "sensitivity"},
+    "unaware": {"kind": "unaware", "theta_tag": "unaware"}
+  },
+  "primary_policy": "aware_primary",
+  "service_semantics": "time_window",
+  "arrival_policy": "block",
+  "continuity_weight": 1.0,
+  "reoptimisation": "incremental",
+  "rebalance_counted_separately": true,
+  "reallocation_delay_s": {"primary": 0, "sensitivity": [1]},
+  "interruption_tolerance": {
+    "candidates_s": [0, 5, 10, 30, 60],
+    "selection_split": "val",
+    "selection_rule": "pending",
+    "selected_s": "pending"
+  },
+  "proactive_reliability": {
+    "primary": false,
+    "sensitivity": true,
+    "k_consecutive_s": "pending",
+    "cooldown_s": "pending",
+    "max_switches_per_session": "pending",
+    "ping_pong_definition": "pending"
+  }
+}

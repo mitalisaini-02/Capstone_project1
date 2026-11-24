@@ -1,0 +1,10 @@
+{
+  "_notice": "Building-geometry inputs for the building-aware channel-state classifier. Building data come from OpenStreetMap (ODbL) and are INCOMPLETE; geometry-based results are an optimistic estimate of line of sight, not ground truth.",
+  "net_file": "/home/mitali/Downloads/osm.net.xml",
+  "osm_file": "/home/mitali/Downloads/map (1).osm",
+  "polyconvert_typemap": "/usr/share/sumo/data/typemap/osmPolyconvert.typ.xml",
+  "output_dir": "data/derived/geometry",
+  "building_types": ["building"],
+  "highway_road_types": ["highway.motorway", "highway.motorway_link", "highway.trunk", "highway.trunk_link"],
+  "index_cell_size_m": 100.0
+}

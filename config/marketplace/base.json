@@ -1,0 +1,70 @@
+{
+  "_notice": "SYNTHETIC SIMULATION PARAMETERS. Every numeric value below is a modelling ASSUMPTION (placeholder), not a measured real-world value. Mobility (positions, speeds, timestamps, roles, lifetimes) is reused unchanged from SUMO traces.",
+  "version": "marketplace_datagen_v1",
+  "base_seed": 20261124,
+  "replicates": 3,
+  "time": {"step_s": 1.0},
+  "link": {
+    "comm_range_m": 1000.0,
+    "history_window_s": 10,
+    "prediction_horizon_s": 30,
+    "link_profile": "abstract_sidelink_v0",
+    "_note": "comm_range_m, history_window_s and prediction_horizon_s MUST equal the LSTM training config (config/stage3_large_dataset.json); checked at load time."
+  },
+  "pricing": {"gnb_price_per_gb": 1.0, "_unit": "price units per GB (decimal GB, 1 GB = 8000 Mb)"},
+  "pue": {
+    "registration_delay_s": [0, 30],
+    "backhaul_base_mbps": [5.0, 40.0],
+    "backhaul_ar1_rho": 0.95,
+    "backhaul_log_sigma": 0.2,
+    "backhaul_multiplier_clip": [0.5, 1.2],
+    "access_capacity_mbps": [20.0, 80.0],
+    "link_peak_mbps": [20.0, 50.0],
+    "availability_levels": {
+      "low":  {"p_register": "CALIBRATE", "mean_on_s": 300.0, "mean_off_s": 120.0, "target_supply_demand_ratio": 0.5},
+      "med":  {"p_register": "CALIBRATE", "mean_on_s": 300.0, "mean_off_s": 60.0,  "target_supply_demand_ratio": 1.0},
+      "high": {"p_register": "CALIBRATE", "mean_on_s": 300.0, "mean_off_s": 60.0,  "target_supply_demand_ratio": 2.0}
+    },
+    "price_regimes": {
+      "cheap":     [0.3, 0.7],
+      "mixed":     [0.4, 1.2],
+      "expensive": [0.8, 1.5]
+    },
+    "_price_note": "price_per_gb = gnb_price_per_gb * U(lo, hi)",
+    "withdrawal_levels": {"none": 0.0, "some": 0.0016667},
+    "_withdrawal_note": "per-second hazard of permanent voluntary withdrawal while registered (some = 1/600 s)"
+  },
+  "cue": {
+    "p_ever_requests": 0.6,
+    "qos_classes": {
+      "web":           {"rate_mbps": [1.0, 2.0],  "duration_s": [30, 120]},
+      "video_sd":      {"rate_mbps": [3.0, 3.0],  "duration_s": [60, 300]},
+      "video_hd":      {"rate_mbps": [5.0, 8.0],  "duration_s": [60, 300]},
+      "bulk_download": {"rate_mbps": [10.0, 20.0], "duration_s": [30, 90]}
+    },
+    "demand_levels": {
+      "low":  {"arrival_rate_per_s": 0.0033333, "class_mix": {"web": 0.50, "video_sd": 0.30, "video_hd": 0.15, "bulk_download": 0.05}},
+      "med":  {"arrival_rate_per_s": 0.0083333, "class_mix": {"web": 0.35, "video_sd": 0.30, "video_hd": 0.25, "bulk_download": 0.10}},
+      "high": {"arrival_rate_per_s": 0.0222222, "class_mix": {"web": 0.20, "video_sd": 0.30, "video_hd": 0.30, "bulk_download": 0.20}}
+    },
+    "max_price_multiplier": [0.6, 1.5],
+    "_budget_note": "max_price_per_gb = gnb_price_per_gb * U(lo,hi); max_budget = max_price_per_gb * data_volume_gb (exactly). Per-epoch form: cost_j(t) <= max_price_per_gb * rate * dt / 8000.",
+    "priority_weight": 1.0
+  },
+  "gnb": {
+    "sites_file": "infrastructure.add.xml",
+    "background_ar1_rho": 0.95,
+    "background_log_sigma": 0.15,
+    "background_max_fraction": 0.95,
+    "capacity_levels": {
+      "sufficient":   {"total_capacity_mbps": "CALIBRATE", "load_fraction": 0.3, "target_demand_coverage": [0.95, 1.0]},
+      "insufficient": {"total_capacity_mbps": "CALIBRATE", "load_fraction": 0.8, "target_demand_coverage": [0.60, 0.70]}
+    },
+    "coverage_levels": {"full": 2000.0, "gaps": 1500.0}
+  },
+  "calibration": {
+    "p_register_grid": [0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0],
+    "gnb_total_capacity_grid_mbps": [20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 150, 200, 250, 300],
+    "reference_conditions": {"demand": "med", "price": "mixed", "coverage": "full", "withdrawals": "none", "availability": "med", "gnb_capacity": "sufficient"}
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_notice": "PROVISIONAL, TECHNOLOGY-AGNOSTIC link-capacity profiles. All values are modelling ASSUMPTIONS, not measurements of any real radio technology (in particular NOT measured Wi-Fi performance). Positive Shannon capacity is NOT evidence of a usable link. Link availability for candidate discovery remains the 1000 m geographic range used by the LSTM labels.",
+  "abstract_sidelink_v0": {
+    "model": "log_distance_shannon",
+    "description": "Log-distance path loss + Shannon capacity with an implementation-efficiency factor and a spectral-efficiency cap. Provisional placeholder pending the choice of wireless technology.",
+    "carrier_frequency_ghz": 5.9,
+    "bandwidth_mhz": 20.0,
+    "tx_power_dbm": 23.0,
+    "antenna_gains_dbi": 0.0,
+    "reference_distance_m": 1.0,
+    "path_loss_exponent": 2.7,
+    "thermal_noise_dbm_per_hz": -174.0,
+    "noise_figure_db": 9.0,
+    "implementation_efficiency": 0.6,
+    "max_spectral_efficiency_bps_per_hz": 6.0,
+    "min_distance_m": 1.0,
+    "reporting_snr_floor_db": -5.0,
+    "_units": {
+      "carrier_frequency_ghz": "GHz (only sets free-space loss at the reference distance)",
+      "bandwidth_mhz": "MHz",
+      "tx_power_dbm": "dBm",
+      "antenna_gains_dbi": "dBi, sum of Tx and Rx gains",
+      "reference_distance_m": "m",
+      "path_loss_exponent": "dimensionless",
+      "thermal_noise_dbm_per_hz": "dBm/Hz",
+      "noise_figure_db": "dB",
+      "implementation_efficiency": "fraction of Shannon bound achieved",
+      "max_spectral_efficiency_bps_per_hz": "bit/s/Hz cap",
+      "reporting_snr_floor_db": "dB; used ONLY to flag low-SNR rows in statistics, never for eligibility"
+    }
+  }
+}

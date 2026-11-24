@@ -1,0 +1,20 @@
+{
+  "_notice": "Phase 4 marketplace allocation (per-second snapshot). No tunable parameters: solver tolerances and orderings are fixed a priori. Thresholds come from Phase 3 (recorded files).",
+  "experiment_id": "phase4_allocation_v1",
+  "phase3_root": "data/simulation/phase3",
+  "phase2_root": "data/synthetic/marketplace",
+  "output_root": "data/allocation/phase4",
+  "channel_scenarios": ["G", "F1", "F2", "F3"],
+  "theta_tags": ["primary", "sensitivity"],
+  "methods": ["greedy", "milp", "gnb_only"],
+  "gnb_only_solver": "milp",
+  "dt_s": 1.0,
+  "rate_eps_mbps": 1e-6,
+  "audit_tolerance_mbps": 1e-6,
+  "milp": {"mip_rel_gap": 0.0, "time_limit_s": 30.0, "presolve": true},
+  "greedy_order": ["priority_desc", "arrival_asc", "request_id_asc"],
+  "pricing": "posted_price",
+  "bootstrap": {"B": 2000, "seed": 42},
+  "workers": 4,
+  "benchmark": {"split": "val", "configs": ["C00_baseline", "C02_avail_high", "C04_demand_high", "C07_gnb_insufficient", "S01_highdemand_gnbinsufficient"], "runs": ["run_000", "run_006"], "replicate": 0}
+}

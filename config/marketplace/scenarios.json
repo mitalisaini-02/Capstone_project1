@@ -1,0 +1,20 @@
+{
+  "_notice": "One-factor-at-a-time design around a medium baseline plus three stress combinations. 13 configurations (1 + 9 + 3).",
+  "factors": ["availability", "demand", "price", "gnb_capacity", "coverage", "withdrawals"],
+  "baseline": {"availability": "med", "demand": "med", "price": "mixed", "gnb_capacity": "sufficient", "coverage": "full", "withdrawals": "none"},
+  "configurations": [
+    {"config_id": "C00_baseline"},
+    {"config_id": "C01_avail_low",        "availability": "low"},
+    {"config_id": "C02_avail_high",       "availability": "high"},
+    {"config_id": "C03_demand_low",       "demand": "low"},
+    {"config_id": "C04_demand_high",      "demand": "high"},
+    {"config_id": "C05_price_cheap",      "price": "cheap"},
+    {"config_id": "C06_price_expensive",  "price": "expensive"},
+    {"config_id": "C07_gnb_insufficient", "gnb_capacity": "insufficient"},
+    {"config_id": "C08_coverage_gaps",    "coverage": "gaps"},
+    {"config_id": "C09_withdrawals_some", "withdrawals": "some"},
+    {"config_id": "S01_highdemand_gnbinsufficient", "demand": "high", "gnb_capacity": "insufficient"},
+    {"config_id": "S02_lowavail_withdrawals",       "availability": "low", "withdrawals": "some"},
+    {"config_id": "S03_expensive_coveragegaps",     "price": "expensive", "coverage": "gaps"}
+  ]
+}

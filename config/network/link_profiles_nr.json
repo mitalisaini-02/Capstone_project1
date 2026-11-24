@@ -1,0 +1,48 @@
+{
+  "_notice": "NR sidelink (PC5) link profiles for the PUE (relay UE) -> CUE (remote UE) hop. Equations and the values tagged [37.885]/[36.942] are taken from 3GPP TR 37.885 V15.3.0 and TR 36.942 V19.0.0. Values tagged ASSUMPTION are modelling choices pending review. This file is separate from config/marketplace/link_profiles.json, which is frozen with Phase 2 and must not change.",
+  "nr_sidelink_tr37885_v1": {
+    "model": "tr37885_v2v",
+    "scenario": "urban",
+    "carrier_frequency_ghz": 6.0,
+    "bandwidth_mhz": 20.0,
+    "ue_tx_power_dbm": 23.0,
+    "ue_noise_figure_db": 9.0,
+    "thermal_noise_dbm_per_hz": -174.0,
+    "tx_antenna_gain_dbi": 3.0,
+    "rx_antenna_gain_dbi": 3.0,
+    "tx_antenna_height_m": 1.6,
+    "rx_antenna_height_m": 1.6,
+    "blocker_height_m": 1.6,
+    "min_distance_m": 1.0,
+    "throughput_mapping": {"method": "attenuated_truncated_shannon", "alpha": 0.6, "snr_min_db": -10.0, "thr_max_bps_per_hz": 4.4},
+    "_sources": {
+      "scenario": "ASSUMPTION: 'urban' (SUMO network is an OSM city map). [37.885] Table 6.2-1/6.2.1-1 urban equations.",
+      "carrier_frequency_ghz": "[37.885] Table 6.1.1-1: between vehicle/pedestrian UEs 6 GHz",
+      "bandwidth_mhz": "[37.885] Table 6.1.1-1: 10 and 20 MHz baseline for SL. ASSUMPTION: 20 MHz chosen (same as abstract_sidelink_v0)",
+      "ue_tx_power_dbm": "[37.885] Table 6.1.1-1: vehicle UE 23 dBm",
+      "ue_noise_figure_db": "[37.885] Table 6.1.1-1: UE receiver noise figure 9 dB",
+      "thermal_noise_dbm_per_hz": "standard -174 dBm/Hz at 290 K",
+      "antenna_gain_dbi": "[37.885] Table 6.1.4-8 (Option 1, 6 GHz): max directional element gain 3 dBi. ASSUMPTION: max gain used, radiation pattern not modelled (optimistic)",
+      "antenna_heights_m": "[37.885] §6.1.2: vehicle Type 2 antenna height 1.6 m, vehicle height 1.6 m. ASSUMPTION: all vehicles Type 2 -> d3D = d2D and NLOSv blockage Case 3",
+      "min_distance_m": "IMPLEMENTATION GUARD (not from the TR): distances clipped at 1 m to keep log10 finite",
+      "throughput_mapping": "[36.942] Annex A.1 Table A.1, E-UTRA DL baseline (alpha 0.6, SNRmin -10 dB, 4.4 bps/Hz). ASSUMPTION: applied to NR sidelink; TR 37.885 defines no SNR-to-throughput mapping"
+    }
+  },
+  "nr_sidelink_tr37885_v1_highway": {
+    "model": "tr37885_v2v",
+    "scenario": "highway",
+    "carrier_frequency_ghz": 6.0,
+    "bandwidth_mhz": 20.0,
+    "ue_tx_power_dbm": 23.0,
+    "ue_noise_figure_db": 9.0,
+    "thermal_noise_dbm_per_hz": -174.0,
+    "tx_antenna_gain_dbi": 3.0,
+    "rx_antenna_gain_dbi": 3.0,
+    "tx_antenna_height_m": 1.6,
+    "rx_antenna_height_m": 1.6,
+    "blocker_height_m": 1.6,
+    "min_distance_m": 1.0,
+    "throughput_mapping": {"method": "attenuated_truncated_shannon", "alpha": 0.6, "snr_min_db": -10.0, "thr_max_bps_per_hz": 4.4},
+    "_sources": "Same as nr_sidelink_tr37885_v1 except scenario = highway ([37.885] highway LOS probability and pathloss; no NLOS building state)."
+  }
+}
