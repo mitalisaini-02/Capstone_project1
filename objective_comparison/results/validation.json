@@ -1,0 +1,82 @@
+{
+  "scenario_count": 156,
+  "decisions_per_algorithm": 110287,
+  "common_feasible_decisions": 32413,
+  "paired_minimum_cost_mismatches": 0,
+  "paired_rate_bound_mismatches": 0,
+  "non_demand_violations": {
+    "Best-SINR": {
+      "violations_selection": 0,
+      "violations_link_capacity": 0,
+      "violations_activity": 0,
+      "violations_reliability": 0,
+      "violations_coverage": 0,
+      "violations_gnb_radio": 0,
+      "violations_budget": 0,
+      "violations_invalid": 0,
+      "violations_access": 0,
+      "violations_backhaul": 0,
+      "violations_pc5_bandwidth": 0,
+      "violations_cell_capacity": 0,
+      "violations_gnb_bandwidth": 0
+    },
+    "Exact": {
+      "violations_selection": 0,
+      "violations_link_capacity": 0,
+      "violations_activity": 0,
+      "violations_reliability": 0,
+      "violations_coverage": 0,
+      "violations_gnb_radio": 0,
+      "violations_budget": 0,
+      "violations_invalid": 0,
+      "violations_access": 0,
+      "violations_backhaul": 0,
+      "violations_pc5_bandwidth": 0,
+      "violations_cell_capacity": 0,
+      "violations_gnb_bandwidth": 0
+    },
+    "Greedy": {
+      "violations_selection": 0,
+      "violations_link_capacity": 0,
+      "violations_activity": 0,
+      "violations_reliability": 0,
+      "violations_coverage": 0,
+      "violations_gnb_radio": 0,
+      "violations_budget": 0,
+      "violations_invalid": 0,
+      "violations_access": 0,
+      "violations_backhaul": 0,
+      "violations_pc5_bandwidth": 0,
+      "violations_cell_capacity": 0,
+      "violations_gnb_bandwidth": 0
+    },
+    "Random": {
+      "violations_selection": 0,
+      "violations_link_capacity": 0,
+      "violations_activity": 0,
+      "violations_reliability": 0,
+      "violations_coverage": 0,
+      "violations_gnb_radio": 0,
+      "violations_budget": 0,
+      "violations_invalid": 0,
+      "violations_access": 0,
+      "violations_backhaul": 0,
+      "violations_pc5_bandwidth": 0,
+      "violations_cell_capacity": 0,
+      "violations_gnb_bandwidth": 0
+    }
+  },
+  "exact_proven_optimal": 32416,
+  "exact_proven_infeasible": 77870,
+  "exact_optimal_status_both_stages": 32417,
+  "exact_solver_limits_or_errors": 0,
+  "trial_count": 1764592,
+  "feasible_trial_count": 518428,
+  "sources_sha256": {
+    "objective_comparison/allocation.py": "5f768b6d11ac3a00fef871039a0401f9a9cac645a2660c604d53878955dbab57",
+    "objective_comparison/report.py": "a4fb215f6bff00934ebc2935fd40c085730d3b07f75c46f1008e7b71b0b4af02",
+    "objective_comparison/run.py": "a88bff86d255d011569e786ef175cf19ab2e996d8fbcedf198c2daa08f0fa084",
+    "objective_comparison/sinr.py": "950ea37f94226d5ba3a7fdce4897e67a79b2e9b5af2cfdec4ee084b1680b08ff",
+    "objective_comparison/test_objectives.py": "16591709b76fbe8040300a621ad1de658e2d676e2e59f220ac4bf9e9a64b32ca"
+  }
+}

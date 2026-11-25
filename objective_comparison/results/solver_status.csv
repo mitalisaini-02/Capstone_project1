@@ -1,0 +1,4 @@
+stage1_status,stage2_status,proven_optimal,decisions
+0.0,0.0,False,1
+0.0,0.0,True,32416
+2.0,,False,77870

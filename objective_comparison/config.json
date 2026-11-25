@@ -1,0 +1,26 @@
+{
+  "experiment": "cost_then_rate",
+  "phase3_config": "config/simulation/phase3.json",
+  "split": "test",
+  "channel": "G",
+  "algorithms": ["Greedy", "Random", "Best-SINR", "Exact"],
+  "eta": 0.00005,
+  "epsilon": 0.000001,
+  "min_selected_mbps": 0.00001,
+  "seed": 42,
+  "random_trials": 16,
+  "solver_time_limit_s": 3.0,
+  "solver_relative_gap": 0.0,
+  "reliability_threshold": 0.62,
+  "pc5_reuse_channels": 3,
+  "pc5_interference": "Available providers split by vehicle ID modulo reuse channels. Each is assumed active on its reuse channel during the snapshot. Reuse channels are modeled as orthogonal 20 MHz carriers. Activity is held fixed during allocation.",
+  "gnb_interference": "All configured sites transmit simultaneously on one reused downlink carrier, orthogonal to PC5. Serving cell shares bandwidth among CUEs.",
+  "gnb_radio_overrides": {
+    "carrier_frequency_ghz": 3.5,
+    "bandwidth_mhz": 20.0,
+    "ue_tx_power_dbm": 46.0,
+    "tx_antenna_gain_dbi": 0.0,
+    "tx_antenna_height_m": 25.0
+  },
+  "output": "objective_comparison/results"
+}
