@@ -1,0 +1,31 @@
+{
+  "scenario_threshold_runs": 1404,
+  "scenario_files_verified": 936,
+  "matched_recorded_anchor_runs": 312,
+  "maximum_outcome_differences_above_tolerance": {
+    "admitted": 0,
+    "dropped": 0,
+    "recoveries": 0,
+    "reallocations": 0,
+    "interruption_episodes": 0,
+    "active_seconds": 0,
+    "delivered_mbit": 0,
+    "payment": 0
+  },
+  "audit_violations": 0,
+  "ledger_problems": 0,
+  "errors": 0,
+  "evaluated_ground_truth_events": {
+    "departure_events": 193,
+    "out_of_range_events": 37,
+    "censored_sessions": 1058,
+    "cue_departed_sessions": 4873
+  },
+  "primary": 0.62,
+  "sensitivity": 0.65,
+  "phase5_reference_summary_sha256": "47a600976badbbf4b6cddb3063077e3fa0cbc94b16e4eafa57ffad70ea6142c9",
+  "code_sha256": {
+    "threshold_investigation/run.py": "a0fef2ebc234ebcf04dcff17514915960be990030efcdc016e5fa8979bd2a590",
+    "threshold_investigation/report.py": "9bbb7cc45a87451e3611b4008dd632dbb0a12bd00446dbe2a7d7cbe1b82d2e4b"
+  }
+}
